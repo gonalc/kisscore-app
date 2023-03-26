@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "lint": "eslint --ext .tsx --ext .ts .",
     "lint-fix": "npx eslint . --fix",
-    "test": "echo 'So far there are no tests.'"
+    "test": "echo 'So far there are no tests.'",
+    "prettier": "npx prettier --write ."
   },
   "dependencies": {
     "@types/react": "~18.0.27",
@@ -25,8 +26,10 @@
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "husky": "^7.0.0"
+    "husky": "^7.0.0",
+    "prettier": "^2.8.7"
   },
   "private": true
 }
