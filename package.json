@@ -13,6 +13,19 @@
     "test": "echo 'So far there are no tests.'",
     "prettier": "npx prettier --write ."
   },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .tsx --ext .ts src/ --fix"
+    ],
+    "./src/**": [
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "@types/react": "~18.0.27",
     "expo": "~48.0.9",
@@ -29,6 +42,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^7.0.0",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.7"
   },
   "private": true
