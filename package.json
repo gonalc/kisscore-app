@@ -15,11 +15,12 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint --ext .tsx --ext .ts . --fix"
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
     ],
-    "./src/**": [
-      "prettier --write ."
+    "*.{md,yml,json}": [
+      "prettier --write"
     ]
   },
   "husky": {
