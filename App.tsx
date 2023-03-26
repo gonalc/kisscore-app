@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import { NunitoSans_400Regular } from '@expo-google-fonts/nunito-sans'
 import { PassionOne_400Regular } from '@expo-google-fonts/passion-one'
+import Login from './src/views/Auth/Login'
 
-export default function App() {
+function App() {
   const [fontsLoaded] = useFonts({
     NunitoSans: NunitoSans_400Regular,
     PassionOne: PassionOne_400Regular
@@ -16,7 +17,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: 'PassionOne' }}>First commit TS!</Text>
+      <Login />
       <StatusBar style="auto" />
     </View>
   )
@@ -24,9 +25,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
   }
 })
+
+export default App
