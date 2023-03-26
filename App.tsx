@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font'
 import { NunitoSans_400Regular } from '@expo-google-fonts/nunito-sans'
 import { PassionOne_400Regular } from '@expo-google-fonts/passion-one'
 import Login from './src/views/Auth/Login'
+import './i18n'
 
 function App() {
   const [fontsLoaded] = useFonts({
