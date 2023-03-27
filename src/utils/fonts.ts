@@ -11,6 +11,6 @@ export const FONT_SIZE = {
   title: LARGEST_FONT,
   header: LARGER_FONT,
   body: NORMAL_FONT,
-  buttons: LARGE_FONT,
+  buttons: NORMAL_FONT,
   labels: SMALL_FONT
 }
