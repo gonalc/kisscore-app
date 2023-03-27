@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Input from '../../../components/EmailInput'
+import Input from '../../../components/forms/EmailInput'
 import COLORS from '../../../utils/colors'
 import { FONT_SIZE, PassionOne } from '../../../utils/fonts'
 import { MODIFY_FORM } from './constants'
