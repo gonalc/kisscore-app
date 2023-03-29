@@ -5,6 +5,11 @@ import { NunitoSans_400Regular } from '@expo-google-fonts/nunito-sans'
 import { PassionOne_400Regular } from '@expo-google-fonts/passion-one'
 import Login from './src/views/Auth/Login'
 import './i18n'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Signup from './src/views/Auth/Signup'
+
+const Stack = createNativeStackNavigator()
 
 function App() {
   const [fontsLoaded] = useFonts({
@@ -18,7 +23,16 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Login />
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer>
       <StatusBar style="auto" />
     </View>
   )

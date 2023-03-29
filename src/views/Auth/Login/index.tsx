@@ -1,11 +1,13 @@
+import { useNavigation } from '@react-navigation/native'
 import { useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import i18n from '../../../../i18n'
 import Button from '../../../components/Button'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
+import NegativeButton from '../../../components/NegativeButton'
 import COLORS from '../../../utils/colors'
-import { FONT_SIZE, PassionOne } from '../../../utils/fonts'
+import { FONT_SIZE, NunitoSans, PassionOne, SMALL_FONT } from '../../../utils/fonts'
 import { emailIsValid, passwordIsValid } from '../../../utils/forms'
 import { MODIFY_FORM, SUBMIT_FORM } from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
@@ -20,6 +22,8 @@ function Login() {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const navigation = useNavigation()
 
   const editForm = (field: keyof typeof initialState) => (value: string) => {
     const payload: ILoginAction['payload'] = { [field]: value }
@@ -56,6 +60,10 @@ function Login() {
     console.log({ loginData })
   }
 
+  const goToSignup = () => {
+    navigation.navigate('Signup')
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Kisscore</Text>
@@ -65,8 +73,16 @@ function Login() {
         showError={state.submitted && state.emailError}
       />
       <PasswordInput value={state.password} onChange={editForm('password')} />
-      <View style={styles.buttonWrapper}>
+      <View style={styles.block}>
         <Button label={i18n.t('forms.login')} onPress={onSubmit} disabled={!formIsValid()} />
+      </View>
+
+      <View style={styles.block}>
+        <Text style={styles.registerText}>{i18n.t('forms.registerText')}</Text>
+      </View>
+
+      <View style={styles.block}>
+        <NegativeButton label={i18n.t('forms.signup')} onPress={goToSignup} />
       </View>
     </View>
   )
@@ -86,8 +102,13 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     textAlign: 'center'
   },
-  buttonWrapper: {
+  block: {
     marginVertical: 10
+  },
+  registerText: {
+    textAlign: 'center',
+    fontSize: SMALL_FONT,
+    fontFamily: NunitoSans
   }
 })
 
