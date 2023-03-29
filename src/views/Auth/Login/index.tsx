@@ -1,16 +1,21 @@
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { RootStackParamList } from '../../../../App'
 import i18n from '../../../../i18n'
 import Button from '../../../components/Button'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
 import NegativeButton from '../../../components/NegativeButton'
+import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
-import { FONT_SIZE, NunitoSans, PassionOne, SMALL_FONT } from '../../../utils/fonts'
+import { NunitoSans, SMALL_FONT } from '../../../utils/fonts'
 import { emailIsValid, passwordIsValid } from '../../../utils/forms'
 import { MODIFY_FORM, SUBMIT_FORM } from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
+
+type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
 function Login() {
   const initialState: ILoginInitialState = {
@@ -23,7 +28,7 @@ function Login() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<THomeScreenProp>()
 
   const editForm = (field: keyof typeof initialState) => (value: string) => {
     const payload: ILoginAction['payload'] = { [field]: value }
@@ -66,7 +71,7 @@ function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Kisscore</Text>
+      <Title />
       <EmailInput
         value={state.email}
         onChange={editForm('email')}
@@ -94,13 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     padding: 50
-  },
-  title: {
-    fontSize: FONT_SIZE.title,
-    fontFamily: PassionOne,
-    color: COLORS.red,
-    marginVertical: 20,
-    textAlign: 'center'
   },
   block: {
     marginVertical: 10

@@ -9,7 +9,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Signup from './src/views/Auth/Signup'
 
-const Stack = createNativeStackNavigator()
+export type RootStackParamList = {
+  Login: undefined
+  Signup: undefined
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 function App() {
   const [fontsLoaded] = useFonts({
