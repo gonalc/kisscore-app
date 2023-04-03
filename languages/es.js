@@ -2,7 +2,8 @@ const es = {
   labels: {
     name: 'Nombre',
     country: 'País',
-    city: 'Ciudad'
+    city: 'Ciudad',
+    birthDate: 'Fecha de nacimiento'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',

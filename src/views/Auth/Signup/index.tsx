@@ -8,6 +8,7 @@ import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
 import { FC } from 'react'
+import DateInput from '../../../components/forms/DateInput'
 
 interface IInputData<T> {
   Component: FC<T>
@@ -29,6 +30,12 @@ const Signup = () => {
         label: i18n.t('labels.name'),
         icon: <FontAwesome name="user" {...iconProps} />,
         placeholder: i18n.t('forms.namePlaceholder')
+      }
+    },
+    birthdate: {
+      Component: DateInput,
+      props: {
+        label: i18n.t('labels.birthDate')
       }
     },
     country: {
