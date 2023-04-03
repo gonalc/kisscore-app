@@ -8,9 +8,10 @@ import { FONT_SIZE, LARGER_FONT, LARGE_FONT, NunitoSans } from '../../utils/font
 export interface IPasswordInputProps {
   value: string
   onChange: (value: string) => void
+  placeholder?: string
 }
 
-const PasswordInput: FC<IPasswordInputProps> = ({ value, onChange }) => {
+const PasswordInput: FC<IPasswordInputProps> = ({ value, onChange, placeholder }) => {
   const [visiblePassword, setVisiblePassword] = useState(false)
 
   const toggleVisibility = () => {
@@ -23,7 +24,7 @@ const PasswordInput: FC<IPasswordInputProps> = ({ value, onChange }) => {
       <TextInput
         value={value}
         onChangeText={onChange}
-        placeholder={i18n.t('forms.passwordPlaceholder')}
+        placeholder={placeholder || i18n.t('forms.passwordPlaceholder')}
         inputMode="text"
         keyboardType="numeric"
         secureTextEntry={!visiblePassword}
