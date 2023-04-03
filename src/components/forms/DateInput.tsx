@@ -4,6 +4,8 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
 import COLORS from '../../utils/colors'
+import dayjs from 'dayjs'
+import { DATE_FORMAT } from '../../utils/dates'
 
 interface IDateInputProps {
   label: string
@@ -11,7 +13,7 @@ interface IDateInputProps {
 
 const DateInput: FC<IDateInputProps> = ({ label }) => {
   const [date, setDate] = useState(new Date().getTime())
-  const [show, setShow] = useState<'date' | 'time' | false>(false)
+  const [show, setShow] = useState(false)
 
   const onChange = (event: DateTimePickerEvent) => {
     setShow(false)
@@ -22,13 +24,13 @@ const DateInput: FC<IDateInputProps> = ({ label }) => {
     <View>
       <Text style={styles.label}>{label}</Text>
 
-      <Pressable onPress={() => setShow('date')} style={styles.container}>
+      <Pressable onPress={() => setShow(true)} style={styles.container}>
         <MaterialCommunityIcons
           name="calendar-month-outline"
           size={LARGE_FONT}
           color={COLORS.black}
         />
-        <Text style={styles.textInput}>{new Date(date).getDate()}</Text>
+        <Text style={styles.textInput}>{dayjs(date).format(DATE_FORMAT)}</Text>
       </Pressable>
 
       {show && <DateTimePicker value={new Date(date)} onChange={onChange} />}
