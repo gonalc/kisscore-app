@@ -1,0 +1,40 @@
+import constants from './constants'
+
+type TSignupConstants = keyof typeof constants
+
+export interface ISignupState {
+  name: string
+  birthDate: string
+  country: string
+  city: string
+  email: string
+  password: string
+  repeatedPassword: string
+  submitted: boolean
+}
+
+export interface ISignupAction {
+  type: TSignupConstants
+  payload?: Partial<ISignupState>
+}
+
+const { MODIFY_FORM, SUBMIT_FORM } = constants
+
+function reducer(state: ISignupState, action: ISignupAction) {
+  const { type, payload = {} } = action
+
+  switch (type) {
+    case MODIFY_FORM:
+      return {
+        ...state,
+        ...payload
+      }
+    case SUBMIT_FORM:
+      return {
+        ...state,
+        submitted: true
+      }
+  }
+}
+
+export default reducer

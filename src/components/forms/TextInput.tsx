@@ -3,19 +3,25 @@ import { View, TextInput as Input, TextInputProps, Text, StyleSheet } from 'reac
 import COLORS from '../../utils/colors'
 import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
 
-export interface ITextInputProps extends TextInputProps {
+export interface ITextInputProps extends Omit<TextInputProps, 'onChange' | 'onChangeText'> {
   label: string
   icon: ReactNode
   placeholder: string
+  onChange: (value: string) => void
 }
 
-const TextInput: FC<ITextInputProps> = ({ label, icon, placeholder }) => {
+const TextInput: FC<ITextInputProps> = ({ label, icon, placeholder, onChange, value }) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.container}>
         {icon}
-        <Input style={styles.textInput} placeholder={placeholder} />
+        <Input
+          style={styles.textInput}
+          placeholder={placeholder}
+          onChangeText={onChange}
+          value={value}
+        />
       </View>
     </View>
   )

@@ -7,8 +7,11 @@ import { LARGE_FONT } from '../../../utils/fonts'
 import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
-import { FC } from 'react'
+import { FC, useReducer } from 'react'
 import DateInput from '../../../components/forms/DateInput'
+import reducer, { ISignupAction, ISignupState } from './reducer'
+import constants from './constants'
+import Button from '../../../components/Button'
 
 interface IInputData<T> {
   Component: FC<T>
@@ -17,10 +20,37 @@ interface IInputData<T> {
 
 type TSignupInputs = Record<string, IInputData<any>>
 
+const { MODIFY_FORM } = constants
+
 const Signup = () => {
+  const initialState: ISignupState = {
+    name: '',
+    birthDate: '',
+    country: '',
+    city: '',
+    email: '',
+    password: '',
+    repeatedPassword: '',
+    submitted: false
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState)
+
   const iconProps = {
     color: COLORS.black,
     size: LARGE_FONT
+  }
+
+  const onChange = (field: keyof typeof inputs) => (value: string) => {
+    const payload: ISignupAction['payload'] = { [field]: value }
+
+    console.log({ value, field })
+
+    dispatch({ type: MODIFY_FORM, payload })
+  }
+
+  const onSubmit = () => {
+    console.log('STATE: ', state)
   }
 
   const inputs: TSignupInputs = {
@@ -29,13 +59,15 @@ const Signup = () => {
       props: {
         label: i18n.t('labels.name'),
         icon: <FontAwesome name="user" {...iconProps} />,
-        placeholder: i18n.t('forms.namePlaceholder')
+        placeholder: i18n.t('forms.namePlaceholder'),
+        onChangeText: onChange
       }
     },
     birthdate: {
       Component: DateInput,
       props: {
-        label: i18n.t('labels.birthDate')
+        label: i18n.t('labels.birthDate'),
+        onChange
       }
     },
     country: {
@@ -43,7 +75,8 @@ const Signup = () => {
       props: {
         label: i18n.t('labels.country'),
         icon: <FontAwesome name="flag" {...iconProps} />,
-        placeholder: i18n.t('forms.countryPlaceholder')
+        placeholder: i18n.t('forms.countryPlaceholder'),
+        onChangeText: onChange
       }
     },
     city: {
@@ -51,28 +84,29 @@ const Signup = () => {
       props: {
         label: i18n.t('labels.city'),
         placeholder: i18n.t('forms.cityPlaceholder'),
-        icon: <MaterialCommunityIcons name="city" {...iconProps} />
+        icon: <MaterialCommunityIcons name="city" {...iconProps} />,
+        onChangeText: onChange
       }
     },
     email: {
       Component: EmailInput,
       props: {
         value: '',
-        onChange: (value: string) => console.log('Email changed: ', value)
+        onChange
       }
     },
     password: {
       Component: PasswordInput,
       props: {
         value: '',
-        onChange: (value: string) => console.log('Password changed: ', value)
+        onChange
       }
     },
     passwordRepeat: {
       Component: PasswordInput,
       props: {
         value: '',
-        onChange: (value: string) => console.log('Password changed: ', value),
+        onChange,
         placeholder: i18n.t('forms.repeatPassword')
       }
     }
@@ -85,8 +119,10 @@ const Signup = () => {
         {Object.entries(inputs).map(([key, input]) => {
           const { Component, props } = input
 
-          return <Component {...props} key={`${key}_signup-input`} />
+          return <Component {...props} onChange={onChange(key)} key={`${key}_signup-input`} />
         })}
+
+        <Button label="Daleee" onPress={onSubmit} />
       </View>
     </View>
   )
