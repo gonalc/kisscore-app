@@ -6,7 +6,7 @@ type TSignupConstants = keyof typeof constants
 export interface ISignupState {
   name: string
   nameError: TErrorType | null
-  birthDate: string
+  birthDate: number
   country: string
   city: string
   email: string

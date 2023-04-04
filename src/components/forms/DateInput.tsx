@@ -9,16 +9,21 @@ import { DATE_FORMAT } from '../../utils/dates'
 
 export interface IDateInputProps {
   label: string
-  minimumDate?: Date
+  maximumDate?: Date
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value: number) => void
+  value: number
 }
 
-const DateInput: FC<IDateInputProps> = ({ label, minimumDate }) => {
-  const [date, setDate] = useState(new Date().getTime())
+const DateInput: FC<IDateInputProps> = ({ label, maximumDate, onChange, value }) => {
+  const [date, setDate] = useState(value)
   const [show, setShow] = useState(false)
 
-  const onChange = (event: DateTimePickerEvent) => {
+  const onChangeDate = (event: DateTimePickerEvent) => {
     setShow(false)
-    setDate(event.nativeEvent.timestamp)
+    const { timestamp } = event.nativeEvent
+    setDate(timestamp)
+    onChange(timestamp)
   }
 
   return (
@@ -35,7 +40,7 @@ const DateInput: FC<IDateInputProps> = ({ label, minimumDate }) => {
       </Pressable>
 
       {show && (
-        <DateTimePicker value={new Date(date)} onChange={onChange} minimumDate={minimumDate} />
+        <DateTimePicker value={new Date(date)} onChange={onChangeDate} maximumDate={maximumDate} />
       )}
     </View>
   )

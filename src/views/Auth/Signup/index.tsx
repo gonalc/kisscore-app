@@ -14,14 +14,20 @@ import constants from './constants'
 import Button from '../../../components/Button'
 import { MIN_NAME_LENGTH } from '../../../utils/forms'
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
+import { today } from '../../../utils/dates'
 
 const { MODIFY_FORM, SUBMIT_FORM } = constants
 
+const MINIMUM_AGE = 16
+const AVERAGE_AGE = 20
+
 const Signup = () => {
+  const maximumDate = today.subtract(MINIMUM_AGE, 'years').valueOf()
+
   const initialState: ISignupState = {
     name: '',
     nameError: null,
-    birthDate: '',
+    birthDate: today.subtract(AVERAGE_AGE, 'years').valueOf(),
     country: '',
     city: '',
     email: '',
@@ -56,7 +62,7 @@ const Signup = () => {
     return { formErrors, hasErrors }
   }
 
-  const onChange = (field: string) => (value: string) => {
+  const onChange = (field: string) => (value: string | number) => {
     const payload: ISignupAction['payload'] = { [field]: value }
 
     console.log({ field, value })
@@ -89,7 +95,11 @@ const Signup = () => {
       Component: DateInput,
       props: {
         label: i18n.t('labels.birthDate'),
-        onChange
+        onChange: (value) => {
+          console.log({ value })
+        },
+        value: state.birthDate,
+        maximumDate: new Date(maximumDate)
       }
     },
     country: {
