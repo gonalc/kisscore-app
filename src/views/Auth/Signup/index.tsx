@@ -15,6 +15,7 @@ import Button from '../../../components/Button'
 import { AVERAGE_AGE, MIN_NAME_LENGTH, maximumSignupDate } from '../../../utils/forms'
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
 import { today } from '../../../utils/dates'
+import CountryInput from '../../../components/forms/CountryInput'
 
 const { MODIFY_FORM, SUBMIT_FORM } = constants
 
@@ -152,6 +153,8 @@ const Signup = () => {
         <View style={styles.buttonContainer}>
           <Button label={i18n.t('forms.signup')} onPress={onSubmit} />
         </View>
+
+        <CountryInput />
       </View>
     </View>
   )
