@@ -7,7 +7,7 @@ export interface ITextInputProps extends Omit<TextInputProps, 'onChange' | 'onCh
   label: string
   icon: ReactNode
   placeholder: string
-  onChange: (value: string) => void
+  onChange: () => void
 }
 
 const TextInput: FC<ITextInputProps> = ({ label, icon, placeholder, onChange, value }) => {
