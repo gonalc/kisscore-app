@@ -11,7 +11,7 @@ export interface ISignupState {
   city: string
   email: string
   password: string
-  repeatedPassword: string
+  passwordRepeat: string
   submitted: boolean
 }
 

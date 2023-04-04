@@ -7,21 +7,13 @@ import { LARGE_FONT } from '../../../utils/fonts'
 import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
-import { FC, useReducer } from 'react'
+import { useReducer } from 'react'
 import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
 import Button from '../../../components/Button'
 import { MIN_NAME_LENGTH } from '../../../utils/forms'
-
-interface IInputData<T> {
-  Component: FC<T>
-  props: T
-}
-
-type TSignupInputs = Record<string, IInputData<any>>
-
-type TFormErrors = Pick<ISignupState, 'nameError'>
+import { ISignupInputs, TFormErrors } from '../../../types/forms'
 
 const { MODIFY_FORM, SUBMIT_FORM } = constants
 
@@ -34,7 +26,7 @@ const Signup = () => {
     city: '',
     email: '',
     password: '',
-    repeatedPassword: '',
+    passwordRepeat: '',
     submitted: false
   }
 
@@ -64,8 +56,10 @@ const Signup = () => {
     return { formErrors, hasErrors }
   }
 
-  const onChange = (field: keyof typeof inputs) => (value: string) => {
+  const onChange = (field: string) => (value: string) => {
     const payload: ISignupAction['payload'] = { [field]: value }
+
+    console.log({ field, value })
 
     dispatch({ type: MODIFY_FORM, payload })
   }
@@ -79,19 +73,19 @@ const Signup = () => {
     dispatch({ type: SUBMIT_FORM, payload: formErrors })
   }
 
-  const inputs: TSignupInputs = {
+  const inputs: ISignupInputs = {
     name: {
       Component: TextInput,
       props: {
         label: i18n.t('labels.name'),
         icon: <FontAwesome name="user" {...iconProps} />,
         placeholder: i18n.t('forms.namePlaceholder'),
-        onChangeText: onChange,
+        onChange,
         error: state.nameError,
         errorPayload: { value: MIN_NAME_LENGTH }
       }
     },
-    birthdate: {
+    birthDate: {
       Component: DateInput,
       props: {
         label: i18n.t('labels.birthDate'),
@@ -104,7 +98,7 @@ const Signup = () => {
         label: i18n.t('labels.country'),
         icon: <FontAwesome name="flag" {...iconProps} />,
         placeholder: i18n.t('forms.countryPlaceholder'),
-        onChangeText: onChange
+        onChange
       }
     },
     city: {
@@ -113,7 +107,7 @@ const Signup = () => {
         label: i18n.t('labels.city'),
         placeholder: i18n.t('forms.cityPlaceholder'),
         icon: <MaterialCommunityIcons name="city" {...iconProps} />,
-        onChangeText: onChange
+        onChange
       }
     },
     email: {

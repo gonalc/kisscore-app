@@ -9,7 +9,8 @@ export interface ITextInputProps extends Omit<TextInputProps, 'onChange' | 'onCh
   label: string
   icon: ReactNode
   placeholder: string
-  onChange: () => void
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value: string) => void
   error?: TErrorType
   errorPayload?: Record<string, unknown>
 }

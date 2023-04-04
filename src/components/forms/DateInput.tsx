@@ -7,11 +7,12 @@ import COLORS from '../../utils/colors'
 import dayjs from 'dayjs'
 import { DATE_FORMAT } from '../../utils/dates'
 
-interface IDateInputProps {
+export interface IDateInputProps {
   label: string
+  minimumDate?: Date
 }
 
-const DateInput: FC<IDateInputProps> = ({ label }) => {
+const DateInput: FC<IDateInputProps> = ({ label, minimumDate }) => {
   const [date, setDate] = useState(new Date().getTime())
   const [show, setShow] = useState(false)
 
@@ -33,7 +34,9 @@ const DateInput: FC<IDateInputProps> = ({ label }) => {
         <Text style={styles.textInput}>{dayjs(date).format(DATE_FORMAT)}</Text>
       </Pressable>
 
-      {show && <DateTimePicker value={new Date(date)} onChange={onChange} />}
+      {show && (
+        <DateTimePicker value={new Date(date)} onChange={onChange} minimumDate={minimumDate} />
+      )}
     </View>
   )
 }
