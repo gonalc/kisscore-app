@@ -5,8 +5,6 @@ export const emailIsValid = (email: string): boolean => {
 
   const validEmailFormat = VALID_EMAIL_REGEXP.test(email)
 
-  console.log({ validEmailFormat })
-
   return email.length >= MIN_EMAIL_LENGTH && validEmailFormat
 }
 
@@ -22,6 +20,8 @@ export const passwordIsValid = (password: string): boolean => {
   const VALID_PASSWORD_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
   const validPassword = VALID_PASSWORD_REGEXP.test(password)
-  console.log({ validPassword })
+
   return validPassword
 }
+
+export const MIN_NAME_LENGTH = 3

@@ -14,7 +14,10 @@ const es = {
     namePlaceholder: 'Introduce tu nombre',
     countryPlaceholder: '¿Cuál es tu país?',
     cityPlaceholder: '¿Cuál es tu ciudad?',
-    repeatPassword: 'Repite tu contraseña'
+    repeatPassword: 'Repite tu contraseña',
+    errors: {
+      length: 'Tiene que tener al menos {{value}} caracteres.'
+    }
   }
 }
 

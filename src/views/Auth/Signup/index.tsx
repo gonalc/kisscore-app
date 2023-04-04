@@ -12,6 +12,7 @@ import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
 import Button from '../../../components/Button'
+import { MIN_NAME_LENGTH } from '../../../utils/forms'
 
 interface IInputData<T> {
   Component: FC<T>
@@ -20,11 +21,14 @@ interface IInputData<T> {
 
 type TSignupInputs = Record<string, IInputData<any>>
 
-const { MODIFY_FORM } = constants
+type TFormErrors = Pick<ISignupState, 'nameError'>
+
+const { MODIFY_FORM, SUBMIT_FORM } = constants
 
 const Signup = () => {
   const initialState: ISignupState = {
     name: '',
+    nameError: null,
     birthDate: '',
     country: '',
     city: '',
@@ -41,6 +45,25 @@ const Signup = () => {
     size: LARGE_FONT
   }
 
+  const validateForm = () => {
+    const formErrors: TFormErrors = {
+      nameError: null
+    }
+
+    let hasErrors = false
+
+    const { name } = state
+
+    if (name.length < MIN_NAME_LENGTH) {
+      formErrors.nameError = 'length'
+      hasErrors = true
+    } else {
+      formErrors.nameError = null
+    }
+
+    return { formErrors, hasErrors }
+  }
+
   const onChange = (field: keyof typeof inputs) => (value: string) => {
     const payload: ISignupAction['payload'] = { [field]: value }
 
@@ -49,6 +72,11 @@ const Signup = () => {
 
   const onSubmit = () => {
     console.log('STATE: ', state)
+    const { formErrors, hasErrors } = validateForm()
+
+    console.log({ formErrors, hasErrors })
+
+    dispatch({ type: SUBMIT_FORM, payload: formErrors })
   }
 
   const inputs: TSignupInputs = {
@@ -58,7 +86,9 @@ const Signup = () => {
         label: i18n.t('labels.name'),
         icon: <FontAwesome name="user" {...iconProps} />,
         placeholder: i18n.t('forms.namePlaceholder'),
-        onChangeText: onChange
+        onChangeText: onChange,
+        error: state.nameError,
+        errorPayload: { value: MIN_NAME_LENGTH }
       }
     },
     birthdate: {

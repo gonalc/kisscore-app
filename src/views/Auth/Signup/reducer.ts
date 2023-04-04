@@ -1,9 +1,11 @@
+import { TErrorType } from '../../../types/forms'
 import constants from './constants'
 
 type TSignupConstants = keyof typeof constants
 
 export interface ISignupState {
   name: string
+  nameError: TErrorType | null
   birthDate: string
   country: string
   city: string
@@ -32,6 +34,7 @@ function reducer(state: ISignupState, action: ISignupAction) {
     case SUBMIT_FORM:
       return {
         ...state,
+        ...payload,
         submitted: true
       }
   }
