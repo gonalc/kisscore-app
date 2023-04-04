@@ -12,18 +12,13 @@ import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
 import Button from '../../../components/Button'
-import { MIN_NAME_LENGTH } from '../../../utils/forms'
+import { AVERAGE_AGE, MIN_NAME_LENGTH, maximumSignupDate } from '../../../utils/forms'
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
 import { today } from '../../../utils/dates'
 
 const { MODIFY_FORM, SUBMIT_FORM } = constants
 
-const MINIMUM_AGE = 16
-const AVERAGE_AGE = 20
-
 const Signup = () => {
-  const maximumDate = today.subtract(MINIMUM_AGE, 'years').valueOf()
-
   const initialState: ISignupState = {
     name: '',
     nameError: null,
@@ -99,7 +94,7 @@ const Signup = () => {
           console.log({ value })
         },
         value: state.birthDate,
-        maximumDate: new Date(maximumDate)
+        maximumDate: new Date(maximumSignupDate)
       }
     },
     country: {

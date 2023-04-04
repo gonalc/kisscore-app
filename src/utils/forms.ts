@@ -1,3 +1,5 @@
+import { today } from './dates'
+
 export const emailIsValid = (email: string): boolean => {
   // eslint-disable-next-line no-useless-escape
   const VALID_EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -25,3 +27,8 @@ export const passwordIsValid = (password: string): boolean => {
 }
 
 export const MIN_NAME_LENGTH = 3
+
+export const MINIMUM_AGE = 16
+export const AVERAGE_AGE = 20
+
+export const maximumSignupDate = today.subtract(MINIMUM_AGE, 'years').valueOf()
