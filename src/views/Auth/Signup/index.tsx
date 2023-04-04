@@ -44,8 +44,6 @@ const Signup = () => {
   const onChange = (field: keyof typeof inputs) => (value: string) => {
     const payload: ISignupAction['payload'] = { [field]: value }
 
-    console.log({ value, field })
-
     dispatch({ type: MODIFY_FORM, payload })
   }
 
@@ -122,7 +120,9 @@ const Signup = () => {
           return <Component {...props} onChange={onChange(key)} key={`${key}_signup-input`} />
         })}
 
-        <Button label="Daleee" onPress={onSubmit} />
+        <View style={styles.buttonContainer}>
+          <Button label={i18n.t('forms.signup')} onPress={onSubmit} />
+        </View>
       </View>
     </View>
   )
@@ -134,6 +134,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     padding: 50
+  },
+  buttonContainer: {
+    marginVertical: 10
   }
 })
 
