@@ -3,9 +3,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { CountryPicker } from 'react-native-country-codes-picker'
 import { FontAwesome } from '@expo/vector-icons'
 import { CountryItem } from 'react-native-country-codes-picker/types/Types'
-import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
-import COLORS from '../../utils/colors'
-import i18n from '../../../i18n'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../../utils/fonts'
+import COLORS from '../../../utils/colors'
+import i18n from '../../../../i18n'
+import CountryListItem from './CountryListItem'
 
 export interface ICountryInputProps {
   value: string
@@ -57,7 +58,9 @@ const CountryInput: FC<ICountryInputProps> = ({
       <CountryPicker
         style={{
           modal: {
-            height: 500
+            height: 500,
+            backgroundColor: COLORS.white,
+            paddingHorizontal: 30
           },
           dialCode: {
             height: phoneMode ? 20 : 0,
@@ -69,6 +72,7 @@ const CountryInput: FC<ICountryInputProps> = ({
         lang={'es'}
         searchMessage={i18n.t('forms.countryPlaceholder')}
         popularCountries={['ES']}
+        itemTemplate={CountryListItem}
       />
     </View>
   )
