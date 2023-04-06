@@ -131,6 +131,8 @@ const Signup = () => {
       try {
         await signup(formData)
 
+        // Need to set the user in context
+
         navigation.navigate('Leagues')
       } catch (error) {
         dispatch({ type: SIGNUP_ERROR })
