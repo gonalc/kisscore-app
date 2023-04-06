@@ -11,7 +11,6 @@ export interface ICountryInputProps {
   value: string
   placeholder?: string
   phoneMode?: boolean
-  // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void
 }
 
