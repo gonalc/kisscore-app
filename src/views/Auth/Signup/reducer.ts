@@ -12,6 +12,7 @@ export interface ISignupState {
   email: string
   emailError: boolean
   password: string
+  passwordError: boolean
   passwordRepeat: string
   submitted: boolean
 }

@@ -43,4 +43,4 @@ export interface ISignupInputs {
   passwordRepeat: IPasswordInput
 }
 
-export type TFormErrors = Pick<ISignupState, 'nameError' | 'emailError'>
+export type TFormErrors = Pick<ISignupState, 'nameError' | 'emailError' | 'passwordError'>

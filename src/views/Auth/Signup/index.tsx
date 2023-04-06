@@ -12,7 +12,13 @@ import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
 import Button from '../../../components/Button'
-import { AVERAGE_AGE, MIN_NAME_LENGTH, emailIsValid, maximumSignupDate } from '../../../utils/forms'
+import {
+  AVERAGE_AGE,
+  MIN_NAME_LENGTH,
+  emailIsValid,
+  maximumSignupDate,
+  passwordIsValid
+} from '../../../utils/forms'
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
 import { today } from '../../../utils/dates'
 import CountryInput from '../../../components/forms/CountryInput'
@@ -29,6 +35,7 @@ const Signup = () => {
     email: '',
     emailError: false,
     password: '',
+    passwordError: false,
     passwordRepeat: '',
     submitted: false
   }
@@ -43,12 +50,13 @@ const Signup = () => {
   const validateForm = () => {
     const formErrors: TFormErrors = {
       nameError: null,
-      emailError: false
+      emailError: false,
+      passwordError: false
     }
 
     let hasErrors = false
 
-    const { name, email } = state
+    const { name, email, password } = state
 
     // Validate name
     if (name.length < MIN_NAME_LENGTH) {
@@ -59,10 +67,18 @@ const Signup = () => {
     }
 
     // Validate email
-    const isValid = emailIsValid(email)
-    formErrors.emailError = !isValid
+    const isValidEmail = emailIsValid(email)
+    formErrors.emailError = !isValidEmail
 
-    if (!isValid) {
+    if (!isValidEmail) {
+      hasErrors = true
+    }
+
+    // Validate password
+    const isValidPassword = passwordIsValid(password)
+    formErrors.passwordError = !isValidPassword
+
+    if (!isValidPassword) {
       hasErrors = true
     }
 
@@ -139,7 +155,8 @@ const Signup = () => {
       Component: PasswordInput,
       props: {
         value: state.password,
-        onChange
+        onChange,
+        showError: state.passwordError
       }
     },
     passwordRepeat: {
