@@ -12,10 +12,12 @@ import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
 import { NunitoSans, SMALL_FONT } from '../../../utils/fonts'
 import { emailIsValid, passwordIsValid } from '../../../utils/forms'
-import { MODIFY_FORM, SUBMIT_FORM } from './constants'
+import constants from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
+
+const { MODIFY_FORM, SUBMIT_FORM } = constants
 
 function Login() {
   const initialState: ILoginInitialState = {

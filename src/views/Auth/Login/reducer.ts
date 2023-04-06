@@ -1,4 +1,6 @@
-import { MODIFY_FORM, SUBMIT_FORM } from './constants'
+import constants from './constants'
+
+type TLoginConstants = keyof typeof constants
 
 export interface ILoginInitialState {
   email: string
@@ -9,9 +11,11 @@ export interface ILoginInitialState {
 }
 
 export interface ILoginAction {
-  type: string
+  type: TLoginConstants
   payload?: Partial<ILoginInitialState>
 }
+
+const { MODIFY_FORM, SUBMIT_FORM } = constants
 
 function reducer(state: ILoginInitialState, action: ILoginAction) {
   const { type, payload = {} } = action
