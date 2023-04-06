@@ -15,6 +15,7 @@ const es = {
     countryPlaceholder: '¿Cuál es tu país?',
     cityPlaceholder: '¿Cuál es tu ciudad?',
     repeatPassword: 'Repite tu contraseña',
+    countryNotFound: 'País no encontrado',
     errors: {
       length: 'Tiene que tener al menos {{value}} caracteres.'
     }

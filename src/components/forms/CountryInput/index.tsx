@@ -69,10 +69,11 @@ const CountryInput: FC<ICountryInputProps> = ({
         }}
         show={show}
         pickerButtonOnPress={(item) => onSelect(item)}
-        lang={'es'}
-        searchMessage={i18n.t('forms.countryPlaceholder')}
+        lang={i18n.locale}
+        searchMessage={i18n.t('forms.countryNotFound')}
         popularCountries={['ES']}
         itemTemplate={CountryListItem}
+        onBackdropPress={() => setShow(false)}
       />
     </View>
   )
