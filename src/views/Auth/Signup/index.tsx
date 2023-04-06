@@ -99,12 +99,11 @@ const Signup = () => {
       }
     },
     country: {
-      Component: TextInput,
+      Component: CountryInput,
       props: {
-        label: i18n.t('labels.country'),
-        icon: <FontAwesome name="flag" {...iconProps} />,
         placeholder: i18n.t('forms.countryPlaceholder'),
-        onChange
+        onChange,
+        value: state.country
       }
     },
     city: {
@@ -153,8 +152,6 @@ const Signup = () => {
         <View style={styles.buttonContainer}>
           <Button label={i18n.t('forms.signup')} onPress={onSubmit} />
         </View>
-
-        <CountryInput />
       </View>
     </View>
   )

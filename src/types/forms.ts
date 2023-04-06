@@ -4,6 +4,7 @@ import { IDateInputProps } from '../components/forms/DateInput'
 import { IEmailInputProps } from '../components/forms/EmailInput'
 import { IPasswordInputProps } from '../components/forms/PasswordInput'
 import { ISignupState } from '../views/Auth/Signup/reducer'
+import { ICountryInputProps } from '../components/forms/CountryInput'
 
 export type TErrorType = 'length'
 
@@ -15,6 +16,11 @@ interface IBasicTextInput {
 interface IBirthDateInput {
   Component: FC<IDateInputProps>
   props: IDateInputProps
+}
+
+interface ICountryInput {
+  Component: FC<ICountryInputProps>
+  props: ICountryInputProps
 }
 
 interface IEmailInput {
@@ -30,7 +36,7 @@ interface IPasswordInput {
 export interface ISignupInputs {
   name: IBasicTextInput
   birthDate: IBirthDateInput
-  country: IBasicTextInput
+  country: ICountryInput
   city: IBasicTextInput
   email: IEmailInput
   password: IPasswordInput
