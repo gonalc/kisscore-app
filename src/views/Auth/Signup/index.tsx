@@ -37,6 +37,7 @@ const Signup = () => {
     password: '',
     passwordError: false,
     passwordRepeat: '',
+    passwordRepeatError: false,
     submitted: false
   }
 
@@ -51,12 +52,13 @@ const Signup = () => {
     const formErrors: TFormErrors = {
       nameError: null,
       emailError: false,
-      passwordError: false
+      passwordError: false,
+      passwordRepeatError: false
     }
 
     let hasErrors = false
 
-    const { name, email, password } = state
+    const { name, email, password, passwordRepeat } = state
 
     // Validate name
     if (name.length < MIN_NAME_LENGTH) {
@@ -79,6 +81,14 @@ const Signup = () => {
     formErrors.passwordError = !isValidPassword
 
     if (!isValidPassword) {
+      hasErrors = true
+    }
+
+    // Validate repeated password
+    const areEqual = password === passwordRepeat
+    formErrors.passwordRepeatError = !areEqual
+
+    if (!areEqual) {
       hasErrors = true
     }
 
@@ -164,7 +174,9 @@ const Signup = () => {
       props: {
         value: state.passwordRepeat,
         onChange,
-        placeholder: i18n.t('forms.repeatPassword')
+        placeholder: i18n.t('forms.repeatPassword'),
+        showError: state.passwordRepeatError,
+        errorMessage: 'forms.errors.passwordsMustBeEqual'
       }
     }
   }

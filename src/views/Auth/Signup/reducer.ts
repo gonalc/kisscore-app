@@ -14,6 +14,7 @@ export interface ISignupState {
   password: string
   passwordError: boolean
   passwordRepeat: string
+  passwordRepeatError: boolean
   submitted: boolean
 }
 

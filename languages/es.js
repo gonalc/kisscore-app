@@ -20,7 +20,8 @@ const es = {
       length: 'Tiene que tener al menos {{value}} caracteres.',
       emailError: 'El email no es válido',
       passwordInvalid:
-        'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.'
+        'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.',
+      passwordsMustBeEqual: 'Las contraseñas deben coincidir.'
     }
   }
 }

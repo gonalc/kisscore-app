@@ -10,9 +10,16 @@ export interface IPasswordInputProps {
   onChange: (value: string) => void
   placeholder?: string
   showError?: boolean
+  errorMessage?: string
 }
 
-const PasswordInput: FC<IPasswordInputProps> = ({ value, onChange, placeholder, showError }) => {
+const PasswordInput: FC<IPasswordInputProps> = ({
+  value,
+  onChange,
+  placeholder,
+  showError,
+  errorMessage
+}) => {
   const styles = getStyles({ showError })
 
   const [visiblePassword, setVisiblePassword] = useState(false)
@@ -45,7 +52,9 @@ const PasswordInput: FC<IPasswordInputProps> = ({ value, onChange, placeholder, 
           </Pressable>
         </View>
       </View>
-      {showError && <Text style={styles.error}>{i18n.t('forms.errors.passwordInvalid')}</Text>}
+      {showError && (
+        <Text style={styles.error}>{i18n.t(errorMessage || 'forms.errors.passwordInvalid')}</Text>
+      )}
     </View>
   )
 }
