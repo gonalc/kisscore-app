@@ -16,6 +16,7 @@ export interface ISignupState {
   passwordRepeat: string
   passwordRepeatError: boolean
   submitted: boolean
+  signupError: boolean
 }
 
 export interface ISignupAction {
@@ -23,7 +24,7 @@ export interface ISignupAction {
   payload?: Partial<ISignupState>
 }
 
-const { MODIFY_FORM, SUBMIT_FORM } = constants
+const { MODIFY_FORM, SUBMIT_FORM, SIGNUP_ERROR } = constants
 
 function reducer(state: ISignupState, action: ISignupAction) {
   const { type, payload = {} } = action
@@ -39,6 +40,11 @@ function reducer(state: ISignupState, action: ISignupAction) {
         ...state,
         ...payload,
         submitted: true
+      }
+    case SIGNUP_ERROR:
+      return {
+        ...state,
+        signupError: true
       }
   }
 }

@@ -8,10 +8,12 @@ import './i18n'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Signup from './src/views/Auth/Signup'
+import Leagues from './src/views/Leagues'
 
 export type RootStackParamList = {
   Login: undefined
   Signup: undefined
+  Leagues: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -36,6 +38,8 @@ function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
+
+          <Stack.Screen name="Leagues" component={Leagues} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

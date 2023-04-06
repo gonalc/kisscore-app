@@ -1,9 +1,9 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import TextInput from '../../../components/forms/TextInput'
 import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
-import { LARGE_FONT } from '../../../utils/fonts'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../../utils/fonts'
 import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
@@ -24,10 +24,17 @@ import { today } from '../../../utils/dates'
 import CountryInput from '../../../components/forms/CountryInput'
 import { signup } from '../../../api/auth'
 import { ICreationUser } from '../../../types/users'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../../../App'
 
-const { MODIFY_FORM, SUBMIT_FORM } = constants
+type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
+
+const { MODIFY_FORM, SUBMIT_FORM, SIGNUP_ERROR } = constants
 
 const Signup = () => {
+  const navigation = useNavigation<THomeScreenProp>()
+
   const initialState: ISignupState = {
     name: '',
     nameError: null,
@@ -40,7 +47,8 @@ const Signup = () => {
     passwordError: false,
     passwordRepeat: '',
     passwordRepeatError: false,
-    submitted: false
+    submitted: false,
+    signupError: false
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -120,9 +128,13 @@ const Signup = () => {
         birthdate: new Date(birthdate)
       }
 
-      const result = await signup(formData)
+      try {
+        await signup(formData)
 
-      console.log({ result })
+        navigation.navigate('Leagues')
+      } catch (error) {
+        dispatch({ type: SIGNUP_ERROR })
+      }
     }
   }
 
@@ -142,9 +154,7 @@ const Signup = () => {
       Component: DateInput,
       props: {
         label: i18n.t('labels.birthDate'),
-        onChange: (value) => {
-          console.log({ value })
-        },
+        onChange: () => null,
         value: state.birthdate,
         maximumDate: new Date(maximumSignupDate)
       }
@@ -208,6 +218,12 @@ const Signup = () => {
         <View style={styles.buttonContainer}>
           <Button label={i18n.t('forms.signup')} onPress={onSubmit} />
         </View>
+
+        {state.signupError && (
+          <View>
+            <Text style={styles.textError}>{i18n.t('forms.errors.signupError')}</Text>
+          </View>
+        )}
       </View>
     </View>
   )
@@ -221,6 +237,13 @@ const styles = StyleSheet.create({
     padding: 50
   },
   buttonContainer: {
+    marginVertical: 10
+  },
+  textError: {
+    color: COLORS.red,
+    fontSize: FONT_SIZE.labels,
+    fontFamily: NunitoSans,
+    textAlign: 'center',
     marginVertical: 10
   }
 })

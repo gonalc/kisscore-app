@@ -21,6 +21,7 @@ parserOptions: {
     quotes: ["error", "single"],
     semi: ["error", "never"],
     "prettier/prettier": "error",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "no-console" :["error", { allow: ["warn", "error"] }]
   },
 };
