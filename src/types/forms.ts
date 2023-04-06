@@ -35,7 +35,7 @@ interface IPasswordInput {
 
 export interface ISignupInputs {
   name: IBasicTextInput
-  birthDate: IBirthDateInput
+  birthdate: IBirthDateInput
   country: ICountryInput
   city: IBasicTextInput
   email: IEmailInput

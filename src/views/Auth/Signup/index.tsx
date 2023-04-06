@@ -22,6 +22,8 @@ import {
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
 import { today } from '../../../utils/dates'
 import CountryInput from '../../../components/forms/CountryInput'
+import { signup } from '../../../api/auth'
+import { ICreationUser } from '../../../types/users'
 
 const { MODIFY_FORM, SUBMIT_FORM } = constants
 
@@ -29,7 +31,7 @@ const Signup = () => {
   const initialState: ISignupState = {
     name: '',
     nameError: null,
-    birthDate: today.subtract(AVERAGE_AGE, 'years').valueOf(),
+    birthdate: today.subtract(AVERAGE_AGE, 'years').valueOf(),
     country: '',
     city: '',
     email: '',
@@ -98,18 +100,30 @@ const Signup = () => {
   const onChange = (field: string) => (value: string | number) => {
     const payload: ISignupAction['payload'] = { [field]: value }
 
-    console.log({ field, value })
-
     dispatch({ type: MODIFY_FORM, payload })
   }
 
-  const onSubmit = () => {
-    console.log('STATE: ', state)
+  const onSubmit = async () => {
     const { formErrors, hasErrors } = validateForm()
 
-    console.log({ formErrors, hasErrors })
-
     dispatch({ type: SUBMIT_FORM, payload: formErrors })
+
+    if (!hasErrors) {
+      const { name, email, password, country, city, birthdate } = state
+
+      const formData: ICreationUser = {
+        name,
+        email,
+        password,
+        country,
+        city,
+        birthdate: new Date(birthdate)
+      }
+
+      const result = await signup(formData)
+
+      console.log({ result })
+    }
   }
 
   const inputs: ISignupInputs = {
@@ -124,14 +138,14 @@ const Signup = () => {
         errorPayload: { value: MIN_NAME_LENGTH }
       }
     },
-    birthDate: {
+    birthdate: {
       Component: DateInput,
       props: {
         label: i18n.t('labels.birthDate'),
         onChange: (value) => {
           console.log({ value })
         },
-        value: state.birthDate,
+        value: state.birthdate,
         maximumDate: new Date(maximumSignupDate)
       }
     },
