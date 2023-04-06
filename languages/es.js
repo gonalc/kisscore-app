@@ -17,7 +17,8 @@ const es = {
     repeatPassword: 'Repite tu contraseña',
     countryNotFound: 'País no encontrado',
     errors: {
-      length: 'Tiene que tener al menos {{value}} caracteres.'
+      length: 'Tiene que tener al menos {{value}} caracteres.',
+      emailError: 'El email no es válido'
     }
   }
 }

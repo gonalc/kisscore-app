@@ -12,7 +12,7 @@ import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
 import Button from '../../../components/Button'
-import { AVERAGE_AGE, MIN_NAME_LENGTH, maximumSignupDate } from '../../../utils/forms'
+import { AVERAGE_AGE, MIN_NAME_LENGTH, emailIsValid, maximumSignupDate } from '../../../utils/forms'
 import { ISignupInputs, TFormErrors } from '../../../types/forms'
 import { today } from '../../../utils/dates'
 import CountryInput from '../../../components/forms/CountryInput'
@@ -27,6 +27,7 @@ const Signup = () => {
     country: '',
     city: '',
     email: '',
+    emailError: false,
     password: '',
     passwordRepeat: '',
     submitted: false
@@ -41,18 +42,28 @@ const Signup = () => {
 
   const validateForm = () => {
     const formErrors: TFormErrors = {
-      nameError: null
+      nameError: null,
+      emailError: false
     }
 
     let hasErrors = false
 
-    const { name } = state
+    const { name, email } = state
 
+    // Validate name
     if (name.length < MIN_NAME_LENGTH) {
       formErrors.nameError = 'length'
       hasErrors = true
     } else {
       formErrors.nameError = null
+    }
+
+    // Validate email
+    const isValid = emailIsValid(email)
+    formErrors.emailError = !isValid
+
+    if (!isValid) {
+      hasErrors = true
     }
 
     return { formErrors, hasErrors }
@@ -112,27 +123,29 @@ const Signup = () => {
         label: i18n.t('labels.city'),
         placeholder: i18n.t('forms.cityPlaceholder'),
         icon: <MaterialCommunityIcons name="city" {...iconProps} />,
-        onChange
+        onChange,
+        value: state.city
       }
     },
     email: {
       Component: EmailInput,
       props: {
-        value: '',
-        onChange
+        onChange,
+        value: state.email,
+        showError: state.emailError
       }
     },
     password: {
       Component: PasswordInput,
       props: {
-        value: '',
+        value: state.password,
         onChange
       }
     },
     passwordRepeat: {
       Component: PasswordInput,
       props: {
-        value: '',
+        value: state.passwordRepeat,
         onChange,
         placeholder: i18n.t('forms.repeatPassword')
       }

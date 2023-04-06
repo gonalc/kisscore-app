@@ -10,6 +10,7 @@ export interface ISignupState {
   country: string
   city: string
   email: string
+  emailError: boolean
   password: string
   passwordRepeat: string
   submitted: boolean
