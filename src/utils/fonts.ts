@@ -1,4 +1,5 @@
 export const NunitoSans = 'NunitoSans'
+export const NunitoSansBold = 'NunitoSansBold'
 export const PassionOne = 'PassionOne'
 
 export const SMALL_FONT = 14
