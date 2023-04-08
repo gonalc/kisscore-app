@@ -15,6 +15,8 @@ import { emailIsValid, passwordIsValid } from '../../../utils/forms'
 import constants from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
 import { login } from '../../../api/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { JWT_STORAGE_KEY, USER_STORAGE_KEY } from '../../../utils/storage'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
@@ -67,10 +69,12 @@ function Login() {
     }
 
     try {
-      await login(loginData)
+      const { jwt, user } = await login(loginData)
 
-      // Need to set the user in context
-      // Store JTW in async storage
+      await AsyncStorage.setItem(JWT_STORAGE_KEY, jwt)
+      await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+
+      navigation.navigate('Leagues')
     } catch (error) {
       dispatch({ type: LOGIN_ERROR })
     }
