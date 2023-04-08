@@ -57,7 +57,8 @@ function App() {
             options={{
               headerTitleStyle: { fontFamily: NunitoSansBold },
               headerTintColor: COLORS.white,
-              headerBackground: () => <HeaderBackground />
+              headerBackground: () => <HeaderBackground />,
+              headerBackVisible: false
             }}
           />
         </Stack.Navigator>
