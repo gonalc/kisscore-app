@@ -25,3 +25,8 @@ export async function getStoredUser(): Promise<IUser> {
     console.error('There was some error finding the user: ', error)
   }
 }
+
+export async function storeSessionData(user: IUser, jwt: string) {
+  await AsyncStorage.setItem(JWT_STORAGE_KEY, jwt)
+  await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+}

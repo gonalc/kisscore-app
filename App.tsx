@@ -12,6 +12,9 @@ import Leagues from './src/views/Leagues'
 import { NunitoSansBold } from './src/utils/fonts'
 import HeaderBackground from './src/components/HeaderBackground'
 import COLORS from './src/utils/colors'
+import { useEffect, useState } from 'react'
+import { getJWTToken, storeSessionData } from './src/utils/storage'
+import { checkToken } from './src/api/auth'
 
 export type RootStackParamList = {
   Login: undefined
@@ -28,14 +31,32 @@ function App() {
     PassionOne: PassionOne_400Regular
   })
 
-  if (!fontsLoaded) {
+  const [loading, setLoading] = useState(true)
+  const [initialScreen, setInitialScreen] = useState<keyof RootStackParamList>('Login')
+
+  useEffect(() => {
+    const check = async () => {
+      const token = await getJWTToken()
+
+      if (token) {
+        const { jwt, user } = await checkToken(token)
+        await storeSessionData(user, jwt)
+        setInitialScreen('Leagues')
+        setLoading(false)
+      }
+    }
+
+    check()
+  })
+
+  if (!fontsLoaded || loading) {
     return null
   }
 
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={initialScreen}>
           <Stack.Screen
             name="Login"
             component={Login}
