@@ -12,11 +12,11 @@ interface ILoginResponse {
   user: IUser
 }
 
-export async function signup(payload: ICreationUser): Promise<IUser> {
+export async function signup(payload: ICreationUser): Promise<ILoginResponse> {
   try {
-    const url = `${BASE_URL}/users`
+    const url = `${BASE_URL}/auth/signup`
 
-    const result: AxiosResponse<APIResponse<IUser>> = await axios.post(url, payload)
+    const result: AxiosResponse<APIResponse<ILoginResponse>> = await axios.post(url, payload)
 
     return result.data.data
   } catch (error) {

@@ -27,6 +27,8 @@ import { ICreationUser } from '../../../types/users'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../../../App'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { JWT_STORAGE_KEY, USER_STORAGE_KEY } from '../../../utils/storage'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 
@@ -129,9 +131,10 @@ const Signup = () => {
       }
 
       try {
-        await signup(formData)
+        const { jwt, user } = await signup(formData)
 
-        // Need to set the user in context
+        await AsyncStorage.setItem(JWT_STORAGE_KEY, jwt)
+        await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
 
         navigation.navigate('Leagues')
       } catch (error) {
