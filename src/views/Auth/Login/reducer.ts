@@ -8,6 +8,7 @@ export interface ILoginInitialState {
   password: string
   passwordError: boolean
   submitted: boolean
+  loginError: boolean
 }
 
 export interface ILoginAction {
@@ -15,7 +16,7 @@ export interface ILoginAction {
   payload?: Partial<ILoginInitialState>
 }
 
-const { MODIFY_FORM, SUBMIT_FORM } = constants
+const { MODIFY_FORM, SUBMIT_FORM, LOGIN_ERROR } = constants
 
 function reducer(state: ILoginInitialState, action: ILoginAction) {
   const { type, payload = {} } = action
@@ -29,7 +30,14 @@ function reducer(state: ILoginInitialState, action: ILoginAction) {
     case SUBMIT_FORM:
       return {
         ...state,
-        submitted: true
+        submitted: true,
+        loginError: false
+      }
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        submitted: true,
+        loginError: true
       }
   }
 }

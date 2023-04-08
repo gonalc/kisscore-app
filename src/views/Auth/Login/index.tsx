@@ -10,14 +10,15 @@ import PasswordInput from '../../../components/forms/PasswordInput'
 import NegativeButton from '../../../components/NegativeButton'
 import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
-import { NunitoSans, SMALL_FONT } from '../../../utils/fonts'
+import { FONT_SIZE, NunitoSans, SMALL_FONT } from '../../../utils/fonts'
 import { emailIsValid, passwordIsValid } from '../../../utils/forms'
 import constants from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
+import { login } from '../../../api/auth'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
-const { MODIFY_FORM, SUBMIT_FORM } = constants
+const { MODIFY_FORM, SUBMIT_FORM, LOGIN_ERROR } = constants
 
 function Login() {
   const initialState: ILoginInitialState = {
@@ -25,7 +26,8 @@ function Login() {
     emailError: false,
     password: '',
     passwordError: false,
-    submitted: false
+    submitted: false,
+    loginError: false
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -54,15 +56,24 @@ function Login() {
     return state.email && state.password && !state.emailError && !state.passwordError
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     dispatch({ type: SUBMIT_FORM })
 
-    // const { email, password } = state
+    const { email, password } = state
 
-    // const loginData = {
-    //   email,
-    //   password
-    // }
+    const loginData = {
+      email,
+      password
+    }
+
+    try {
+      await login(loginData)
+
+      // Need to set the user in context
+      // Store JTW in async storage
+    } catch (error) {
+      dispatch({ type: LOGIN_ERROR })
+    }
   }
 
   const goToSignup = () => {
@@ -86,6 +97,12 @@ function Login() {
         <Text style={styles.registerText}>{i18n.t('forms.registerText')}</Text>
       </View>
 
+      {state.loginError && (
+        <View>
+          <Text style={styles.textError}>{i18n.t('forms.errors.loginError')}</Text>
+        </View>
+      )}
+
       <View style={styles.block}>
         <NegativeButton label={i18n.t('forms.signup')} onPress={goToSignup} />
       </View>
@@ -107,6 +124,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: SMALL_FONT,
     fontFamily: NunitoSans
+  },
+  textError: {
+    color: COLORS.red,
+    fontSize: FONT_SIZE.labels,
+    fontFamily: NunitoSans,
+    textAlign: 'center',
+    marginVertical: 10
   }
 })
 

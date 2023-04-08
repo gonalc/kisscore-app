@@ -39,7 +39,8 @@ function reducer(state: ISignupState, action: ISignupAction) {
       return {
         ...state,
         ...payload,
-        submitted: true
+        submitted: true,
+        signupError: false
       }
     case SIGNUP_ERROR:
       return {
