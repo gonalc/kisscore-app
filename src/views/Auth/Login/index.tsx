@@ -51,20 +51,18 @@ function Login() {
   }
 
   const formIsValid = () => {
-    return !state.emailError && !state.passwordError
+    return state.email && state.password && !state.emailError && !state.passwordError
   }
 
   const onSubmit = () => {
     dispatch({ type: SUBMIT_FORM })
 
-    const { email, password } = state
+    // const { email, password } = state
 
-    const loginData = {
-      email,
-      password
-    }
-
-    console.log({ loginData })
+    // const loginData = {
+    //   email,
+    //   password
+    // }
   }
 
   const goToSignup = () => {
