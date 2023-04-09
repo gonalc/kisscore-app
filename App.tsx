@@ -15,6 +15,7 @@ import COLORS from './src/utils/colors'
 import { useEffect, useState } from 'react'
 import { getJWTToken, storeSessionData } from './src/utils/storage'
 import { checkToken } from './src/api/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export type RootStackParamList = {
   Login: undefined
@@ -43,6 +44,8 @@ function App() {
         await storeSessionData(user, jwt)
         setInitialScreen('Leagues')
         setLoading(false)
+      } else {
+        await AsyncStorage.clear()
       }
     }
 
