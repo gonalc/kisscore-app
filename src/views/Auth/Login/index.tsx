@@ -72,7 +72,7 @@ function Login() {
 
       await storeSessionData(user, jwt)
 
-      navigation.navigate('Leagues')
+      navigation.navigate('LeaguesScreens')
     } catch (error) {
       dispatch({ type: LOGIN_ERROR })
     }

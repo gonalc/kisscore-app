@@ -8,7 +8,6 @@ import './i18n'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Signup from './src/views/Auth/Signup'
-import Leagues from './src/views/Leagues'
 import { NunitoSansBold } from './src/utils/fonts'
 import HeaderBackground from './src/components/HeaderBackground'
 import COLORS from './src/utils/colors'
@@ -16,11 +15,12 @@ import { useEffect, useState } from 'react'
 import { getJWTToken, storeSessionData } from './src/utils/storage'
 import { checkToken } from './src/api/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import LeaguesTabs from './src/views/LeaguesTabs'
 
 export type RootStackParamList = {
   Login: undefined
   Signup: undefined
-  Leagues: undefined
+  LeaguesScreens: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -42,7 +42,7 @@ function App() {
       if (token) {
         const { jwt, user } = await checkToken(token)
         await storeSessionData(user, jwt)
-        setInitialScreen('Leagues')
+        setInitialScreen('LeaguesScreens')
         setLoading(false)
       } else {
         await AsyncStorage.clear()
@@ -76,8 +76,8 @@ function App() {
           />
 
           <Stack.Screen
-            name="Leagues"
-            component={Leagues}
+            name="LeaguesScreens"
+            component={LeaguesTabs}
             options={{
               headerTitleStyle: { fontFamily: NunitoSansBold },
               headerTintColor: COLORS.white,

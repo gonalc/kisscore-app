@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '../../../App'
 
-type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Leagues'>
+type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
 const Leagues: FC = () => {
   const navigation = useNavigation<THomeScreenProp>()

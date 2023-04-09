@@ -134,7 +134,7 @@ const Signup = () => {
 
         await storeSessionData(user, jwt)
 
-        navigation.navigate('Leagues')
+        navigation.navigate('LeaguesScreens')
       } catch (error) {
         dispatch({ type: SIGNUP_ERROR })
       }
