@@ -1,3 +1,5 @@
+import { ILeague } from './leagues'
+
 export interface ICreationUser {
   name: string
   birthdate: Date
@@ -11,4 +13,8 @@ export interface IUser extends Omit<ICreationUser, 'password'> {
   id: number
   createdAt: Date
   updatedAt: Date
+}
+
+export interface IUserWithLeagues extends IUser {
+  leagues: ILeague[]
 }

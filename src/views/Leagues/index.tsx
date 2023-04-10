@@ -2,19 +2,14 @@ import { FC, useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { getJWTToken, getStoredUser } from '../../utils/storage'
 import { IUser } from '../../types/users'
-import Button from '../../components/Button'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import type { RootStackParamList } from '../../../App'
-
-type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
+import COLORS from '../../utils/colors'
+import useFetchLeagues from '../../hooks/fetchLeagues'
 
 const Leagues: FC = () => {
-  const navigation = useNavigation<THomeScreenProp>()
-
   const [token, setToken] = useState<string>('')
   const [user, setUser] = useState<IUser | null>(null)
+
+  const { leagues, loading } = useFetchLeagues()
 
   useEffect(() => {
     const getStoredData = async () => {
@@ -28,11 +23,10 @@ const Leagues: FC = () => {
     getStoredData()
   }, [])
 
-  const logout = async () => {
-    await AsyncStorage.clear()
-
-    navigation.navigate('Login')
+  if (loading) {
+    return <Text>Loadinnngggg</Text>
   }
+
   return (
     <View style={styles.container}>
       <Text>Leagues Screen</Text>
@@ -42,7 +36,7 @@ const Leagues: FC = () => {
       <Text>User:</Text>
       <Text style={{ marginBottom: 50 }}>{JSON.stringify(user)}</Text>
 
-      <Button label="Logout" onPress={logout} />
+      <Text>Leagues: {leagues?.length}</Text>
     </View>
   )
 }
@@ -50,7 +44,8 @@ const Leagues: FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50
+    padding: 50,
+    backgroundColor: COLORS.white
   }
 })
 
