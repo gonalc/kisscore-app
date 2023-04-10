@@ -31,4 +31,6 @@ export const MIN_NAME_LENGTH = 3
 export const MINIMUM_AGE = 16
 export const AVERAGE_AGE = 20
 
+export const MIN_LEAGUE_NAME_LENGTH = 5
+
 export const maximumSignupDate = today.subtract(MINIMUM_AGE, 'years').valueOf()

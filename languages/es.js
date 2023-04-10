@@ -5,6 +5,9 @@ const es = {
     city: 'Ciudad',
     birthDate: 'Fecha de nacimiento'
   },
+  actions: {
+    create: 'Crear'
+  },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
     passwordPlaceholder: 'Introduce tu contraseña',

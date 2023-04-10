@@ -12,4 +12,18 @@ const COLORS = {
   black: '#240E0D'
 }
 
+export function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+
+  if (result) {
+    const red = parseInt(result[1], 16)
+    const green = parseInt(result[2], 16)
+    const blue = parseInt(result[3], 16)
+
+    return `${red}, ${green}, ${blue}`
+  }
+
+  return '0, 0, 0'
+}
+
 export default COLORS
