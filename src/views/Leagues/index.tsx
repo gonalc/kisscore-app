@@ -4,6 +4,7 @@ import { getJWTToken, getStoredUser } from '../../utils/storage'
 import { IUser } from '../../types/users'
 import COLORS from '../../utils/colors'
 import useFetchLeagues from '../../hooks/fetchLeagues'
+import Loader from '../../components/Loader'
 
 const Leagues: FC = () => {
   const [token, setToken] = useState<string>('')
@@ -23,21 +24,19 @@ const Leagues: FC = () => {
     getStoredData()
   }, [])
 
-  if (loading) {
-    return <Text>Loadinnngggg</Text>
-  }
-
   return (
-    <View style={styles.container}>
-      <Text>Leagues Screen</Text>
-      <Text>Token:</Text>
-      <Text style={{ marginBottom: 50 }}>{token}</Text>
+    <Loader isLoading={loading}>
+      <View style={styles.container}>
+        <Text>Leagues Screen</Text>
+        <Text>Token:</Text>
+        <Text style={{ marginBottom: 50 }}>{token}</Text>
 
-      <Text>User:</Text>
-      <Text style={{ marginBottom: 50 }}>{JSON.stringify(user)}</Text>
+        <Text>User:</Text>
+        <Text style={{ marginBottom: 50 }}>{JSON.stringify(user)}</Text>
 
-      <Text>Leagues: {leagues?.length}</Text>
-    </View>
+        <Text>Leagues: {leagues?.length}</Text>
+      </View>
+    </Loader>
   )
 }
 
