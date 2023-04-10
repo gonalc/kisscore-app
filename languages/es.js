@@ -26,6 +26,10 @@ const es = {
         'Hubo un problema al registrar el usuario. ¿Puede que ese email ya exista? Vuelve a probar más tarde.',
       loginError: 'Las credenciales no son correctas.'
     }
+  },
+  leagues: {
+    createLeague: 'Crear liga',
+    noLeagues: 'No estás dentro de ninguna liga.'
   }
 }
 

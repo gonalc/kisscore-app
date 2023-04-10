@@ -1,41 +1,31 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { getJWTToken, getStoredUser } from '../../utils/storage'
-import { IUser } from '../../types/users'
 import COLORS from '../../utils/colors'
 import useFetchLeagues from '../../hooks/fetchLeagues'
 import Loader from '../../components/Loader'
+import NoLeagues from './NoLeagues'
 
 const Leagues: FC = () => {
-  const [token, setToken] = useState<string>('')
-  const [user, setUser] = useState<IUser | null>(null)
-
   const { leagues, loading } = useFetchLeagues()
 
-  useEffect(() => {
-    const getStoredData = async () => {
-      const jwt = await getJWTToken()
-      const userData = await getStoredUser()
+  const renderContent = () => {
+    if (leagues.length) {
+      return (
+        <>
+          <Text>Leagues Screen</Text>
 
-      setToken(jwt)
-      setUser(userData)
+          <Text>Leagues:</Text>
+          <Text style={{ marginBottom: 50 }}>{JSON.stringify(leagues)}</Text>
+        </>
+      )
     }
 
-    getStoredData()
-  }, [])
+    return <NoLeagues />
+  }
 
   return (
     <Loader isLoading={loading}>
-      <View style={styles.container}>
-        <Text>Leagues Screen</Text>
-        <Text>Token:</Text>
-        <Text style={{ marginBottom: 50 }}>{token}</Text>
-
-        <Text>User:</Text>
-        <Text style={{ marginBottom: 50 }}>{JSON.stringify(user)}</Text>
-
-        <Text>Leagues: {leagues?.length}</Text>
-      </View>
+      <View style={styles.container}>{renderContent()}</View>
     </Loader>
   )
 }
