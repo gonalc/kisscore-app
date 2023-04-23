@@ -1,68 +1,33 @@
-import { FC, ReactNode } from 'react'
-import { Pressable, Modal as RNModal, StyleSheet, Text, View } from 'react-native'
-import COLORS, { hexToRgb } from '../utils/colors'
-import { FontAwesome5 } from '@expo/vector-icons'
-import { LARGE_FONT, NORMAL_FONT, NunitoSans } from '../utils/fonts'
-import useKeyboard from '../hooks/keyboard'
+import { FC } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import Backdrop from './Backdrop'
 
 export interface IModalProps {
-  isVisible: boolean
-  children: ReactNode
+  isOpen: boolean
   onClose: () => void
-  title: string
 }
 
-const Modal: FC<IModalProps> = ({ isVisible, children, title, onClose }) => {
-  const isKeyboardShown = useKeyboard()
-
-  const styles = getStyles({ isKeyboardShown })
+const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
+  if (!isOpen) {
+    return null
+  }
 
   return (
-    <RNModal animationType="slide" visible={isVisible} transparent statusBarTranslucent>
+    <>
+      <Backdrop onPress={onClose} />
       <View style={styles.container}>
-        <View style={styles.content}>
-          <View style={styles.header}>
-            <Text style={styles.title}>{title}</Text>
-            <Pressable onPress={onClose} style={styles.closeContainer}>
-              <FontAwesome5 name="times" size={NORMAL_FONT} color={COLORS.black} />
-            </Pressable>
-          </View>
-          {children}
-        </View>
+        <Text>Modal</Text>
       </View>
-    </RNModal>
+    </>
   )
 }
 
-const getStyles = ({ isKeyboardShown }) => {
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      backgroundColor: `rgba(${hexToRgb(COLORS.gray)}, 0.5)`
-    },
-    content: {
-      padding: 15,
-      backgroundColor: COLORS.white,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      flex: isKeyboardShown ? 1 : 0
-    },
-    header: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingTop: isKeyboardShown ? 20 : 0
-    },
-    title: {
-      fontSize: LARGE_FONT,
-      color: COLORS.black,
-      fontFamily: NunitoSans
-    },
-    closeContainer: {
-      padding: 5
-    }
-  })
-}
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 10,
+    left: 20
+  }
+})
 
 export default Modal
