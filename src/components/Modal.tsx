@@ -1,23 +1,60 @@
-import { FC } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { FC, ReactNode, useEffect, useState } from 'react'
+import { StyleSheet, Dimensions } from 'react-native'
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import Backdrop from './Backdrop'
+import COLORS from '../utils/colors'
 
 export interface IModalProps {
   isOpen: boolean
   onClose: () => void
+  children: ReactNode
 }
 
-const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
+const Modal: FC<IModalProps> = ({ isOpen, onClose, children }) => {
+  const { width, height } = Dimensions.get('window')
+  const [modalHeight, setModalHeight] = useState<number>(-height)
+
+  const offset = useSharedValue(height)
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: offset.value }]
+    }
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      offset.value = height
+    }
+
+    const targetTranslation = height - modalHeight * 2 + 40
+
+    offset.value = withSpring(targetTranslation)
+  }, [modalHeight, isOpen])
+
   if (!isOpen) {
     return null
   }
 
+  const closeModal = () => {
+    offset.value = withSpring(height)
+
+    onClose()
+  }
+
   return (
     <>
-      <Backdrop onPress={onClose} />
-      <View style={styles.container}>
-        <Text>Modal</Text>
-      </View>
+      <Backdrop onPress={closeModal} />
+      <Animated.View
+        style={[styles.container, { width }, animatedStyles]}
+        onLayout={(event) => {
+          const { height } = event.nativeEvent.layout
+
+          setModalHeight(height)
+        }}
+      >
+        {children}
+      </Animated.View>
     </>
   )
 }
@@ -25,8 +62,11 @@ const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 10,
-    left: 20
+    left: 0,
+    backgroundColor: COLORS.white,
+    padding: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   }
 })
 

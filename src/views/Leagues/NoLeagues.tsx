@@ -36,7 +36,23 @@ const NoLeagues: FC = () => {
         />
       </View>
 
-      <Modal isOpen={creatingLeague} onClose={() => setCreatingLeague(false)} />
+      <Modal isOpen={creatingLeague} onClose={() => setCreatingLeague(false)}>
+        <View style={styles.createLeagueForm}>
+          <TextInput
+            label={i18n.t('labels.name')}
+            icon={<Ionicons name="trophy" size={LARGE_FONT} color={COLORS.black} />}
+            placeholder="Super Cup"
+            onChange={setLeagueName}
+            value={leagueName}
+          />
+
+          <Button
+            disabled={leagueName.length < MIN_LEAGUE_NAME_LENGTH}
+            label={i18n.t('actions.create')}
+            onPress={() => alert(`Creamoss!! ${leagueName}`)}
+          />
+        </View>
+      </Modal>
 
       <ModalDeprecated
         isVisible={creatingLeagueDeprecated}
