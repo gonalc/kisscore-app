@@ -3,6 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import Backdrop from './Backdrop'
 import COLORS from '../utils/colors'
+import useKeyboard from '../hooks/keyboard'
 
 export interface IModalProps {
   isOpen: boolean
@@ -12,6 +13,9 @@ export interface IModalProps {
 
 const Modal: FC<IModalProps> = ({ isOpen, onClose, children }) => {
   const { width, height } = Dimensions.get('window')
+
+  const { keyboardShown, keyboardHeight } = useKeyboard()
+
   const [modalHeight, setModalHeight] = useState<number>(-height)
 
   const offset = useSharedValue(height)
@@ -21,6 +25,14 @@ const Modal: FC<IModalProps> = ({ isOpen, onClose, children }) => {
       transform: [{ translateY: offset.value }]
     }
   })
+
+  useEffect(() => {
+    const keyboardMovement = keyboardShown
+      ? offset.value - keyboardHeight
+      : offset.value + keyboardHeight
+
+    offset.value = withSpring(keyboardMovement)
+  }, [keyboardShown])
 
   useEffect(() => {
     if (isOpen) {
