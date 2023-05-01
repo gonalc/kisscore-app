@@ -62,7 +62,8 @@ const getStyles = ({ error }) => {
       fontSize: FONT_SIZE.body,
       marginLeft: 10,
       color: COLORS.black,
-      fontFamily: NunitoSans
+      fontFamily: NunitoSans,
+      flex: 1
     },
     label: {
       fontSize: FONT_SIZE.labels,
