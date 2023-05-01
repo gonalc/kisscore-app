@@ -19,6 +19,7 @@ const es = {
     cityPlaceholder: '¿Cuál es tu ciudad?',
     repeatPassword: 'Repite tu contraseña',
     countryNotFound: 'País no encontrado',
+    createLeaguePlaceholder: 'Súper Copa',
     errors: {
       length: 'Tiene que tener al menos {{value}} caracteres.',
       emailError: 'El email no es válido',

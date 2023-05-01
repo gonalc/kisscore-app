@@ -31,7 +31,7 @@ const NoLeagues: FC = () => {
           <TextInput
             label={i18n.t('labels.name')}
             icon={<Ionicons name="trophy" size={LARGE_FONT} color={COLORS.black} />}
-            placeholder="Super Cup"
+            placeholder={i18n.t('forms.createLeaguePlaceholder')}
             onChange={setLeagueName}
             value={leagueName}
           />
