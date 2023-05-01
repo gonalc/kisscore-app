@@ -27,22 +27,18 @@ const Modal: FC<IModalProps> = ({ isOpen, onClose, children }) => {
   })
 
   useEffect(() => {
-    const keyboardMovement = keyboardShown
-      ? offset.value - keyboardHeight
-      : offset.value + keyboardHeight
-
-    offset.value = withSpring(keyboardMovement)
-  }, [keyboardShown])
-
-  useEffect(() => {
     if (isOpen) {
       offset.value = height
     }
 
-    const targetTranslation = height - modalHeight * 2 + 40
+    let targetTranslation = height - modalHeight * 2 + 40
 
-    offset.value = withSpring(targetTranslation)
-  }, [modalHeight, isOpen])
+    targetTranslation = keyboardShown ? targetTranslation - keyboardHeight : targetTranslation
+
+    if (targetTranslation !== offset.value) {
+      offset.value = withSpring(targetTranslation)
+    }
+  }, [isOpen, keyboardShown])
 
   if (!isOpen) {
     return null

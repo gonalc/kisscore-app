@@ -22,7 +22,8 @@ const TextInput: FC<ITextInputProps> = ({
   onChange,
   value,
   error,
-  errorPayload = {}
+  errorPayload = {},
+  ...textInputProps
 }) => {
   const styles = getStyles({ error })
 
@@ -36,6 +37,7 @@ const TextInput: FC<ITextInputProps> = ({
           placeholder={placeholder}
           onChangeText={onChange}
           value={value}
+          {...textInputProps}
         />
       </View>
       {error && (

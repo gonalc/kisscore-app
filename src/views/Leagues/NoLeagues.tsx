@@ -34,6 +34,7 @@ const NoLeagues: FC = () => {
             placeholder={i18n.t('forms.createLeaguePlaceholder')}
             onChange={setLeagueName}
             value={leagueName}
+            autoFocus
           />
 
           <Button
