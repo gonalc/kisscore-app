@@ -1,18 +1,17 @@
 import axios, { AxiosResponse } from 'axios'
 import { APIResponse, BASE_URL } from './url'
 import { IUserWithLeagues } from '../types/users'
-import { USERS_URL } from './auth'
 import type { ILeagueToCreate, ILeague } from '../types/leagues'
 
 const LEAGUES_URL = `${BASE_URL}/leagues`
 
 export async function getUserLeagues(userId: number) {
   try {
-    const url = `${USERS_URL}/${userId}?include=leagues`
+    const url = `${LEAGUES_URL}/from-user/${userId}`
 
     const result: AxiosResponse<APIResponse<IUserWithLeagues>> = await axios.get(url)
 
-    return result.data.data.leagues
+    return result.data.data
   } catch (error) {
     throw Error(error)
   }

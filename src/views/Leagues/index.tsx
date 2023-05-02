@@ -1,9 +1,10 @@
 import { FC } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import COLORS from '../../utils/colors'
 import useFetchLeagues from '../../hooks/leagues/fetchLeagues'
 import Loader from '../../components/Loader'
 import NoLeagues from './NoLeagues'
+import LeagueCard from './LeagueCard'
 
 const Leagues: FC = () => {
   const { leagues, loading, fetch } = useFetchLeagues()
@@ -11,12 +12,13 @@ const Leagues: FC = () => {
   const renderContent = () => {
     if (leagues.length) {
       return (
-        <>
-          <Text>Leagues Screen</Text>
-
-          <Text>Leagues:</Text>
-          <Text style={{ marginBottom: 50 }}>{JSON.stringify(leagues)}</Text>
-        </>
+        <View>
+          <FlatList
+            renderItem={({ item }) => <LeagueCard league={item} />}
+            data={leagues}
+            keyExtractor={(item) => `league-item_${item.id}`}
+          />
+        </View>
       )
     }
 
