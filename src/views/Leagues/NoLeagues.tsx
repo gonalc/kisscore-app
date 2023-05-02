@@ -14,21 +14,27 @@ import Loader from '../../components/Loader'
 import useCreateLeague from '../../hooks/leagues/createLeague'
 import type { IBaseLeague } from '../../types/leagues'
 
-const NoLeagues: FC = () => {
+interface INoLeaguesProps {
+  fetchLeagues: () => void
+}
+
+const NoLeagues: FC<INoLeaguesProps> = ({ fetchLeagues }) => {
   const [creatingLeague, setCreatingLeague] = useState(false)
   const [leagueName, setLeagueName] = useState('')
 
   const { loading, create } = useCreateLeague()
 
-  const onCreate = () => {
+  const onCreate = async () => {
     const leagueToCreate: IBaseLeague = {
       name: leagueName.trim()
     }
 
-    create(leagueToCreate)
+    await create(leagueToCreate)
 
     setCreatingLeague(false)
     setLeagueName('')
+
+    fetchLeagues()
   }
 
   return (

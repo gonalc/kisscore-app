@@ -6,7 +6,7 @@ import Loader from '../../components/Loader'
 import NoLeagues from './NoLeagues'
 
 const Leagues: FC = () => {
-  const { leagues, loading } = useFetchLeagues()
+  const { leagues, loading, fetch } = useFetchLeagues()
 
   const renderContent = () => {
     if (leagues.length) {
@@ -20,7 +20,7 @@ const Leagues: FC = () => {
       )
     }
 
-    return <NoLeagues />
+    return <NoLeagues fetchLeagues={fetch} />
   }
 
   return (

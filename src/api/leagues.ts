@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { APIResponse, BASE_URL } from './url'
 import { IUserWithLeagues } from '../types/users'
 import { USERS_URL } from './auth'
-import { IBaseLeague, ILeague } from '../types/leagues'
+import type { ILeagueToCreate, ILeague } from '../types/leagues'
 
 const LEAGUES_URL = `${BASE_URL}/leagues`
 
@@ -18,7 +18,7 @@ export async function getUserLeagues(userId: number) {
   }
 }
 
-export async function createLeague(leagueToCreate: IBaseLeague) {
+export async function createLeague(leagueToCreate: ILeagueToCreate) {
   try {
     const result: AxiosResponse<APIResponse<ILeague>> = await axios.post(
       LEAGUES_URL,

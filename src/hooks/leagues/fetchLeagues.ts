@@ -7,22 +7,22 @@ const useFetchLeagues = () => {
   const [leagues, setLeagues] = useState<ILeague[]>([])
   const [loading, setLoading] = useState(false)
 
+  const fetch = async () => {
+    setLoading(true)
+
+    const user = await getStoredUser()
+
+    const result = await getUserLeagues(user.id)
+
+    setLeagues(result)
+    setLoading(false)
+  }
+
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true)
-
-      const user = await getStoredUser()
-
-      const result = await getUserLeagues(user.id)
-
-      setLeagues(result)
-      setLoading(false)
-    }
-
     fetch()
   }, [])
 
-  return { leagues, loading }
+  return { leagues, loading, fetch }
 }
 
 export default useFetchLeagues
