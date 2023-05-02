@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import type { ILeague } from '../types/leagues'
-import { getUserLeagues } from '../api/leagues'
-import { getStoredUser } from '../utils/storage'
+import type { ILeague } from '../../types/leagues'
+import { getUserLeagues } from '../../api/leagues'
+import { getStoredUser } from '../../utils/storage'
 
 const useFetchLeagues = () => {
   const [leagues, setLeagues] = useState<ILeague[]>([])

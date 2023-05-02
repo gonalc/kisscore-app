@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import COLORS from '../../utils/colors'
-import useFetchLeagues from '../../hooks/fetchLeagues'
+import useFetchLeagues from '../../hooks/leagues/fetchLeagues'
 import Loader from '../../components/Loader'
 import NoLeagues from './NoLeagues'
 

@@ -10,13 +10,29 @@ import TextInput from '../../components/forms/TextInput'
 import Button from '../../components/Button'
 import { MIN_LEAGUE_NAME_LENGTH } from '../../utils/forms'
 import Modal from '../../components/Modal'
+import Loader from '../../components/Loader'
+import useCreateLeague from '../../hooks/leagues/createLeague'
+import type { IBaseLeague } from '../../types/leagues'
 
 const NoLeagues: FC = () => {
   const [creatingLeague, setCreatingLeague] = useState(false)
   const [leagueName, setLeagueName] = useState('')
 
+  const { loading, create } = useCreateLeague()
+
+  const onCreate = () => {
+    const leagueToCreate: IBaseLeague = {
+      name: leagueName.trim()
+    }
+
+    create(leagueToCreate)
+
+    setCreatingLeague(false)
+    setLeagueName('')
+  }
+
   return (
-    <>
+    <Loader isLoading={loading}>
       <Text style={styles.noLeaguesTitle}>{i18n.t('leagues.noLeagues')}</Text>
       <View style={styles.buttonContainer}>
         <NegativeButton
@@ -40,11 +56,11 @@ const NoLeagues: FC = () => {
           <Button
             disabled={leagueName.length < MIN_LEAGUE_NAME_LENGTH}
             label={i18n.t('actions.create')}
-            onPress={() => alert(`Creamoss!! ${leagueName}`)}
+            onPress={onCreate}
           />
         </View>
       </Modal>
-    </>
+    </Loader>
   )
 }
 

@@ -1,11 +1,10 @@
+import { DBBaseItem } from '.'
 import { IUser } from './users'
 
-export interface ILeague {
-  id: number
+export interface IBaseLeague {
   name: string
-  createdAt: Date
-  updatedAt: Date
 }
+export interface ILeague extends IBaseLeague, DBBaseItem {}
 
 export interface ILeagueWithPlayers extends ILeague {
   players: IUser[]

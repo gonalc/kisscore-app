@@ -1,3 +1,4 @@
+import { DBBaseItem } from '.'
 import { ILeague } from './leagues'
 
 export interface ICreationUser {
@@ -9,11 +10,7 @@ export interface ICreationUser {
   password: string
 }
 
-export interface IUser extends Omit<ICreationUser, 'password'> {
-  id: number
-  createdAt: Date
-  updatedAt: Date
-}
+export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {}
 
 export interface IUserWithLeagues extends IUser {
   leagues: ILeague[]

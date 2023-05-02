@@ -13,6 +13,7 @@ interface ILoginResponse {
 }
 
 const AUTH_URL = `${BASE_URL}/auth`
+export const USERS_URL = `${BASE_URL}/users`
 
 export async function signup(payload: ICreationUser): Promise<ILoginResponse> {
   try {
