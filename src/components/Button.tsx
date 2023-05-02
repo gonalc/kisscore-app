@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCC'
   },
   text: {
-    color: COLORS.white,
+    color: COLORS.whiteRed,
     fontSize: FONT_SIZE.buttons,
     fontFamily: NunitoSans
   }

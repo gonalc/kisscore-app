@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     left: 0,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.whiteRed,
     padding: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10

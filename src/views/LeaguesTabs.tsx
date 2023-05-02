@@ -15,7 +15,7 @@ const LeaguesTabs = () => {
       backgroundColor: COLORS.black
     },
     tabBarActiveTintColor: COLORS.red,
-    tabBarInactiveTintColor: COLORS.white,
+    tabBarInactiveTintColor: COLORS.whiteRed,
     tabBarShowLabel: false
   }
 

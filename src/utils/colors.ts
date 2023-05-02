@@ -8,8 +8,10 @@ const COLORS = {
   navyBlue: '#000080',
   lightBlue: '#92A9ED',
   teal: '#41E1B9',
-  white: '#FFE9E8',
-  black: '#240E0D'
+  whiteRed: '#FFE9E8',
+  black: '#240E0D',
+  background: '#F9F9F9',
+  white: '#FFFFFF'
 }
 
 export function hexToRgb(hex: string) {

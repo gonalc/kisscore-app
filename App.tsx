@@ -80,7 +80,7 @@ function App() {
             component={LeaguesTabs}
             options={{
               headerTitleStyle: { fontFamily: NunitoSansBold },
-              headerTintColor: COLORS.white,
+              headerTintColor: COLORS.whiteRed,
               headerBackground: () => <HeaderBackground />,
               headerBackVisible: false
             }}

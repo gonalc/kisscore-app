@@ -114,7 +114,7 @@ function Login() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.background,
     flex: 1,
     alignItems: 'stretch',
     padding: 50

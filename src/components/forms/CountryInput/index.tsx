@@ -59,7 +59,7 @@ const CountryInput: FC<ICountryInputProps> = ({
         style={{
           modal: {
             height: 500,
-            backgroundColor: COLORS.white,
+            backgroundColor: COLORS.background,
             paddingHorizontal: 30
           },
           dialCode: {
