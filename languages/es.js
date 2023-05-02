@@ -3,7 +3,8 @@ const es = {
     name: 'Nombre',
     country: 'País',
     city: 'Ciudad',
-    birthDate: 'Fecha de nacimiento'
+    birthDate: 'Fecha de nacimiento',
+    playersAmount: '{{count}} Jug.'
   },
   actions: {
     create: 'Crear'

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import type { ILeague } from '../../types/leagues'
+import type { ILeagueWithPlayers } from '../../types/leagues'
 import { getUserLeagues } from '../../api/leagues'
 import { getStoredUser } from '../../utils/storage'
 
 const useFetchLeagues = () => {
-  const [leagues, setLeagues] = useState<ILeague[]>([])
+  const [leagues, setLeagues] = useState<ILeagueWithPlayers[]>([])
   const [loading, setLoading] = useState(false)
 
   const fetch = async () => {
