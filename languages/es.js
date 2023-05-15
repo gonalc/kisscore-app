@@ -7,7 +7,8 @@ const es = {
     playersAmount: '{{count}} Jug.'
   },
   actions: {
-    create: 'Crear'
+    create: 'Crear',
+    back: 'Volver'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',

@@ -8,6 +8,7 @@ import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
 import COLORS from '../../utils/colors'
 import { sortByField } from '../../utils/sorter'
 import PlayerItem from './PlayerItem'
+import BackButton from '../../components/BackButton'
 
 // Type for the route prop
 type SingleLeagueRouteProps = RouteProp<LeaguesStackParamsList, 'SingleLeague'>
@@ -27,6 +28,8 @@ const SingleLeague: FC<ISingleLeagueProps> = ({ route }) => {
   return (
     <Loader isLoading={loading}>
       <View style={styles.container}>
+        <BackButton />
+
         <Text style={styles.title}>{name}</Text>
 
         <FlatList
@@ -49,8 +52,7 @@ const styles = StyleSheet.create({
     fontFamily: NunitoSans,
     fontSize: FONT_SIZE.header,
     color: COLORS.black,
-    padding: 20,
-    paddingBottom: 0
+    paddingHorizontal: 20
   },
   listEdge: {
     padding: 10

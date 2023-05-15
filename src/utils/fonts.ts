@@ -14,4 +14,4 @@ export const FONT_SIZE = {
   body: NORMAL_FONT,
   buttons: NORMAL_FONT,
   labels: SMALL_FONT
-}
+} as const
