@@ -10,7 +10,9 @@ export interface ICreationUser {
   password: string
 }
 
-export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {}
+export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {
+  score: number
+}
 
 export interface IUserWithLeagues extends IUser {
   leagues: ILeague[]

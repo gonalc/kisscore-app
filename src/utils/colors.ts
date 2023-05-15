@@ -11,7 +11,10 @@ const COLORS = {
   whiteRed: '#FFE9E8',
   black: '#240E0D',
   background: '#F9F9F9',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  gold: '#FFD700',
+  silver: '#C0C0C0',
+  bronze: '#9E4936'
 }
 
 export function hexToRgb(hex: string) {

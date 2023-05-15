@@ -1,49 +1,33 @@
-import { FC } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import COLORS from '../../utils/colors'
-import useFetchLeagues from '../../hooks/leagues/fetchLeagues'
-import Loader from '../../components/Loader'
-import NoLeagues from './NoLeagues'
-import LeagueCard from './LeagueCard'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import LeaguesHome from './LeaguesHome'
+import SingleLeague from './SingleLeague'
 
-const Leagues: FC = () => {
-  const { leagues, loading, fetch } = useFetchLeagues()
-
-  const renderContent = () => {
-    if (leagues.length) {
-      return (
-        <View>
-          <FlatList
-            renderItem={({ item }) => <LeagueCard league={item} />}
-            data={leagues}
-            keyExtractor={(item) => `league-item_${item.id}`}
-            ListHeaderComponent={<View />}
-            ListHeaderComponentStyle={styles.listEdge}
-            ListFooterComponent={<View />}
-            ListFooterComponentStyle={styles.listEdge}
-          />
-        </View>
-      )
-    }
-
-    return <NoLeagues fetchLeagues={fetch} />
-  }
-
-  return (
-    <Loader isLoading={loading}>
-      <View style={styles.container}>{renderContent()}</View>
-    </Loader>
-  )
+export type LeaguesStackParamsList = {
+  LeaguesHome: undefined
+  SingleLeague: { leagueId: number }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background
-  },
-  listEdge: {
-    padding: 20
-  }
-})
+const Stack = createNativeStackNavigator<LeaguesStackParamsList>()
+
+const Leagues = () => {
+  return (
+    <Stack.Navigator initialRouteName="LeaguesHome">
+      <Stack.Screen
+        name="LeaguesHome"
+        component={LeaguesHome}
+        options={{
+          header: () => null
+        }}
+      />
+      <Stack.Screen
+        name="SingleLeague"
+        component={SingleLeague}
+        options={{
+          header: () => null
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
 
 export default Leagues

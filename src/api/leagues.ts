@@ -16,6 +16,18 @@ export async function getUserLeagues(userId: number) {
   }
 }
 
+export async function getSingleLeague(leagueId: number) {
+  try {
+    const url = `${LEAGUES_URL}/${leagueId}?include=players`
+
+    const result: AxiosResponse<APIResponse<ILeagueWithPlayers>> = await axios.get(url)
+
+    return result.data.data
+  } catch (error) {
+    throw Error(error)
+  }
+}
+
 export async function createLeague(leagueToCreate: ILeagueToCreate) {
   try {
     const result: AxiosResponse<APIResponse<ILeague>> = await axios.post(

@@ -5,6 +5,8 @@ import COLORS from '../../utils/colors'
 import { LARGER_FONT, LARGE_FONT, NunitoSans, NunitoSansBold } from '../../utils/fonts'
 import { FontAwesome } from '@expo/vector-icons'
 import i18n from '../../../i18n'
+import { useNavigation } from '@react-navigation/native'
+import type { TLeaguesHomeScreenProp } from './LeaguesHome'
 
 interface ILeagueCardProps {
   league: ILeagueWithPlayers
@@ -13,10 +15,15 @@ interface ILeagueCardProps {
 const AVATAR_SIZE = 50
 
 const LeagueCard: FC<ILeagueCardProps> = ({ league }) => {
-  const { name, players } = league
+  const { name, players, id } = league
+
+  const navigation = useNavigation<TLeaguesHomeScreenProp>()
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.navigate('SingleLeague', { leagueId: id })}
+    >
       <View style={styles.avatar}>
         <Text style={styles.avatarText}>{name[0]}</Text>
       </View>
