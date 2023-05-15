@@ -9,6 +9,7 @@ import COLORS from '../../utils/colors'
 import { sortByField } from '../../utils/sorter'
 import PlayerItem from './PlayerItem'
 import BackButton from '../../components/BackButton'
+import LeagueSettings from './LeagueSettings'
 
 // Type for the route prop
 type SingleLeagueRouteProps = RouteProp<LeaguesStackParamsList, 'SingleLeague'>
@@ -30,7 +31,11 @@ const SingleLeague: FC<ISingleLeagueProps> = ({ route }) => {
       <View style={styles.container}>
         <BackButton />
 
-        <Text style={styles.title}>{name}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{name}</Text>
+
+          <LeagueSettings />
+        </View>
 
         <FlatList
           data={sortedPlayers}
@@ -51,11 +56,16 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: NunitoSans,
     fontSize: FONT_SIZE.header,
-    color: COLORS.black,
-    paddingHorizontal: 20
+    color: COLORS.black
   },
   listEdge: {
     padding: 10
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20
   }
 })
 

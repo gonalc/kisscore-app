@@ -4,7 +4,8 @@ const es = {
     country: 'País',
     city: 'Ciudad',
     birthDate: 'Fecha de nacimiento',
-    playersAmount: '{{count}} Jug.'
+    playersAmount: '{{count}} Jug.',
+    options: 'Opciones'
   },
   actions: {
     create: 'Crear',
@@ -35,7 +36,10 @@ const es = {
   },
   leagues: {
     createLeague: 'Crear liga',
-    noLeagues: 'No estás dentro de ninguna liga.'
+    noLeagues: 'No estás dentro de ninguna liga.',
+    settings: {
+      invitePlayer: 'Invitar jugador'
+    }
   }
 }
 
