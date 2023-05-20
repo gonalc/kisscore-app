@@ -26,9 +26,9 @@ const LeaguesHome: FC = () => {
             data={leagues}
             keyExtractor={(item) => `league-item_${item.id}`}
             ListHeaderComponent={<View />}
-            ListHeaderComponentStyle={styles.listEdge}
+            ListHeaderComponentStyle={styles.listEdgeTop}
             ListFooterComponent={<View />}
-            ListFooterComponentStyle={styles.listEdge}
+            ListFooterComponentStyle={styles.listEdgeBottom}
           />
         </View>
       )
@@ -50,7 +50,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background
   },
-  listEdge: {
+  listEdgeTop: {
+    padding: 10
+  },
+  listEdgeBottom: {
     padding: 20
   }
 })
