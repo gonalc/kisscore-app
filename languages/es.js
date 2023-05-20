@@ -46,7 +46,9 @@ const es = {
     }
   },
   invitations: {
-    title: 'Tienes invitaciones pendientes.'
+    title: 'Tienes invitaciones pendientes.',
+    acceptConfirmation: 'Vas a aceptar la invitación a la liga {{name}}.',
+    rejectConfirmation: 'Vas a rechazar la invitación a la liga {{name}}.'
   }
 }
 

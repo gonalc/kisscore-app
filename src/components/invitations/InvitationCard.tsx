@@ -22,12 +22,20 @@ const InvitationCard: FC<IInvitationCardProps> = ({ invitation }) => {
   const renderContent = () => {
     if (confirmStage) {
       return (
-        <View style={styles.buttonsRow}>
-          <NegativeButton
-            label={i18n.t('labels.thinkAboutIt')}
-            onPress={() => setConfirmStage(null)}
-          />
-          <Button label={i18n.t('actions.confirm')} onPress={() => alert('Vamos a aceptar')} />
+        <View>
+          <Text style={styles.confirmationText}>
+            {i18n.t(`invitations.${confirmStage}Confirmation`, { name: leagueName })}
+          </Text>
+          <View style={styles.buttonsRow}>
+            <NegativeButton
+              label={i18n.t('labels.thinkAboutIt')}
+              onPress={() => setConfirmStage(null)}
+            />
+            <Button
+              label={i18n.t(`actions.${confirmStage === 'reject' ? 'reject' : 'confirm'}`)}
+              onPress={() => alert('Vamos a aceptar')}
+            />
+          </View>
         </View>
       )
     }
@@ -72,6 +80,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     justifyContent: 'space-around'
+  },
+  confirmationText: {
+    fontFamily: NunitoSans,
+    fontSize: FONT_SIZE.body,
+    color: COLORS.black,
+    textAlign: 'center',
+    marginBottom: 10
   }
 })
 
