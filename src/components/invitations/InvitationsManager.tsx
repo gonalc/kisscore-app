@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import useFetchInvitations from '../../hooks/invitations/fetchInvitations'
 import Modal from 'react-native-modal'
 import { ScrollView, StyleSheet, View } from 'react-native'
@@ -7,9 +7,14 @@ import InvitationCard from './InvitationCard'
 import i18n from '../../../i18n'
 import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
 import Button from '../Button'
+import Loader from '../Loader'
 
-const InvitationsManager = () => {
-  const { invitations } = useFetchInvitations()
+interface IInvitationsManagerProps {
+  fetchLeagues: () => void
+}
+
+const InvitationsManager: FC<IInvitationsManagerProps> = ({ fetchLeagues }) => {
+  const { invitations, fetch, loading } = useFetchInvitations()
   const [showModal, setShowModal] = useState(false)
 
   if (!invitations?.length) {
@@ -23,16 +28,25 @@ const InvitationsManager = () => {
       </View>
 
       <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
-        <View style={styles.modalContainer}>
-          <ScrollView>
-            {invitations.map((invitation) => {
-              const { id } = invitation
+        <Loader isLoading={loading}>
+          <View style={styles.modalContainer}>
+            <ScrollView>
+              {invitations.map((invitation) => {
+                const { id } = invitation
 
-              return <InvitationCard key={`invitation-for-league_${id}`} invitation={invitation} />
-            })}
-          </ScrollView>
-          <Button label="Cerrar" onPress={() => setShowModal(false)} />
-        </View>
+                return (
+                  <InvitationCard
+                    key={`invitation-for-league_${id}`}
+                    invitation={invitation}
+                    fetchInvitations={fetch}
+                    fetchLeagues={fetchLeagues}
+                  />
+                )
+              })}
+            </ScrollView>
+            <Button label="Cerrar" onPress={() => setShowModal(false)} />
+          </View>
+        </Loader>
       </Modal>
     </>
   )

@@ -15,3 +15,27 @@ export async function getUserInvitations(userId: number) {
     throw Error(error)
   }
 }
+
+export async function acceptInvitation(invitation: IInvitation) {
+  try {
+    const url = `${INVITATIONS_URL}/accept/${invitation.id}`
+
+    const result: AxiosResponse<APIResponse<unknown>> = await axios.post(url, invitation)
+
+    return result.data.data
+  } catch (error) {
+    throw Error(error)
+  }
+}
+
+export async function rejectInvitation(id: number) {
+  try {
+    const url = `${INVITATIONS_URL}/${id}`
+
+    const result: AxiosResponse<APIResponse<unknown>> = await axios.delete(url)
+
+    return result.data.data
+  } catch (error) {
+    throw Error(error)
+  }
+}

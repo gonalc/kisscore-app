@@ -39,7 +39,7 @@ const LeaguesHome: FC = () => {
 
   return (
     <Loader isLoading={loading}>
-      <InvitationsManager />
+      <InvitationsManager fetchLeagues={fetch} />
       <View style={styles.container}>{renderContent()}</View>
     </Loader>
   )

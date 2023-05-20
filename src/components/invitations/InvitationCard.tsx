@@ -7,17 +7,35 @@ import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
 import Button from '../Button'
 import NegativeButton from '../NegativeButton'
 import i18n from '../../../i18n'
+import useConfirmInvitation from '../../hooks/invitations/confirmInvitation'
+import Loader from '../Loader'
 
 type ConfirmStage = 'accept' | 'reject' | null
 
 interface IInvitationCardProps {
   invitation: IInvitation
+  fetchInvitations: () => void
+  fetchLeagues: () => void
 }
 
-const InvitationCard: FC<IInvitationCardProps> = ({ invitation }) => {
+const InvitationCard: FC<IInvitationCardProps> = ({
+  invitation,
+  fetchInvitations,
+  fetchLeagues
+}) => {
   const { leagueName } = invitation
 
+  const { confirm, loading } = useConfirmInvitation()
+
   const [confirmStage, setConfirmStage] = useState<ConfirmStage>(null)
+
+  const confirmInvitation = async () => {
+    if (confirmInvitation) {
+      await confirm(confirmStage, invitation)
+      fetchInvitations()
+      fetchLeagues()
+    }
+  }
 
   const renderContent = () => {
     if (confirmStage) {
@@ -26,16 +44,18 @@ const InvitationCard: FC<IInvitationCardProps> = ({ invitation }) => {
           <Text style={styles.confirmationText}>
             {i18n.t(`invitations.${confirmStage}Confirmation`, { name: leagueName })}
           </Text>
-          <View style={styles.buttonsRow}>
-            <NegativeButton
-              label={i18n.t('labels.thinkAboutIt')}
-              onPress={() => setConfirmStage(null)}
-            />
-            <Button
-              label={i18n.t(`actions.${confirmStage === 'reject' ? 'reject' : 'confirm'}`)}
-              onPress={() => alert('Vamos a aceptar')}
-            />
-          </View>
+          <Loader isLoading={loading}>
+            <View style={styles.buttonsRow}>
+              <NegativeButton
+                label={i18n.t('labels.thinkAboutIt')}
+                onPress={() => setConfirmStage(null)}
+              />
+              <Button
+                label={i18n.t(`actions.${confirmStage === 'reject' ? 'reject' : 'confirm'}`)}
+                onPress={confirmInvitation}
+              />
+            </View>
+          </Loader>
         </View>
       )
     }
