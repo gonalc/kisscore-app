@@ -3,7 +3,7 @@ export const NunitoSansBold = 'NunitoSansBold'
 export const PassionOne = 'PassionOne'
 
 export const SMALL_FONT = 14
-export const NORMAL_FONT = 20
+export const NORMAL_FONT = 18
 export const LARGE_FONT = 24
 export const LARGER_FONT = 30
 export const LARGEST_FONT = 48

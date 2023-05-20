@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, Share, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '../../utils/fonts'
 import COLORS from '../../utils/colors'
@@ -19,11 +19,31 @@ const LeagueSettings: FC = () => {
     setShowMenu((previous) => !previous)
   }
 
+  const onShareInvitation = async () => {
+    try {
+      const result = await Share.share({
+        message: 'This will be the invitation to the league'
+      })
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // console.log('Shared with activityType')
+        } else {
+          // console.log('Shared')
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // console.log('Action dismissed')
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   const menuItems: TMenuItem[] = [
     {
       label: 'invitePlayer',
       icon: <FontAwesome name="share-alt" size={LARGE_FONT} color={COLORS.black} />,
-      onPress: () => alert('Share invitation')
+      onPress: onShareInvitation
     }
   ]
 

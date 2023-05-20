@@ -5,11 +5,15 @@ const es = {
     city: 'Ciudad',
     birthDate: 'Fecha de nacimiento',
     playersAmount: '{{count}} Jug.',
-    options: 'Opciones'
+    options: 'Opciones',
+    thinkAboutIt: 'Me lo pienso'
   },
   actions: {
     create: 'Crear',
-    back: 'Volver'
+    back: 'Volver',
+    reject: 'Rechazar',
+    accept: 'Aceptar',
+    confirm: 'Confirmar'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -40,6 +44,9 @@ const es = {
     settings: {
       invitePlayer: 'Invitar jugador'
     }
+  },
+  invitations: {
+    title: 'Tienes invitaciones pendientes.'
   }
 }
 

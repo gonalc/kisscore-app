@@ -7,6 +7,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import i18n from '../../../i18n'
 import { useNavigation } from '@react-navigation/native'
 import type { TLeaguesHomeScreenProp } from './LeaguesHome'
+import boxShadow from '../../styles/boxShadow'
 
 interface ILeagueCardProps {
   league: ILeagueWithPlayers
@@ -49,14 +50,7 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 400,
     alignSelf: 'center',
-    shadowColor: COLORS.gray,
-    shadowOffset: {
-      width: 10,
-      height: 20
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 15,
-    elevation: 10,
+    ...boxShadow,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10
