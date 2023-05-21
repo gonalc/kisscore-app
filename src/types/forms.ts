@@ -39,11 +39,12 @@ export interface ISignupInputs {
   country: ICountryInput
   city: IBasicTextInput
   email: IEmailInput
+  username: IBasicTextInput
   password: IPasswordInput
   passwordRepeat: IPasswordInput
 }
 
 export type TFormErrors = Pick<
   ISignupState,
-  'nameError' | 'emailError' | 'passwordError' | 'passwordRepeatError'
+  'nameError' | 'emailError' | 'passwordError' | 'passwordRepeatError' | 'usernameError'
 >

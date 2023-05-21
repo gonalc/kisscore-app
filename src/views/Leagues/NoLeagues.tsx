@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.body,
     fontFamily: NunitoSans,
     color: COLORS.black,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 20
   },
   createLeagueForm: {
     padding: 10

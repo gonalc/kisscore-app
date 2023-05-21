@@ -1,8 +1,8 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, ScrollView } from 'react-native'
 import TextInput from '../../../components/forms/TextInput'
 import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../../utils/fonts'
 import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
@@ -44,6 +44,8 @@ const Signup = () => {
     city: '',
     email: '',
     emailError: false,
+    username: '',
+    usernameError: null,
     password: '',
     passwordError: false,
     passwordRepeat: '',
@@ -64,12 +66,13 @@ const Signup = () => {
       nameError: null,
       emailError: false,
       passwordError: false,
-      passwordRepeatError: false
+      passwordRepeatError: false,
+      usernameError: null
     }
 
     let hasErrors = false
 
-    const { name, email, password, passwordRepeat } = state
+    const { name, email, password, passwordRepeat, username } = state
 
     // Validate name
     if (name.length < MIN_NAME_LENGTH) {
@@ -77,6 +80,14 @@ const Signup = () => {
       hasErrors = true
     } else {
       formErrors.nameError = null
+    }
+
+    // Validate username
+    if (username.length < MIN_NAME_LENGTH) {
+      formErrors.usernameError = 'length'
+      hasErrors = true
+    } else {
+      hasErrors = false
     }
 
     // Validate email
@@ -118,10 +129,11 @@ const Signup = () => {
     dispatch({ type: SUBMIT_FORM, payload: formErrors })
 
     if (!hasErrors) {
-      const { name, email, password, country, city, birthdate } = state
+      const { name, email, password, country, city, birthdate, username } = state
 
       const formData: ICreationUser = {
         name,
+        username,
         email,
         password,
         country,
@@ -150,6 +162,18 @@ const Signup = () => {
         placeholder: i18n.t('forms.namePlaceholder'),
         onChange,
         error: state.nameError,
+        errorPayload: { value: MIN_NAME_LENGTH }
+      }
+    },
+    username: {
+      Component: TextInput,
+      props: {
+        onChange,
+        value: state.username,
+        label: i18n.t('labels.username'),
+        icon: <FontAwesome5 name="user-tag" {...iconProps} />,
+        placeholder: i18n.t('forms.usernamePlaceholder'),
+        error: state.usernameError,
         errorPayload: { value: MIN_NAME_LENGTH }
       }
     },
@@ -209,7 +233,7 @@ const Signup = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Title />
       <View>
         {Object.entries(inputs).map(([key, input]) => {
@@ -228,7 +252,7 @@ const Signup = () => {
           </View>
         )}
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -236,8 +260,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
-    alignItems: 'stretch',
     padding: 50
+  },
+  contentContainer: {
+    paddingBottom: 50
   },
   buttonContainer: {
     marginVertical: 10

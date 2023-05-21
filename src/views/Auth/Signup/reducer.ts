@@ -11,6 +11,8 @@ export interface ISignupState {
   city: string
   email: string
   emailError: boolean
+  username: string
+  usernameError: TErrorType | null
   password: string
   passwordError: boolean
   passwordRepeat: string

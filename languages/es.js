@@ -1,6 +1,7 @@
 const es = {
   labels: {
     name: 'Nombre',
+    username: 'Nombre de usuario',
     country: 'País',
     city: 'Ciudad',
     birthDate: 'Fecha de nacimiento',
@@ -18,6 +19,7 @@ const es = {
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
     passwordPlaceholder: 'Introduce tu contraseña',
+    usernamePlaceholder: 'Introduce tu username',
     login: 'Iniciar sesión',
     registerText: '¿No tienes cuenta? Regístrate aquí.',
     signup: 'Registrarme',
@@ -34,7 +36,7 @@ const es = {
         'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.',
       passwordsMustBeEqual: 'Las contraseñas deben coincidir.',
       signupError:
-        'Hubo un problema al registrar el usuario. ¿Puede que ese email ya exista? Vuelve a probar más tarde.',
+        'Hubo un problema al registrar el usuario. Puede que ese email o el nombre de usuario ya existan. Vuelve a probar más tarde.',
       loginError: 'Las credenciales no son correctas.'
     }
   },

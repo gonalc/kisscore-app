@@ -3,6 +3,7 @@ import { ILeague } from './leagues'
 
 export interface ICreationUser {
   name: string
+  username: string
   birthdate: Date
   country: string
   city: string

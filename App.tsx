@@ -43,10 +43,11 @@ function App() {
         const { jwt, user } = await checkToken(token)
         await storeSessionData(user, jwt)
         setInitialScreen('LeaguesScreens')
-        setLoading(false)
       } else {
         await AsyncStorage.clear()
       }
+
+      setLoading(false)
     }
 
     check()
