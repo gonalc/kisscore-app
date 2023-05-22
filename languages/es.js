@@ -53,7 +53,9 @@ const es = {
   invitations: {
     title: 'Tienes invitaciones pendientes.',
     acceptConfirmation: 'Vas a aceptar la invitación a la liga {{name}}.',
-    rejectConfirmation: 'Vas a rechazar la invitación a la liga {{name}}.'
+    rejectConfirmation: 'Vas a rechazar la invitación a la liga {{name}}.',
+    invitationSuccess: 'Se ha invitado a {{username}} correctamente',
+    invitationError: 'Hubo un error. Quizás el nombre de usuario no existe.'
   }
 }
 

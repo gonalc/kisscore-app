@@ -34,7 +34,7 @@ const SingleLeague: FC<ISingleLeagueProps> = ({ route }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{name}</Text>
 
-          <LeagueSettings />
+          <LeagueSettings leagueId={leagueId} />
         </View>
 
         <FlatList

@@ -5,3 +5,8 @@ export interface IInvitation {
   leagueName: string
   createdAt: Date
 }
+
+export type TInvitationCreationPayload = {
+  username: string
+  leagueId: number
+}

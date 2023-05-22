@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { APIResponse, BASE_URL } from './url'
-import type { IInvitation } from '../types/invitations'
+import type { IInvitation, TInvitationCreationPayload } from '../types/invitations'
 
 const INVITATIONS_URL = `${BASE_URL}/invitations`
 
@@ -9,6 +9,18 @@ export async function getUserInvitations(userId: number) {
     const url = `${INVITATIONS_URL}?filters[userId]=${userId}`
 
     const result: AxiosResponse<APIResponse<IInvitation[]>> = await axios.get(url)
+
+    return result.data.data
+  } catch (error) {
+    throw Error(error)
+  }
+}
+
+export async function inviteUser(payload: TInvitationCreationPayload) {
+  try {
+    const url = `${INVITATIONS_URL}/invite`
+
+    const result: AxiosResponse<APIResponse<IInvitation>> = await axios.post(url, payload)
 
     return result.data.data
   } catch (error) {

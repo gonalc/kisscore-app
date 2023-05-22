@@ -20,9 +20,13 @@ type TMenuItem = {
   animatedStyles: Record<string, unknown>
 }
 
+interface ILeagueSettingsProps {
+  leagueId: number
+}
+
 const DURATION = 300
 
-const LeagueSettings: FC = () => {
+const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
   const [showMenu, setShowMenu] = useState(false)
   const [invitingUser, setInvitingUser] = useState(false)
 
@@ -142,7 +146,7 @@ const LeagueSettings: FC = () => {
               )
             })}
             <Animated.View style={inviteFormStyles}>
-              {invitingUser && <InviteForm onCancel={finishInviting} />}
+              {invitingUser && <InviteForm onCancel={finishInviting} leagueId={leagueId} />}
             </Animated.View>
           </View>
         </View>
