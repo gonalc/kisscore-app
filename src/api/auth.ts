@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios'
 import { APIResponse, BASE_URL } from './url'
 import type { ICreationUser, IUser } from '../types/users'
 
-interface ILoginData {
-  email: string
+export interface ILoginData {
+  userKey: string
   password: string
 }
 

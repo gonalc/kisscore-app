@@ -1,10 +1,11 @@
+import { TErrorType } from '../../../types/forms'
 import constants from './constants'
 
 type TLoginConstants = keyof typeof constants
 
 export interface ILoginInitialState {
-  email: string
-  emailError: boolean
+  userKey: string
+  userKeyError: TErrorType | null
   password: string
   passwordError: boolean
   submitted: boolean

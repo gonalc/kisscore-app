@@ -5,17 +5,18 @@ import { StyleSheet, Text, View } from 'react-native'
 import { RootStackParamList } from '../../../../App'
 import i18n from '../../../../i18n'
 import Button from '../../../components/Button'
-import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
 import NegativeButton from '../../../components/NegativeButton'
 import Title from '../../../components/Title'
 import COLORS from '../../../utils/colors'
-import { FONT_SIZE, NunitoSans, SMALL_FONT } from '../../../utils/fonts'
-import { emailIsValid, passwordIsValid } from '../../../utils/forms'
+import { FONT_SIZE, LARGE_FONT, NunitoSans, SMALL_FONT } from '../../../utils/fonts'
+import { MIN_NAME_LENGTH, passwordIsValid } from '../../../utils/forms'
 import constants from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
-import { login } from '../../../api/auth'
+import { ILoginData, login } from '../../../api/auth'
 import { storeSessionData } from '../../../utils/storage'
+import TextInput from '../../../components/forms/TextInput'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
@@ -23,8 +24,8 @@ const { MODIFY_FORM, SUBMIT_FORM, LOGIN_ERROR } = constants
 
 function Login() {
   const initialState: ILoginInitialState = {
-    email: '',
-    emailError: false,
+    userKey: '',
+    userKeyError: null,
     password: '',
     passwordError: false,
     submitted: false,
@@ -38,10 +39,10 @@ function Login() {
   const editForm = (field: keyof typeof initialState) => (value: string) => {
     const payload: ILoginAction['payload'] = { [field]: value }
 
-    if (field === 'email') {
-      const isValid = emailIsValid(value)
+    if (field === 'userKey') {
+      const isValid = value.length >= MIN_NAME_LENGTH
 
-      payload.emailError = !isValid
+      payload.userKeyError = isValid ? null : 'length'
     }
 
     if (field === 'password') {
@@ -54,16 +55,16 @@ function Login() {
   }
 
   const formIsValid = () => {
-    return state.email && state.password && !state.emailError && !state.passwordError
+    return state.userKey && state.password && !state.userKeyError && !state.passwordError
   }
 
   const onSubmit = async () => {
     dispatch({ type: SUBMIT_FORM })
 
-    const { email, password } = state
+    const { userKey, password } = state
 
-    const loginData = {
-      email,
+    const loginData: ILoginData = {
+      userKey,
       password
     }
 
@@ -85,10 +86,14 @@ function Login() {
   return (
     <View style={styles.container}>
       <Title />
-      <EmailInput
-        value={state.email}
-        onChange={editForm('email')}
-        showError={state.submitted && state.emailError}
+      <TextInput
+        value={state.userKey}
+        onChange={editForm('userKey')}
+        label={i18n.t('forms.userKey')}
+        placeholder={i18n.t('forms.emailPlaceholder')}
+        icon={<FontAwesome5 name="user-astronaut" size={LARGE_FONT} color={COLORS.black} />}
+        error={state.submitted && state.userKeyError && state.userKeyError ? 'length' : null}
+        errorPayload={{ value: MIN_NAME_LENGTH }}
       />
       <PasswordInput value={state.password} onChange={editForm('password')} />
       <View style={styles.block}>

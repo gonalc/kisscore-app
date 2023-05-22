@@ -18,6 +18,7 @@ const es = {
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
+    userKey: 'Email o nombre de usuario',
     passwordPlaceholder: 'Introduce tu contraseña',
     usernamePlaceholder: 'Introduce tu username',
     login: 'Iniciar sesión',
