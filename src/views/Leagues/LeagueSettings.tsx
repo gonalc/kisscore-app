@@ -1,22 +1,68 @@
 import { FC, ReactNode, useState } from 'react'
 import { Pressable, Share, StyleSheet, Text, View } from 'react-native'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '../../utils/fonts'
 import COLORS from '../../utils/colors'
 import Modal from 'react-native-modal'
 import i18n from '../../../i18n'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSpring
+} from 'react-native-reanimated'
+import InviteForm from './InviteForm'
 
 type TMenuItem = {
   label: string
   icon: ReactNode
   onPress: () => void
+  animatedStyles: Record<string, unknown>
 }
+
+const DURATION = 300
 
 const LeagueSettings: FC = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const [invitingUser, setInvitingUser] = useState(false)
 
-  const toggleMenu = () => {
-    setShowMenu((previous) => !previous)
+  const itemsOpacity = useSharedValue(1)
+  const inviteOffset = useSharedValue(0)
+
+  const inviteFormOffset = useSharedValue(0)
+  const inviteFormOpacity = useSharedValue(0)
+
+  const animatedOpacityStyles = useAnimatedStyle(() => {
+    return {
+      opacity: itemsOpacity.value
+    }
+  })
+
+  const animatedInviteStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: inviteOffset.value }]
+    }
+  })
+
+  const inviteFormStyles = useAnimatedStyle(() => {
+    return {
+      opacity: inviteFormOpacity.value,
+      transform: [{ translateY: inviteFormOffset.value }]
+    }
+  })
+
+  const resetAnimations = () => {
+    itemsOpacity.value = withSpring(1)
+    inviteOffset.value = withSpring(0)
+
+    inviteFormOffset.value = withSpring(0)
+    inviteFormOpacity.value = withSpring(0)
+  }
+
+  const closeMenu = () => {
+    resetAnimations()
+
+    setShowMenu(false)
   }
 
   const onShareInvitation = async () => {
@@ -39,39 +85,65 @@ const LeagueSettings: FC = () => {
     }
   }
 
+  const startInviting = () => {
+    itemsOpacity.value = withSpring(0)
+    inviteOffset.value = withDelay(DURATION, withSpring(-50))
+
+    inviteFormOffset.value = withDelay(DURATION * 1.5, withSpring(-50))
+    inviteFormOpacity.value = withDelay(DURATION * 1.5, withSpring(1))
+
+    setInvitingUser(true)
+  }
+
+  const finishInviting = () => {
+    resetAnimations()
+
+    setInvitingUser(false)
+  }
+
   const menuItems: TMenuItem[] = [
     {
-      label: 'invitePlayer',
+      label: 'shareLink',
       icon: <FontAwesome name="share-alt" size={LARGE_FONT} color={COLORS.black} />,
-      onPress: onShareInvitation
+      onPress: onShareInvitation,
+      animatedStyles: animatedOpacityStyles
+    },
+    {
+      label: 'invitePlayer',
+      icon: <FontAwesome5 name="user-plus" size={LARGE_FONT} color={COLORS.black} />,
+      onPress: startInviting,
+      animatedStyles: animatedInviteStyles
     }
   ]
 
   return (
     <>
-      <Pressable style={styles.buttonContainer} onPress={toggleMenu}>
+      <Pressable style={styles.buttonContainer} onPress={() => setShowMenu(true)}>
         <Ionicons name="settings-sharp" size={LARGE_FONT} color={COLORS.black} />
       </Pressable>
 
-      <Modal isVisible={showMenu} onBackdropPress={toggleMenu}>
+      <Modal isVisible={showMenu} onBackdropPress={closeMenu}>
         <View style={styles.settingsContainer}>
           <Text style={styles.settingsTitle}>{i18n.t('labels.options')}</Text>
 
           <View>
             {menuItems.map((menuItem) => {
-              const { icon, label, onPress } = menuItem
+              const { icon, label, onPress, animatedStyles } = menuItem
 
               return (
-                <Pressable
-                  key={`league-settings_menu-item_${label}`}
-                  style={styles.settingsItem}
-                  onPress={onPress}
-                >
-                  {icon}
-                  <Text style={styles.settingsItemText}>{i18n.t(`leagues.settings.${label}`)}</Text>
-                </Pressable>
+                <Animated.View key={`league-settings_menu-item_${label}`} style={animatedStyles}>
+                  <Pressable style={styles.settingsItem} onPress={onPress}>
+                    {icon}
+                    <Text style={styles.settingsItemText}>
+                      {i18n.t(`leagues.settings.${label}`)}
+                    </Text>
+                  </Pressable>
+                </Animated.View>
               )
             })}
+            <Animated.View style={inviteFormStyles}>
+              {invitingUser && <InviteForm onCancel={finishInviting} />}
+            </Animated.View>
           </View>
         </View>
       </Modal>
@@ -98,7 +170,8 @@ const styles = StyleSheet.create({
   settingsItem: {
     flexDirection: 'row',
     gap: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10
   },
   settingsItemText: {
     fontFamily: NunitoSans,

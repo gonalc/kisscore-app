@@ -14,7 +14,8 @@ const es = {
     back: 'Volver',
     reject: 'Rechazar',
     accept: 'Aceptar',
-    confirm: 'Confirmar'
+    confirm: 'Confirmar',
+    cancel: 'Cancelar'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -45,7 +46,8 @@ const es = {
     createLeague: 'Crear liga',
     noLeagues: 'No estás dentro de ninguna liga.',
     settings: {
-      invitePlayer: 'Invitar jugador'
+      invitePlayer: 'Invitar jugador',
+      shareLink: 'Compartir link'
     }
   },
   invitations: {
