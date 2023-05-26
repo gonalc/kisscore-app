@@ -8,6 +8,7 @@ import LeagueCard from './LeagueCard'
 import { LeaguesStackParamsList } from '.'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import InvitationsManager from '../../components/invitations/InvitationsManager'
+import AddConquist from './AddConquist'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -41,6 +42,7 @@ const LeaguesHome: FC = () => {
     <Loader isLoading={loading}>
       <InvitationsManager fetchLeagues={fetch} />
       <View style={styles.container}>{renderContent()}</View>
+      <AddConquist />
     </Loader>
   )
 }

@@ -7,13 +7,14 @@ export interface INegativeButtonProps {
   label: string
   onPress: () => void
   icon?: ReactNode
+  disabled?: boolean
 }
 
-const NegativeButton: FC<INegativeButtonProps> = ({ label, onPress, icon }) => {
+const NegativeButton: FC<INegativeButtonProps> = ({ label, onPress, icon, disabled }) => {
   const styles = getStyles({ icon })
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container} disabled={disabled}>
       {icon ?? icon}
       <Text style={styles.text}>{label}</Text>
     </Pressable>

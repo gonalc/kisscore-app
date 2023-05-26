@@ -15,7 +15,8 @@ const es = {
     reject: 'Rechazar',
     accept: 'Aceptar',
     confirm: 'Confirmar',
-    cancel: 'Cancelar'
+    cancel: 'Cancelar',
+    continue: 'Continuar'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -28,6 +29,7 @@ const es = {
     namePlaceholder: 'Introduce tu nombre',
     countryPlaceholder: '¿Cuál es tu país?',
     cityPlaceholder: '¿Cuál es tu ciudad?',
+    emptyCountry: 'No se ha seleccionado el país',
     repeatPassword: 'Repite tu contraseña',
     countryNotFound: 'País no encontrado',
     createLeaguePlaceholder: 'Súper Copa',
@@ -56,6 +58,14 @@ const es = {
     rejectConfirmation: 'Vas a rechazar la invitación a la liga {{name}}.',
     invitationSuccess: 'Se ha invitado a {{username}} correctamente',
     invitationError: 'Hubo un error. Quizás el nombre de usuario no existe.'
+  },
+  conquists: {
+    addConquist: 'Añadir conquista',
+    form: {
+      country: '¿Cuál era su nacionalidad?',
+      birthYear: '¿Te sabes su año de nacimiento?',
+      place: '¿En qué país sucedió?'
+    }
   }
 }
 
