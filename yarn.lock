@@ -6758,17 +6758,17 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-country-codes-picker@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-country-codes-picker/-/react-native-country-codes-picker-2.3.0.tgz#5eeccf8c390292ed12b85c6060a5328c8fba1056"
-  integrity sha512-TqKpiguAcQvwj7oHJYUytZNV7enNHPKt6xF0V/q696V+OBysvrdhEy33ueNBywGQQUMLqDcbnooF/lOoTrkatw==
+react-native-country-codes-picker@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-country-codes-picker/-/react-native-country-codes-picker-2.3.3.tgz#9fa97b7ea550a860099f6f8a02b75e82930fd3de"
+  integrity sha512-ENK7dXcQiAmQoHOImosO27Pf5yMfRi77yK7u+KD4EV5qaNBBK9/2RYYHt0naqd+E20VvHJqpZG7OVwWXptzGuw==
 
 react-native-gradle-plugin@^0.71.16:
   version "0.71.16"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.16.tgz#822bb0c680e03b5df5aa65f2e5ffc2bc2930854a"
   integrity sha512-H2BjG2zk7B7Wii9sXvd9qhCVRQYDAHSWdMw9tscmZBqSP62DkIWEQSk4/B2GhQ4aK9ydVXgtqR6tBeg3yy8TSA==
 
-react-native-modal@^13.0.1:
+react-native-modal@13.0.1:
   version "13.0.1"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-13.0.1.tgz#691f1e646abb96fa82c1788bf18a16d585da37cd"
   integrity sha512-UB+mjmUtf+miaG/sDhOikRfBOv0gJdBU2ZE1HtFWp6UixW9jCk/bhGdHUgmZljbPpp0RaO/6YiMmQSSK3kkMaw==

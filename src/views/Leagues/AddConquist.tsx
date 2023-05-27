@@ -12,6 +12,9 @@ import { AVERAGE_AGE } from '../../utils/forms'
 import NegativeButton from '../../components/NegativeButton'
 import DateInput from '../../components/forms/DateInput'
 import dayjs from 'dayjs'
+import ConquistCountryItem from './ConquistCountryItem'
+import useCreateConquist from '../../hooks/conquists/createConquist'
+import Loader from '../../components/Loader'
 
 enum CreateConquistSteps {
   COUNTRY,
@@ -27,12 +30,30 @@ const AddConquist = () => {
     place: ''
   }
 
+  const { loading, create } = useCreateConquist()
+
   const [showForm, setShowForm] = useState(false)
   const [formStep, setFormStep] = useState<CreateConquistSteps>(CreateConquistSteps.COUNTRY)
   const [creationConquist, setCreationConquist] = useState<ICreationConquist>(initialConquist)
 
+  const onSubmit = async () => {
+    try {
+      await create({
+        ...creationConquist,
+        birthYear: Number(dayjs(creationConquist.birthYear).format(YEAR_FORMAT))
+      })
+      setShowForm(false)
+    } catch (error) {
+      console.error('Error creating conquist: ', error)
+    }
+  }
+
   const onPrevious = () => {
-    setFormStep((step) => step - 1)
+    if (formStep === CreateConquistSteps.COUNTRY) {
+      setShowForm(false)
+    } else {
+      setFormStep((step) => step - 1)
+    }
   }
 
   const onNext = () => {
@@ -103,7 +124,7 @@ const AddConquist = () => {
 
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.country')}: `}
-            <Text style={styles.summaryValue}>{creationConquist.country}</Text>
+            <ConquistCountryItem countryCode={creationConquist.country} />
           </Text>
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.birthYear')}: `}
@@ -113,7 +134,7 @@ const AddConquist = () => {
           </Text>
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.place')}: `}
-            <Text style={styles.summaryValue}>{creationConquist.place}</Text>
+            <ConquistCountryItem countryCode={creationConquist.place} />
           </Text>
         </View>
       )
@@ -131,7 +152,7 @@ const AddConquist = () => {
       )
     }
 
-    return <Button label={i18n.t('actions.create')} onPress={() => alert('Holaa')} />
+    return <Button label={i18n.t('actions.create')} onPress={onSubmit} />
   }
 
   return (
@@ -139,20 +160,18 @@ const AddConquist = () => {
       <Button label="Conquisté!" onPress={() => setShowForm(true)} />
 
       <Modal isVisible={showForm} onBackdropPress={() => setShowForm(false)}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.formTitle}>{i18n.t('conquists.addConquist')}</Text>
+        <Loader isLoading={loading}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.formTitle}>{i18n.t('conquists.addConquist')}</Text>
 
-          {renderStep()}
+            {renderStep()}
 
-          <View style={styles.buttonsRow}>
-            <NegativeButton
-              label={i18n.t('actions.back')}
-              onPress={onPrevious}
-              disabled={formStep === CreateConquistSteps.COUNTRY}
-            />
-            {getNextButton()}
+            <View style={styles.buttonsRow}>
+              <NegativeButton label={i18n.t('actions.back')} onPress={onPrevious} />
+              {getNextButton()}
+            </View>
           </View>
-        </View>
+        </Loader>
       </Modal>
     </View>
   )

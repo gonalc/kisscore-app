@@ -6,4 +6,8 @@ export interface ICreationConquist {
   place: string
 }
 
-export interface IConquist extends ICreationConquist, DBBaseItem {}
+export interface IConquistToCreate extends ICreationConquist {
+  userId: number
+}
+
+export interface IConquist extends IConquistToCreate, DBBaseItem {}
