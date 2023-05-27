@@ -10,7 +10,6 @@ import { DATE_FORMAT } from '../../utils/dates'
 export interface IDateInputProps {
   label: string
   maximumDate?: Date
-  // eslint-disable-next-line no-unused-vars
   onChange: (value: number) => void
   value: number
 }

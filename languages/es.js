@@ -64,7 +64,8 @@ const es = {
     form: {
       country: '¿Cuál era su nacionalidad?',
       birthYear: '¿Te sabes su año de nacimiento?',
-      place: '¿En qué país sucedió?'
+      place: '¿En qué país sucedió?',
+      birthYearExplanation: 'Solo se tendrá en cuenta el año'
     }
   }
 }

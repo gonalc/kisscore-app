@@ -10,6 +10,7 @@ import { ICreationConquist } from '../../types/conquists'
 import { today } from '../../utils/dates'
 import { AVERAGE_AGE } from '../../utils/forms'
 import NegativeButton from '../../components/NegativeButton'
+import DateInput from '../../components/forms/DateInput'
 
 enum CreateConquistSteps {
   COUNTRY,
@@ -36,6 +37,17 @@ const AddConquist = () => {
     setFormStep((step) => step + 1)
   }
 
+  const getNextButtonDisable = () => {
+    switch (formStep) {
+      case CreateConquistSteps.COUNTRY:
+        return !creationConquist.country
+      case CreateConquistSteps.BIRTH_YEAR:
+        return !creationConquist.birthYear
+      default:
+        return true
+    }
+  }
+
   const editConquistToCreate =
     <T extends keyof ICreationConquist>(field: T) =>
     (value: ICreationConquist[T]) => {
@@ -53,6 +65,19 @@ const AddConquist = () => {
           <CountryInput
             value={creationConquist.country}
             onChange={editConquistToCreate('country')}
+          />
+        </View>
+      )
+    }
+
+    if (formStep === CreateConquistSteps.BIRTH_YEAR) {
+      return (
+        <View>
+          <Text style={styles.label}>{i18n.t('conquists.form.birthYear')}</Text>
+          <DateInput
+            label={i18n.t('conquists.form.birthYearExplanation')}
+            value={creationConquist.birthYear}
+            onChange={editConquistToCreate('birthYear')}
           />
         </View>
       )
@@ -75,7 +100,11 @@ const AddConquist = () => {
               onPress={onPrevious}
               disabled={formStep === CreateConquistSteps.COUNTRY}
             />
-            <Button label={i18n.t('actions.continue')} onPress={onNext} />
+            <Button
+              label={i18n.t('actions.continue')}
+              onPress={onNext}
+              disabled={getNextButtonDisable()}
+            />
           </View>
         </View>
       </Modal>
