@@ -7,15 +7,17 @@ import i18n from '../../../i18n'
 import { FONT_SIZE, NunitoSans, NunitoSansBold } from '../../utils/fonts'
 import CountryInput from '../../components/forms/CountryInput'
 import { ICreationConquist } from '../../types/conquists'
-import { today } from '../../utils/dates'
+import { YEAR_FORMAT, today } from '../../utils/dates'
 import { AVERAGE_AGE } from '../../utils/forms'
 import NegativeButton from '../../components/NegativeButton'
 import DateInput from '../../components/forms/DateInput'
+import dayjs from 'dayjs'
 
 enum CreateConquistSteps {
   COUNTRY,
   BIRTH_YEAR,
-  PLACE
+  PLACE,
+  SUMMARY
 }
 
 const AddConquist = () => {
@@ -43,8 +45,10 @@ const AddConquist = () => {
         return !creationConquist.country
       case CreateConquistSteps.BIRTH_YEAR:
         return !creationConquist.birthYear
+      case CreateConquistSteps.PLACE:
+        return !creationConquist.place
       default:
-        return true
+        return false
     }
   }
 
@@ -82,6 +86,52 @@ const AddConquist = () => {
         </View>
       )
     }
+
+    if (formStep === CreateConquistSteps.PLACE) {
+      return (
+        <View>
+          <Text style={styles.label}>{i18n.t('conquists.form.place')}</Text>
+          <CountryInput value={creationConquist.place} onChange={editConquistToCreate('place')} />
+        </View>
+      )
+    }
+
+    if (formStep === CreateConquistSteps.SUMMARY) {
+      return (
+        <View>
+          <Text style={styles.label}>{i18n.t('conquists.form.conquistConfirmation')}</Text>
+
+          <Text style={styles.summaryLabel}>
+            {`${i18n.t('labels.country')}: `}
+            <Text style={styles.summaryValue}>{creationConquist.country}</Text>
+          </Text>
+          <Text style={styles.summaryLabel}>
+            {`${i18n.t('labels.birthYear')}: `}
+            <Text style={styles.summaryValue}>
+              {dayjs(creationConquist.birthYear).format(YEAR_FORMAT)}
+            </Text>
+          </Text>
+          <Text style={styles.summaryLabel}>
+            {`${i18n.t('labels.place')}: `}
+            <Text style={styles.summaryValue}>{creationConquist.place}</Text>
+          </Text>
+        </View>
+      )
+    }
+  }
+
+  const getNextButton = () => {
+    if (formStep < CreateConquistSteps.SUMMARY) {
+      return (
+        <Button
+          label={i18n.t('actions.continue')}
+          onPress={onNext}
+          disabled={getNextButtonDisable()}
+        />
+      )
+    }
+
+    return <Button label={i18n.t('actions.create')} onPress={() => alert('Holaa')} />
   }
 
   return (
@@ -100,11 +150,7 @@ const AddConquist = () => {
               onPress={onPrevious}
               disabled={formStep === CreateConquistSteps.COUNTRY}
             />
-            <Button
-              label={i18n.t('actions.continue')}
-              onPress={onNext}
-              disabled={getNextButtonDisable()}
-            />
+            {getNextButton()}
           </View>
         </View>
       </Modal>
@@ -138,6 +184,14 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.body,
     color: COLORS.black,
     marginVertical: 10
+  },
+  summaryLabel: {
+    fontFamily: NunitoSans,
+    fontSize: FONT_SIZE.body,
+    color: COLORS.black
+  },
+  summaryValue: {
+    fontFamily: NunitoSansBold
   }
 })
 

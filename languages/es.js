@@ -5,9 +5,11 @@ const es = {
     country: 'País',
     city: 'Ciudad',
     birthDate: 'Fecha de nacimiento',
+    birthYear: 'Año de nacimiento',
     playersAmount: '{{count}} Jug.',
     options: 'Opciones',
-    thinkAboutIt: 'Me lo pienso'
+    thinkAboutIt: 'Me lo pienso',
+    place: 'Lugar'
   },
   actions: {
     create: 'Crear',
@@ -65,7 +67,8 @@ const es = {
       country: '¿Cuál era su nacionalidad?',
       birthYear: '¿Te sabes su año de nacimiento?',
       place: '¿En qué país sucedió?',
-      birthYearExplanation: 'Solo se tendrá en cuenta el año'
+      birthYearExplanation: 'Solo se tendrá en cuenta el año',
+      conquistConfirmation: 'Esta es tu última conquista.'
     }
   }
 }
