@@ -10,4 +10,6 @@ export interface IConquistToCreate extends ICreationConquist {
   userId: number
 }
 
-export interface IConquist extends IConquistToCreate, DBBaseItem {}
+export interface IConquist extends IConquistToCreate, DBBaseItem {
+  score: number
+}

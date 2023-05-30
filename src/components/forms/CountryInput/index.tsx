@@ -74,6 +74,7 @@ const CountryInput: FC<ICountryInputProps> = ({
         popularCountries={['ES']}
         itemTemplate={CountryListItem}
         onBackdropPress={() => setShow(false)}
+        excludedCountries={['AN']}
       />
     </View>
   )
