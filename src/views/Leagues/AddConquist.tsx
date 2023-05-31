@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import COLORS from '../../utils/colors'
 import Button from '../../components/Button'
 import { useState } from 'react'
@@ -30,11 +30,24 @@ const AddConquist = () => {
     place: ''
   }
 
-  const { loading, create } = useCreateConquist()
+  const { loading, create, created } = useCreateConquist()
 
   const [showForm, setShowForm] = useState(false)
   const [formStep, setFormStep] = useState<CreateConquistSteps>(CreateConquistSteps.COUNTRY)
   const [creationConquist, setCreationConquist] = useState<ICreationConquist>(initialConquist)
+
+  const showToast = () => {
+    if (created) {
+      const { score } = created
+
+      ToastAndroid.show(i18n.t('conquists.successfulConquist', { score }), ToastAndroid.LONG)
+    }
+  }
+
+  const resetForm = () => {
+    setFormStep(CreateConquistSteps.COUNTRY)
+    setCreationConquist({ ...initialConquist })
+  }
 
   const onSubmit = async () => {
     try {
@@ -43,6 +56,8 @@ const AddConquist = () => {
         birthYear: Number(dayjs(creationConquist.birthYear).format(YEAR_FORMAT))
       })
       setShowForm(false)
+      resetForm()
+      showToast()
     } catch (error) {
       console.error('Error creating conquist: ', error)
     }

@@ -69,7 +69,8 @@ const es = {
       place: '¿En qué país sucedió?',
       birthYearExplanation: 'Solo se tendrá en cuenta el año',
       conquistConfirmation: 'Esta es tu última conquista.'
-    }
+    },
+    successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
   }
 }
 
