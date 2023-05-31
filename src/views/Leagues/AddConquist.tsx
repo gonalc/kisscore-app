@@ -15,6 +15,7 @@ import dayjs from 'dayjs'
 import ConquistCountryItem from './ConquistCountryItem'
 import useCreateConquist from '../../hooks/conquists/createConquist'
 import Loader from '../../components/Loader'
+import { isAndroid } from '../../utils/platform'
 
 enum CreateConquistSteps {
   COUNTRY,
@@ -37,7 +38,7 @@ const AddConquist = () => {
   const [creationConquist, setCreationConquist] = useState<ICreationConquist>(initialConquist)
 
   const showToast = () => {
-    if (created) {
+    if (created && isAndroid()) {
       const { score } = created
 
       ToastAndroid.show(i18n.t('conquists.successfulConquist', { score }), ToastAndroid.LONG)
