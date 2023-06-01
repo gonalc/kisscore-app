@@ -22,7 +22,8 @@ const es = {
     accept: 'Aceptar',
     confirm: 'Confirmar',
     cancel: 'Cancelar',
-    continue: 'Continuar'
+    continue: 'Continuar',
+    logout: 'Cerrar sesión'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
