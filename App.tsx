@@ -16,6 +16,8 @@ import { getJWTToken, storeSessionData } from './src/utils/storage'
 import { checkToken } from './src/api/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import LeaguesTabs from './src/views/LeaguesTabs'
+import { UserContext } from './src/contexts/userContext'
+import type { IUser } from './src/types/users'
 
 export type RootStackParamList = {
   Login: undefined
@@ -33,6 +35,7 @@ function App() {
   })
 
   const [loading, setLoading] = useState(true)
+  const [loggedUser, setLoggedUser] = useState<IUser | null>(null)
   const [initialScreen, setInitialScreen] = useState<keyof RootStackParamList>('Login')
 
   useEffect(() => {
@@ -41,6 +44,7 @@ function App() {
 
       if (token) {
         const { jwt, user } = await checkToken(token)
+        setLoggedUser(user)
         await storeSessionData(user, jwt)
         setInitialScreen('LeaguesScreens')
       } else {
@@ -58,39 +62,41 @@ function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={initialScreen}>
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              header: () => null
-            }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={Signup}
-            options={{
-              header: () => null
-            }}
-          />
+    <UserContext.Provider value={loggedUser}>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={initialScreen}>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                header: () => null
+              }}
+            />
+            <Stack.Screen
+              name="Signup"
+              component={Signup}
+              options={{
+                header: () => null
+              }}
+            />
 
-          <Stack.Screen
-            name="LeaguesScreens"
-            component={LeaguesTabs}
-            options={{
-              headerTitleStyle: { fontFamily: PassionOne, fontSize: FONT_SIZE.header },
-              headerTintColor: COLORS.whiteRed,
-              headerBackground: () => <HeaderBackground />,
-              headerBackVisible: false,
-              title: 'Kisscore'
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      <StatusBar style="auto" />
-    </View>
+            <Stack.Screen
+              name="LeaguesScreens"
+              component={LeaguesTabs}
+              options={{
+                headerTitleStyle: { fontFamily: PassionOne, fontSize: FONT_SIZE.header },
+                headerTintColor: COLORS.whiteRed,
+                headerBackground: () => <HeaderBackground />,
+                headerBackVisible: false,
+                title: 'Kisscore'
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <StatusBar style="auto" />
+      </View>
+    </UserContext.Provider>
   )
 }
 

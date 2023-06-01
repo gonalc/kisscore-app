@@ -1,23 +1,17 @@
 import { FC } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import useGetLocalUser from '../../hooks/users/getLocalUser'
 import i18n from '../../../i18n'
 import COLORS from '../../utils/colors'
 import boxShadow from '../../styles/boxShadow'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
 import { getCountry } from '../../utils/countries'
-import useGetSingleUser from '../../hooks/users/getSingleUser'
-import Loader from '../../components/Loader'
-import { QueryParams } from '../../api/types'
+import type { IUser } from '../../types/users'
 
-const Jumbotron: FC = () => {
-  const localUser = useGetLocalUser()
+interface IJumbotronProps {
+  user: IUser
+}
 
-  const userQueryParams: QueryParams = {
-    include: 'conquists'
-  }
-  const { user, loading } = useGetSingleUser(localUser?.id, userQueryParams)
-
+const Jumbotron: FC<IJumbotronProps> = ({ user }) => {
   const { countries = [], places = [] } = user || {}
 
   const getFlags = (countryCodes: string[], key: string) => {
@@ -47,34 +41,32 @@ const Jumbotron: FC = () => {
   const placesFlags = getFlags(places, 'places')
 
   return (
-    <Loader isLoading={loading}>
-      <View style={styles.container}>
-        <Text style={styles.greetings}>{i18n.t('greetings', { name })}</Text>
+    <View style={styles.container}>
+      <Text style={styles.greetings}>{i18n.t('greetings', { name })}</Text>
 
-        <View style={styles.card}>
-          <View style={styles.scoreContainer}>
-            <Text style={[styles.numbersText, styles.whiteText]}>{score}</Text>
-            <Text style={[styles.labelsText, styles.whiteText]}>{i18n.t('labels.score')}</Text>
-          </View>
+      <View style={styles.card}>
+        <View style={styles.scoreContainer}>
+          <Text style={[styles.numbersText, styles.whiteText]}>{score}</Text>
+          <Text style={[styles.labelsText, styles.whiteText]}>{i18n.t('labels.score')}</Text>
+        </View>
 
-          <View style={styles.outerBox}>
-            <View style={styles.innerBox}>
-              <Text style={styles.numbersText}>{countries.length}</Text>
-              <Text style={styles.labelsText}>{i18n.t('labels.countries')}</Text>
-            </View>
-            <View style={styles.flagsContainer}>{countriesFlags}</View>
+        <View style={styles.outerBox}>
+          <View style={styles.innerBox}>
+            <Text style={styles.numbersText}>{countries.length}</Text>
+            <Text style={styles.labelsText}>{i18n.t('labels.countries')}</Text>
           </View>
+          <View style={styles.flagsContainer}>{countriesFlags}</View>
+        </View>
 
-          <View style={styles.outerBox}>
-            <View style={styles.innerBox}>
-              <Text style={styles.numbersText}>{places.length}</Text>
-              <Text style={styles.labelsText}>{i18n.t('labels.places')}</Text>
-            </View>
-            <View style={styles.flagsContainer}>{placesFlags}</View>
+        <View style={styles.outerBox}>
+          <View style={styles.innerBox}>
+            <Text style={styles.numbersText}>{places.length}</Text>
+            <Text style={styles.labelsText}>{i18n.t('labels.places')}</Text>
           </View>
+          <View style={styles.flagsContainer}>{placesFlags}</View>
         </View>
       </View>
-    </Loader>
+    </View>
   )
 }
 

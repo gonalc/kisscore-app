@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import COLORS from '../../utils/colors'
 import useFetchLeagues from '../../hooks/leagues/fetchLeagues'
@@ -10,6 +10,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import InvitationsManager from '../../components/invitations/InvitationsManager'
 import AddConquist from './AddConquist'
 import Jumbotron from './Jumbotron'
+import type { QueryParams } from '../../api/types'
+import useGetSingleUser from '../../hooks/users/getSingleUser'
+import { UserContext } from '../../contexts/userContext'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -17,7 +20,15 @@ export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
 >
 
 const LeaguesHome: FC = () => {
-  const { leagues, loading, fetch } = useFetchLeagues()
+  const localUser = useContext(UserContext)
+
+  const userQueryParams: QueryParams = {
+    include: 'conquists'
+  }
+  const { user, loading: loadingUser } = useGetSingleUser(localUser?.id, userQueryParams)
+  const { leagues, loading: loadingLeagues, fetch } = useFetchLeagues()
+
+  const loading = loadingLeagues || loadingUser
 
   const renderContent = () => {
     if (leagues.length) {
@@ -42,7 +53,7 @@ const LeaguesHome: FC = () => {
   return (
     <Loader isLoading={loading}>
       <View style={styles.container}>
-        <Jumbotron />
+        <Jumbotron user={user} />
         <InvitationsManager fetchLeagues={fetch} />
         <View style={styles.container}>{renderContent()}</View>
         <AddConquist />
