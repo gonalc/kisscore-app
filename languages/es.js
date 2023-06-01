@@ -1,4 +1,5 @@
 const es = {
+  greetings: '¡Hola, {{name}}!',
   labels: {
     name: 'Nombre',
     username: 'Nombre de usuario',
@@ -9,7 +10,10 @@ const es = {
     playersAmount: '{{count}} Jug.',
     options: 'Opciones',
     thinkAboutIt: 'Me lo pienso',
-    place: 'Lugar'
+    place: 'Lugar',
+    score: 'Puntos',
+    countries: 'Países',
+    places: 'Lugares'
   },
   actions: {
     create: 'Crear',

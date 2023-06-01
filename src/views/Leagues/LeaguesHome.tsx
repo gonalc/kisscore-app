@@ -9,6 +9,7 @@ import { LeaguesStackParamsList } from '.'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import InvitationsManager from '../../components/invitations/InvitationsManager'
 import AddConquist from './AddConquist'
+import Jumbotron from './Jumbotron'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -40,9 +41,12 @@ const LeaguesHome: FC = () => {
 
   return (
     <Loader isLoading={loading}>
-      <InvitationsManager fetchLeagues={fetch} />
-      <View style={styles.container}>{renderContent()}</View>
-      <AddConquist />
+      <View style={styles.container}>
+        <Jumbotron />
+        <InvitationsManager fetchLeagues={fetch} />
+        <View style={styles.container}>{renderContent()}</View>
+        <AddConquist />
+      </View>
     </Loader>
   )
 }

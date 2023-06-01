@@ -8,7 +8,7 @@ import './i18n'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Signup from './src/views/Auth/Signup'
-import { NunitoSansBold } from './src/utils/fonts'
+import { FONT_SIZE, PassionOne } from './src/utils/fonts'
 import HeaderBackground from './src/components/HeaderBackground'
 import COLORS from './src/utils/colors'
 import { useEffect, useState } from 'react'
@@ -80,10 +80,11 @@ function App() {
             name="LeaguesScreens"
             component={LeaguesTabs}
             options={{
-              headerTitleStyle: { fontFamily: NunitoSansBold },
+              headerTitleStyle: { fontFamily: PassionOne, fontSize: FONT_SIZE.header },
               headerTintColor: COLORS.whiteRed,
               headerBackground: () => <HeaderBackground />,
-              headerBackVisible: false
+              headerBackVisible: false,
+              title: 'Kisscore'
             }}
           />
         </Stack.Navigator>
