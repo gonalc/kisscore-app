@@ -1,7 +1,7 @@
 import { StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import COLORS from '../../utils/colors'
 import Button from '../../components/Button'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Modal from 'react-native-modal'
 import i18n from '../../../i18n'
 import { FONT_SIZE, NunitoSans, NunitoSansBold } from '../../utils/fonts'
@@ -24,7 +24,11 @@ enum CreateConquistSteps {
   SUMMARY
 }
 
-const AddConquist = () => {
+interface IAddConquistProps {
+  fetch: () => void
+}
+
+const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
   const initialConquist: ICreationConquist = {
     country: '',
     birthYear: today.subtract(AVERAGE_AGE, 'years').valueOf(),
@@ -50,6 +54,12 @@ const AddConquist = () => {
     setCreationConquist({ ...initialConquist })
   }
 
+  const onModalHide = () => {
+    fetch()
+    resetForm()
+    showToast()
+  }
+
   const onSubmit = async () => {
     try {
       await create({
@@ -57,8 +67,6 @@ const AddConquist = () => {
         birthYear: Number(dayjs(creationConquist.birthYear).format(YEAR_FORMAT))
       })
       setShowForm(false)
-      resetForm()
-      showToast()
     } catch (error) {
       console.error('Error creating conquist: ', error)
     }
@@ -175,7 +183,11 @@ const AddConquist = () => {
     <View style={styles.container}>
       <Button label="Conquisté!" onPress={() => setShowForm(true)} />
 
-      <Modal isVisible={showForm} onBackdropPress={() => setShowForm(false)}>
+      <Modal
+        isVisible={showForm}
+        onBackdropPress={() => setShowForm(false)}
+        onModalHide={onModalHide}
+      >
         <Loader isLoading={loading}>
           <View style={styles.modalContainer}>
             <Text style={styles.formTitle}>{i18n.t('conquists.addConquist')}</Text>

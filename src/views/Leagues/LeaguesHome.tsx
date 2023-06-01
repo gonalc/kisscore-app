@@ -25,7 +25,11 @@ const LeaguesHome: FC = () => {
   const userQueryParams: QueryParams = {
     include: 'conquists'
   }
-  const { user, loading: loadingUser } = useGetSingleUser(localUser?.id, userQueryParams)
+  const {
+    user,
+    loading: loadingUser,
+    fetch: fetchUser
+  } = useGetSingleUser(localUser?.id, userQueryParams)
   const { leagues, loading: loadingLeagues, fetch } = useFetchLeagues()
 
   const loading = loadingLeagues || loadingUser
@@ -56,7 +60,7 @@ const LeaguesHome: FC = () => {
         <Jumbotron user={user} />
         <InvitationsManager fetchLeagues={fetch} />
         <View style={styles.container}>{renderContent()}</View>
-        <AddConquist />
+        <AddConquist fetch={() => fetchUser(true)} />
       </View>
     </Loader>
   )

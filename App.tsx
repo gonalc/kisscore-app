@@ -55,7 +55,7 @@ function App() {
     }
 
     check()
-  })
+  }, [])
 
   if (!fontsLoaded || loading) {
     return null

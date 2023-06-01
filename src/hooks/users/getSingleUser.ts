@@ -7,13 +7,18 @@ const useGetSingleUser = (userId: number, params: QueryParams = {}) => {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<IUser | null>(null)
 
-  const fetch = async () => {
-    setLoading(true)
+  const fetch = async (noLoading?: boolean) => {
+    if (!noLoading) {
+      setLoading(true)
+    }
 
     const result = await fetchUser(userId, params)
 
     setUser(result)
-    setLoading(false)
+
+    if (!noLoading) {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
