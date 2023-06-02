@@ -1,5 +1,6 @@
 const es = {
   greetings: '¡Hola, {{name}}!',
+  logoutConfirmation: '¿Estás seguro/a de que deseas cerrar sesión?',
   labels: {
     name: 'Nombre',
     username: 'Nombre de usuario',
@@ -76,6 +77,9 @@ const es = {
       conquistConfirmation: 'Esta es tu última conquista.'
     },
     successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
+  },
+  settings: {
+    title: 'Ajustes'
   }
 }
 

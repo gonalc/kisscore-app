@@ -1,20 +1,31 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { StyleSheet, Text, View } from 'react-native'
-import Button from '../components/Button'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
-import { useContext } from 'react'
-import { UserContext } from '../contexts/userContext'
 import i18n from '../../i18n'
 import COLORS from '../utils/colors'
+import { FONT_SIZE, NORMAL_FONT, NunitoSans, NunitoSansBold } from '../utils/fonts'
+import { AntDesign } from '@expo/vector-icons'
+import { ReactNode, useState } from 'react'
+import Modal from 'react-native-modal'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
+
+type MenuItem = {
+  icon: ReactNode
+  text: string
+  action: () => void
+}
+
+interface MenuItemsHash {
+  [key: string]: MenuItem
+}
 
 const Settings = () => {
   const navigation = useNavigation<THomeScreenProp>()
 
-  const user = useContext(UserContext)
+  const [logoutConfirmation, setLogoutConfirmation] = useState(false)
 
   const logout = async () => {
     await AsyncStorage.clear()
@@ -22,15 +33,45 @@ const Settings = () => {
     navigation.navigate('Login')
   }
 
+  const menuItems: MenuItemsHash = {
+    logout: {
+      icon: <AntDesign name="logout" size={NORMAL_FONT} color={COLORS.black} />,
+      text: i18n.t('actions.logout'),
+      action: () => setLogoutConfirmation(true)
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text>This is the settings screen</Text>
+      <Text style={styles.title}>{i18n.t('settings.title')}</Text>
 
-      <Text>Logged as:</Text>
-      <Text>Name: {user?.name}</Text>
-      <Text>ID: {user?.id}</Text>
+      {Object.entries(menuItems).map(([itemKey, menuItem]) => {
+        const { icon, action, text } = menuItem
 
-      <Button label={i18n.t('actions.logout')} onPress={logout} />
+        return (
+          <Pressable style={styles.menuItem} onPress={action} key={itemKey}>
+            {icon}
+            <Text style={styles.itemText}>{text}</Text>
+          </Pressable>
+        )
+      })}
+
+      <Modal isVisible={logoutConfirmation} onBackdropPress={() => setLogoutConfirmation(false)}>
+        <View style={styles.modalBody}>
+          <Text style={[styles.itemText, styles.centered, styles.bold]}>
+            {i18n.t('logoutConfirmation')}
+          </Text>
+
+          <View style={styles.buttonsRow}>
+            <Pressable style={styles.modalButton} onPress={() => setLogoutConfirmation(false)}>
+              <Text style={styles.itemText}>{i18n.t('actions.cancel')}</Text>
+            </Pressable>
+            <Pressable style={styles.modalButton} onPress={logout}>
+              <Text style={styles.itemText}>{i18n.t('actions.logout')}</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 }
@@ -40,6 +81,42 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
     padding: 20
+  },
+  title: {
+    fontFamily: NunitoSans,
+    fontSize: FONT_SIZE.header,
+    color: COLORS.black
+  },
+  menuItem: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'center',
+    paddingVertical: 10,
+    marginVertical: 10
+  },
+  itemText: {
+    color: COLORS.black,
+    fontSize: FONT_SIZE.body,
+    fontFamily: NunitoSans
+  },
+  modalBody: {
+    borderRadius: 5,
+    backgroundColor: COLORS.background,
+    padding: 10
+  },
+  centered: {
+    textAlign: 'center'
+  },
+  buttonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  modalButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 10
+  },
+  bold: {
+    fontFamily: NunitoSansBold
   }
 })
 
