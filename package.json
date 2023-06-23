@@ -12,7 +12,8 @@
     "lint-fix": "npx eslint . --fix",
     "test": "echo 'So far there are no tests.'",
     "prettier": "npx prettier --write .",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "android-apk": "eas build -p android --profile preview"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

@@ -19,11 +19,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.cucupapi.kisscoreapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-localization"]
+    "plugins": ["expo-localization"],
+    "extra": {
+      "eas": {
+        "projectId": "78a83ff1-aa4e-4c29-bfc3-36f0dd6a8e2a"
+      }
+    }
   }
 }
