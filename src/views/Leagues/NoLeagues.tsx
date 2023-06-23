@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons'
 import TextInput from '../../components/forms/TextInput'
 import Button from '../../components/Button'
 import { MIN_LEAGUE_NAME_LENGTH } from '../../utils/forms'
-import Modal from '../../components/Modal'
+import Modal from 'react-native-modal'
 import Loader from '../../components/Loader'
 import useCreateLeague from '../../hooks/leagues/createLeague'
 import type { IBaseLeague } from '../../types/leagues'
@@ -48,7 +48,7 @@ const NoLeagues: FC<INoLeaguesProps> = ({ fetchLeagues }) => {
         />
       </View>
 
-      <Modal isOpen={creatingLeague} onClose={() => setCreatingLeague(false)}>
+      <Modal isVisible={creatingLeague} onBackdropPress={() => setCreatingLeague(false)}>
         <View style={styles.createLeagueForm}>
           <TextInput
             label={i18n.t('labels.name')}
@@ -82,7 +82,9 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   createLeagueForm: {
-    padding: 10
+    padding: 10,
+    backgroundColor: COLORS.background,
+    borderRadius: 5
   }
 })
 
