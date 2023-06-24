@@ -93,7 +93,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
       case CreateConquistSteps.COUNTRY:
         return !creationConquist.country
       case CreateConquistSteps.BIRTH_YEAR:
-        return !creationConquist.birthYear
+        return creationConquist.birthYear.length !== YEAR_FORMAT.length
       case CreateConquistSteps.PLACE:
         return !creationConquist.place
       default:
@@ -130,6 +130,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
           <TextInput
             label=""
             value={creationConquist.birthYear.toString()}
+            maxLength={4}
             onChange={editConquistToCreate('birthYear')}
             placeholder={YEAR_FORMAT}
             icon={
