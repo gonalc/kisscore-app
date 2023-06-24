@@ -9,6 +9,7 @@ import { FONT_SIZE, NORMAL_FONT, NunitoSans, NunitoSansBold } from '../utils/fon
 import { AntDesign } from '@expo/vector-icons'
 import { ReactNode, useState } from 'react'
 import Modal from 'react-native-modal'
+import LanguageController from '../components/LanguageController'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
@@ -26,6 +27,7 @@ const Settings = () => {
   const navigation = useNavigation<THomeScreenProp>()
 
   const [logoutConfirmation, setLogoutConfirmation] = useState(false)
+  const [showLanguageModal, setShowLanguageModal] = useState(false)
 
   const logout = async () => {
     await AsyncStorage.clear()
@@ -34,6 +36,11 @@ const Settings = () => {
   }
 
   const menuItems: MenuItemsHash = {
+    // language: {
+    //   icon: <Ionicons name="language" size={NORMAL_FONT} color={COLORS.black} />,
+    //   text: i18n.t('settings.changeLanguage'),
+    //   action: () => setShowLanguageModal(true)
+    // },
     logout: {
       icon: <AntDesign name="logout" size={NORMAL_FONT} color={COLORS.black} />,
       text: i18n.t('actions.logout'),
@@ -72,6 +79,11 @@ const Settings = () => {
           </View>
         </View>
       </Modal>
+
+      <LanguageController
+        isVisible={showLanguageModal}
+        onClose={() => setShowLanguageModal(false)}
+      />
     </View>
   )
 }
@@ -85,14 +97,14 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: NunitoSans,
     fontSize: FONT_SIZE.header,
-    color: COLORS.black
+    color: COLORS.black,
+    marginBottom: 10
   },
   menuItem: {
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
-    paddingVertical: 10,
-    marginVertical: 10
+    paddingVertical: 5
   },
   itemText: {
     color: COLORS.black,

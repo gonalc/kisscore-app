@@ -14,7 +14,8 @@ const es = {
     place: 'Lugar',
     score: 'Puntos',
     countries: 'Países',
-    places: 'Lugares'
+    places: 'Lugares',
+    availableLanguages: 'Idiomas disponibles'
   },
   actions: {
     create: 'Crear',
@@ -80,7 +81,12 @@ const es = {
     successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
   },
   settings: {
-    title: 'Ajustes'
+    title: 'Ajustes',
+    changeLanguage: 'Cambiar idioma'
+  },
+  languages: {
+    es: 'Español',
+    en: 'Inglés'
   }
 }
 
