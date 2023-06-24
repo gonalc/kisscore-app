@@ -69,6 +69,7 @@ const es = {
   },
   conquists: {
     addConquist: 'Añadir conquista',
+    ctaConquered: '¡Conquisté!',
     form: {
       country: '¿Cuál era su nacionalidad?',
       birthYear: '¿Te sabes su año de nacimiento?',

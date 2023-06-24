@@ -181,7 +181,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
   return (
     <View style={styles.container}>
-      <Button label="Conquisté!" onPress={() => setShowForm(true)} />
+      <Button label={i18n.t('conquists.ctaConquered')} onPress={() => setShowForm(true)} />
 
       <Modal
         isVisible={showForm}
