@@ -128,7 +128,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
         <View>
           <Text style={styles.label}>{i18n.t('conquists.form.birthYear')}</Text>
           <TextInput
-            label={i18n.t('conquists.form.birthYearExplanation')}
+            label=""
             value={creationConquist.birthYear.toString()}
             onChange={editConquistToCreate('birthYear')}
             placeholder={YEAR_FORMAT}
