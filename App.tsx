@@ -40,18 +40,22 @@ function App() {
 
   useEffect(() => {
     const check = async () => {
-      const token = await getJWTToken()
+      try {
+        const token = await getJWTToken()
 
-      if (token) {
-        const { jwt, user } = await checkToken(token)
-        setLocalUser(user)
-        await storeSessionData(user, jwt)
-        setInitialScreen('LeaguesScreens')
-      } else {
+        if (token) {
+          const { jwt, user } = await checkToken(token)
+          setLocalUser(user)
+          await storeSessionData(user, jwt)
+          setInitialScreen('LeaguesScreens')
+        } else {
+          await AsyncStorage.clear()
+        }
+      } catch (error) {
         await AsyncStorage.clear()
+      } finally {
+        setLoading(false)
       }
-
-      setLoading(false)
     }
 
     check()
