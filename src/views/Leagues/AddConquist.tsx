@@ -4,18 +4,18 @@ import Button from '../../components/Button'
 import { FC, useState } from 'react'
 import Modal from 'react-native-modal'
 import i18n from '../../../i18n'
-import { FONT_SIZE, NunitoSans, NunitoSansBold } from '../../utils/fonts'
+import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '../../utils/fonts'
 import CountryInput from '../../components/forms/CountryInput'
 import { ICreationConquist } from '../../types/conquists'
-import { YEAR_FORMAT, today } from '../../utils/dates'
-import { AVERAGE_AGE } from '../../utils/forms'
+import { YEAR_FORMAT } from '../../utils/dates'
 import NegativeButton from '../../components/NegativeButton'
-import DateInput from '../../components/forms/DateInput'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import dayjs from 'dayjs'
 import ConquistCountryItem from './ConquistCountryItem'
 import useCreateConquist from '../../hooks/conquists/createConquist'
 import Loader from '../../components/Loader'
 import { isAndroid } from '../../utils/platform'
+import TextInput from '../../components/forms/TextInput'
 
 enum CreateConquistSteps {
   COUNTRY,
@@ -24,14 +24,18 @@ enum CreateConquistSteps {
   SUMMARY
 }
 
+type NewConquistForm = Omit<ICreationConquist, 'birthYear'> & {
+  birthYear: string
+}
+
 interface IAddConquistProps {
   fetch: () => void
 }
 
 const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
-  const initialConquist: ICreationConquist = {
+  const initialConquist: NewConquistForm = {
     country: '',
-    birthYear: today.subtract(AVERAGE_AGE, 'years').valueOf(),
+    birthYear: '',
     place: ''
   }
 
@@ -39,7 +43,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
   const [showForm, setShowForm] = useState(false)
   const [formStep, setFormStep] = useState<CreateConquistSteps>(CreateConquistSteps.COUNTRY)
-  const [creationConquist, setCreationConquist] = useState<ICreationConquist>(initialConquist)
+  const [creationConquist, setCreationConquist] = useState<NewConquistForm>(initialConquist)
 
   const showToast = () => {
     if (created && isAndroid()) {
@@ -64,7 +68,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
     try {
       await create({
         ...creationConquist,
-        birthYear: Number(dayjs(creationConquist.birthYear).format(YEAR_FORMAT))
+        birthYear: Number(creationConquist.birthYear)
       })
       setShowForm(false)
     } catch (error) {
@@ -99,7 +103,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
   const editConquistToCreate =
     <T extends keyof ICreationConquist>(field: T) =>
-    (value: ICreationConquist[T]) => {
+    (value: NewConquistForm[T]) => {
       setCreationConquist((previous) => ({
         ...previous,
         [field]: value
@@ -123,10 +127,19 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
       return (
         <View>
           <Text style={styles.label}>{i18n.t('conquists.form.birthYear')}</Text>
-          <DateInput
+          <TextInput
             label={i18n.t('conquists.form.birthYearExplanation')}
-            value={creationConquist.birthYear}
+            value={creationConquist.birthYear.toString()}
             onChange={editConquistToCreate('birthYear')}
+            placeholder={YEAR_FORMAT}
+            icon={
+              <MaterialCommunityIcons
+                name="calendar-month-outline"
+                size={LARGE_FONT}
+                color={COLORS.black}
+              />
+            }
+            keyboardType="number-pad"
           />
         </View>
       )
