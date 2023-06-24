@@ -1,4 +1,9 @@
 import { createContext } from 'react'
 import type { IUser } from '../types/users'
 
-export const UserContext = createContext<IUser | null>(null)
+interface IUserContext {
+  localUser: IUser
+  setLocalUser: (user: IUser) => void
+}
+
+export const UserContext = createContext<IUserContext | null>(null)

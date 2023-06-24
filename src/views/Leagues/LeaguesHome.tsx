@@ -20,7 +20,7 @@ export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
 >
 
 const LeaguesHome: FC = () => {
-  const localUser = useContext(UserContext)
+  const { localUser } = useContext(UserContext)
 
   const userQueryParams: QueryParams = {
     include: 'conquists'
@@ -55,7 +55,7 @@ const LeaguesHome: FC = () => {
   }
 
   return (
-    <Loader isLoading={loading}>
+    <Loader isLoading={loading || !localUser}>
       <View style={styles.container}>
         <Jumbotron user={user} />
         <InvitationsManager fetchLeagues={fetch} />

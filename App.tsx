@@ -35,7 +35,7 @@ function App() {
   })
 
   const [loading, setLoading] = useState(true)
-  const [loggedUser, setLoggedUser] = useState<IUser | null>(null)
+  const [localUser, setLocalUser] = useState<IUser | null>(null)
   const [initialScreen, setInitialScreen] = useState<keyof RootStackParamList>('Login')
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
 
       if (token) {
         const { jwt, user } = await checkToken(token)
-        setLoggedUser(user)
+        setLocalUser(user)
         await storeSessionData(user, jwt)
         setInitialScreen('LeaguesScreens')
       } else {
@@ -62,7 +62,7 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={loggedUser}>
+    <UserContext.Provider value={{ localUser, setLocalUser }}>
       <View style={styles.container}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName={initialScreen}>

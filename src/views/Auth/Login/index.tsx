@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useReducer } from 'react'
+import { useContext, useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { RootStackParamList } from '../../../../App'
 import i18n from '../../../../i18n'
@@ -17,12 +17,15 @@ import { ILoginData, login } from '../../../api/auth'
 import { storeSessionData } from '../../../utils/storage'
 import TextInput from '../../../components/forms/TextInput'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { UserContext } from '../../../contexts/userContext'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
 const { MODIFY_FORM, SUBMIT_FORM, LOGIN_ERROR } = constants
 
 function Login() {
+  const { setLocalUser } = useContext(UserContext)
+
   const initialState: ILoginInitialState = {
     userKey: '',
     userKeyError: null,
@@ -72,6 +75,7 @@ function Login() {
       const { jwt, user } = await login(loginData)
 
       await storeSessionData(user, jwt)
+      setLocalUser(user)
 
       navigation.navigate('LeaguesScreens')
     } catch (error) {
