@@ -7,7 +7,7 @@ import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../../utils/fonts'
 import i18n from '../../../../i18n'
 import EmailInput from '../../../components/forms/EmailInput'
 import PasswordInput from '../../../components/forms/PasswordInput'
-import { useReducer } from 'react'
+import { useContext, useReducer } from 'react'
 import DateInput from '../../../components/forms/DateInput'
 import reducer, { ISignupAction, ISignupState } from './reducer'
 import constants from './constants'
@@ -28,12 +28,15 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../../../App'
 import { storeSessionData } from '../../../utils/storage'
+import { UserContext } from '../../../contexts/userContext'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 
 const { MODIFY_FORM, SUBMIT_FORM, SIGNUP_ERROR } = constants
 
 const Signup = () => {
+  const { setLocalUser } = useContext(UserContext)
+
   const navigation = useNavigation<THomeScreenProp>()
 
   const initialState: ISignupState = {
@@ -143,6 +146,8 @@ const Signup = () => {
 
       try {
         const { jwt, user } = await signup(formData)
+
+        setLocalUser(user)
 
         await storeSessionData(user, jwt)
 
