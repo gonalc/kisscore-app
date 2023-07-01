@@ -12,4 +12,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm run android-apk
+      - run: npm install -g yarn eas-cli
+      - run: yarn install
+      - run: yarn android-apk
