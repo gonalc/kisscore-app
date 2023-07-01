@@ -1,0 +1,12 @@
+name: build-apk
+run-name: ${{ github.actor }} is building an APK
+on: page_build
+jobs:
+  build-apk:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm run android-apk
