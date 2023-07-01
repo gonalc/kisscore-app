@@ -1,6 +1,9 @@
 name: build-apk
 run-name: ${{ github.actor }} is building an APK
-on: page_build
+on:
+  push:
+    branches:
+      - 'master'
 jobs:
   build-apk:
     runs-on: ubuntu-22.04
