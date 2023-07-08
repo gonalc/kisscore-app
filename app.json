@@ -31,5 +31,8 @@
         "projectId": "78a83ff1-aa4e-4c29-bfc3-36f0dd6a8e2a"
       }
     }
+  },
+  "android": {
+    "googleServicesFile": "./google-services.json"
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "145614590886",
+    "project_id": "kisscore-a1853",
+    "storage_bucket": "kisscore-a1853.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145614590886:android:0ced73a2f441a93c1f7567",
+        "android_client_info": {
+          "package_name": "com.cucupapi.kisscoreapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145614590886-1h3kib3qvq14f7f28k1ggslji8o2s1gj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDlQV_qf6Zs84Ff01GMI54HSuZf_lz8vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145614590886-1h3kib3qvq14f7f28k1ggslji8o2s1gj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
