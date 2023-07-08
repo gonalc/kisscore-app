@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import useFetchInvitations from '../../hooks/invitations/fetchInvitations'
 import Modal from 'react-native-modal'
 import { ScrollView, StyleSheet, View } from 'react-native'
@@ -8,6 +8,8 @@ import i18n from '../../../i18n'
 import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
 import Button from '../Button'
 import Loader from '../Loader'
+import useNotifications from '../../hooks/notifications'
+import type { IInvitation } from '../../types/invitations'
 
 interface IInvitationsManagerProps {
   fetchLeagues: () => void
@@ -16,6 +18,14 @@ interface IInvitationsManagerProps {
 const InvitationsManager: FC<IInvitationsManagerProps> = ({ fetchLeagues }) => {
   const { invitations, fetch, loading } = useFetchInvitations()
   const [showModal, setShowModal] = useState(false)
+
+  const notifications = useNotifications<IInvitation>()
+
+  useEffect(() => {
+    if (notifications?.length) {
+      fetch()
+    }
+  }, [notifications])
 
   if (!invitations?.length) {
     return null

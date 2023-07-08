@@ -5,6 +5,10 @@ import { isAndroid } from '../utils/platform'
 import COLORS from '../utils/colors'
 import { useEffect, useRef, useState } from 'react'
 
+enum NotificationType {
+  INVITATION = 'invitation'
+}
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -51,27 +55,26 @@ async function registerForPushNotificationsAsync() {
   return token
 }
 
-const useNotifications = () => {
+const useNotifications = <T,>(type?: NotificationType) => {
   const notificationListener = useRef<Notifications.Subscription>()
   const responseListener = useRef<Notifications.Subscription>()
 
-  const [expoPushToken, setExpoPushToken] = useState<string | null>(null)
+  const [notifications, setNotifications] = useState<T[]>([])
 
   useEffect(() => {
-    const register = async () => {
-      const token = await registerForPushNotificationsAsync()
-
-      setExpoPushToken(token)
-    }
-
-    register()
+    registerForPushNotificationsAsync()
 
     notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
-      console.log('NOTIFICATION ===> ', notification)
+      const notificationType: NotificationType = notification.request.content.data.type
+      const { payload } = notification.request.content.data
+
+      if (!type || type === notificationType) {
+        setNotifications((previous) => [...previous, payload])
+      }
     })
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
-      console.log('RESPONSE --> ', response)
+      console.log('RESPONSE --> ', JSON.stringify(response, null, 1))
     })
 
     return () => {
@@ -80,7 +83,7 @@ const useNotifications = () => {
     }
   }, [])
 
-  return expoPushToken
+  return notifications
 }
 
 export default useNotifications
