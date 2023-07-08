@@ -64,8 +64,7 @@ const InvitationsManager: FC<IInvitationsManagerProps> = ({ fetchLeagues }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.background,
-    padding: 25
+    backgroundColor: COLORS.background
   },
   modalContainer: {
     backgroundColor: COLORS.background,
