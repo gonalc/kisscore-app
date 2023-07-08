@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import LeaguesTabs from './src/views/LeaguesTabs'
 import { UserContext } from './src/contexts/userContext'
 import type { IUser } from './src/types/users'
+import useNotifications from './src/hooks/notifications'
 
 export type RootStackParamList = {
   Login: undefined
@@ -37,6 +38,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [localUser, setLocalUser] = useState<IUser | null>(null)
   const [initialScreen, setInitialScreen] = useState<keyof RootStackParamList>('Login')
+
+  useNotifications()
 
   useEffect(() => {
     const check = async () => {

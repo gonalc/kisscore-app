@@ -16,6 +16,8 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["NOTIFICATIONS"],
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FF938E"
@@ -31,8 +33,5 @@
         "projectId": "78a83ff1-aa4e-4c29-bfc3-36f0dd6a8e2a"
       }
     }
-  },
-  "android": {
-    "googleServicesFile": "./google-services.json"
   }
 }
