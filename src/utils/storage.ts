@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { IUser } from '../types/users'
+import type { IUser } from '../types/users'
 
 export const JWT_STORAGE_KEY = '@jwt'
 export const USER_STORAGE_KEY = '@user'

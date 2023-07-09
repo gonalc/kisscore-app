@@ -10,6 +10,7 @@ export interface ICreationUser {
   city: string
   email: string
   password: string
+  fcmToken?: string
 }
 
 export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {
