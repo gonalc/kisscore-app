@@ -13,7 +13,8 @@
     "test": "echo 'So far there are no tests.'",
     "prettier": "npx prettier --write .",
     "lint-staged": "lint-staged",
-    "android-apk": "eas build -p android --profile preview"
+    "android-apk": "eas build -p android --profile preview",
+    "android-bundle": "eas build -p android --profile production"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
