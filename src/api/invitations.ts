@@ -1,16 +1,15 @@
-import axios, { AxiosResponse } from 'axios'
-import { APIResponse, BASE_URL } from './url'
 import type { IInvitation, TInvitationCreationPayload } from '../types/invitations'
+import Api from './apiService'
 
-const INVITATIONS_URL = `${BASE_URL}/invitations`
+const api = new Api('invitations')
 
 export async function getUserInvitations(userId: number) {
   try {
-    const url = `${INVITATIONS_URL}?filters[userId]=${userId}`
+    const path = `?filters[userId]=${userId}`
 
-    const result: AxiosResponse<APIResponse<IInvitation[]>> = await axios.get(url)
+    const data = await api.get<IInvitation[]>(path)
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
@@ -18,11 +17,11 @@ export async function getUserInvitations(userId: number) {
 
 export async function inviteUser(payload: TInvitationCreationPayload) {
   try {
-    const url = `${INVITATIONS_URL}/invite`
+    const path = 'invite'
 
-    const result: AxiosResponse<APIResponse<IInvitation>> = await axios.post(url, payload)
+    const data = await api.post<IInvitation>({ path, payload })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
@@ -30,11 +29,11 @@ export async function inviteUser(payload: TInvitationCreationPayload) {
 
 export async function acceptInvitation(invitation: IInvitation) {
   try {
-    const url = `${INVITATIONS_URL}/accept/${invitation.id}`
+    const path = `accept/${invitation.id}`
 
-    const result: AxiosResponse<APIResponse<unknown>> = await axios.post(url, invitation)
+    const data = await api.post({ path, payload: invitation })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
@@ -42,11 +41,9 @@ export async function acceptInvitation(invitation: IInvitation) {
 
 export async function rejectInvitation(id: number) {
   try {
-    const url = `${INVITATIONS_URL}/${id}`
+    const data = api.delete(`${id}`)
 
-    const result: AxiosResponse<APIResponse<unknown>> = await axios.delete(url)
-
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
