@@ -1,6 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
-import { APIResponse, BASE_URL } from './url'
 import type { ICreationUser, IUser } from '../types/users'
+import Api from './apiService'
 
 export interface ILoginData {
   userKey: string
@@ -12,40 +11,39 @@ interface ILoginResponse {
   user: IUser
 }
 
-const AUTH_URL = `${BASE_URL}/auth`
-export const USERS_URL = `${BASE_URL}/users`
+const api = new Api('auth')
 
-export async function signup(payload: ICreationUser): Promise<ILoginResponse> {
+export async function signup(payload: ICreationUser) {
   try {
-    const url = `${AUTH_URL}/signup`
+    const path = 'signup'
 
-    const result: AxiosResponse<APIResponse<ILoginResponse>> = await axios.post(url, payload)
+    const data = await api.post<ILoginResponse>({ path, payload })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
 }
 
-export async function login(payload: ILoginData): Promise<ILoginResponse> {
+export async function login(payload: ILoginData) {
   try {
-    const url = `${AUTH_URL}/login`
+    const path = 'login'
 
-    const result: AxiosResponse<APIResponse<ILoginResponse>> = await axios.post(url, payload)
+    const data = await api.post<ILoginResponse>({ path, payload })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
 }
 
-export async function checkToken(token: string): Promise<ILoginResponse> {
+export async function checkToken(token: string) {
   try {
-    const url = `${AUTH_URL}/check`
+    const path = 'check'
 
-    const result: AxiosResponse<APIResponse<ILoginResponse>> = await axios.post(url, { jwt: token })
+    const data = await api.post<ILoginResponse>({ path, payload: { jwt: token } })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
