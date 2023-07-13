@@ -1,16 +1,15 @@
-import axios, { AxiosResponse } from 'axios'
-import { APIResponse, BASE_URL } from './url'
 import type { ILeagueToCreate, ILeague, ILeagueWithPlayers } from '../types/leagues'
+import Api from './apiService'
 
-const LEAGUES_URL = `${BASE_URL}/leagues`
+const api = new Api('leagues')
 
 export async function getUserLeagues(userId: number) {
   try {
-    const url = `${LEAGUES_URL}/from-user/${userId}`
+    const path = `from-user/${userId}`
 
-    const result: AxiosResponse<APIResponse<ILeagueWithPlayers[]>> = await axios.get(url)
+    const data = await api.get<ILeagueWithPlayers[]>(path)
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
@@ -18,11 +17,11 @@ export async function getUserLeagues(userId: number) {
 
 export async function getSingleLeague(leagueId: number) {
   try {
-    const url = `${LEAGUES_URL}/${leagueId}?include=players`
+    const path = `${leagueId}?include=players`
 
-    const result: AxiosResponse<APIResponse<ILeagueWithPlayers>> = await axios.get(url)
+    const data = await api.get<ILeagueWithPlayers>(path)
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
@@ -30,12 +29,9 @@ export async function getSingleLeague(leagueId: number) {
 
 export async function createLeague(leagueToCreate: ILeagueToCreate) {
   try {
-    const result: AxiosResponse<APIResponse<ILeague>> = await axios.post(
-      LEAGUES_URL,
-      leagueToCreate
-    )
+    const data = await api.post<ILeague>({ path: '', payload: leagueToCreate })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }

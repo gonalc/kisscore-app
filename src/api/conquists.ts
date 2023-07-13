@@ -1,14 +1,13 @@
-import axios, { AxiosResponse } from 'axios'
-import { APIResponse, BASE_URL } from './url'
-import type { IConquist, IConquistToCreate } from '../types/conquists'
+import type { IConquistToCreate } from '../types/conquists'
+import Api from './apiService'
 
-const CONQUISTS_URL = `${BASE_URL}/conquists`
+const api = new Api('conquists')
 
 export async function createConquist(payload: IConquistToCreate) {
   try {
-    const result: AxiosResponse<APIResponse<IConquist>> = await axios.post(CONQUISTS_URL, payload)
+    const data = await api.post<IConquistToCreate>({ payload })
 
-    return result.data.data
+    return data
   } catch (error) {
     throw Error(error)
   }
