@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from 'axios'
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 
 type APIResponse<T> = {
   data: T
@@ -19,10 +19,10 @@ class Api {
     this.baseUrl += `/${entity}`
   }
 
-  async get<T>(path = ''): Promise<AxiosResponse<APIResponse<T>>> {
+  async get<T>(path = '', config: AxiosRequestConfig = {}): Promise<AxiosResponse<APIResponse<T>>> {
     try {
       const url = `${this.baseUrl}/${path}`
-      const result = await axios.get(url)
+      const result = await axios.get(url, config)
 
       return result.data.data
     } catch (error) {
