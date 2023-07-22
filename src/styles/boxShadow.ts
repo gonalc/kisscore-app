@@ -1,4 +1,4 @@
-import COLORS from '../utils/colors'
+import COLORS from '@utils/colors'
 
 const boxShadow = {
   shadowColor: COLORS.gray,
