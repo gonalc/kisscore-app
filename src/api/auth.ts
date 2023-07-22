@@ -1,4 +1,4 @@
-import type { ICreationUser, IUser } from '../types/users'
+import type { ICreationUser, IUser } from '@_types/users'
 import Api from './apiService'
 
 export interface ILoginData {

@@ -1,4 +1,4 @@
-import type { IConquist, IConquistToCreate } from '../types/conquists'
+import type { IConquist, IConquistToCreate } from '@_types/conquists'
 import Api from './apiService'
 
 const api = new Api('conquists')

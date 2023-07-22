@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import COLORS from '../../utils/colors'
-import { IConquist } from '../../types/conquists'
+import COLORS from '@utils/colors'
+import { IConquist } from '@_types/conquists'
 import { type FC } from 'react'
-import { getCountry, getCountryName } from '../../utils/countries'
-import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
+import { getCountry, getCountryName } from '@utils/countries'
+import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
 
 interface IUserConquistsProps {
