@@ -1,4 +1,4 @@
-import { TErrorType } from '../../../types/forms'
+import { TErrorType } from '@_types/forms'
 import constants from './constants'
 
 type TLoginConstants = keyof typeof constants

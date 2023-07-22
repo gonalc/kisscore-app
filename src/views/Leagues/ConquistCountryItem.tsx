@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { Text, StyleSheet } from 'react-native'
-import { FONT_SIZE, NunitoSansBold } from '../../utils/fonts'
-import COLORS from '../../utils/colors'
-import { getCountry } from '../../utils/countries'
+import { FONT_SIZE, NunitoSansBold } from '@utils/fonts'
+import COLORS from '@utils/colors'
+import { getCountry } from '@utils/countries'
 import i18n from '../../../i18n'
 
 interface IConquistCountryItem {

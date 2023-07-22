@@ -1,14 +1,14 @@
 import { FC, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import i18n from '../../../i18n'
-import COLORS from '../../utils/colors'
-import boxShadow from '../../styles/boxShadow'
-import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
-import { getCountry } from '../../utils/countries'
-import type { IUserWithConquists } from '../../types/users'
+import COLORS from '@utils/colors'
+import boxShadow from '@styles/boxShadow'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
+import { getCountry } from '@utils/countries'
+import type { IUserWithConquists } from '@_types/users'
 import UserConquists from './UserConquists'
 import Modal from 'react-native-modal'
-import Button from '../../components/Button'
+import Button from '@components/Button'
 
 interface IJumbotronProps {
   user: IUserWithConquists
