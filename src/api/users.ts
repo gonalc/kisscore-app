@@ -1,4 +1,4 @@
-import type { IUser } from '../types/users'
+import type { IUser } from '@_types/users'
 import type { QueryParams } from './types'
 import Api from './apiService'
 
