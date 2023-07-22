@@ -1,6 +1,7 @@
 import type { CountryItem } from 'react-native-country-codes-picker'
 import type { DBBaseItem } from '.'
 import type { ILeague } from './leagues'
+import type { IConquist } from './conquists'
 
 export interface ICreationUser {
   name: string
@@ -21,4 +22,8 @@ export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {
 
 export interface IUserWithLeagues extends IUser {
   leagues: ILeague[]
+}
+
+export interface IUserWithConquists extends IUser {
+  conquists: IConquist[]
 }

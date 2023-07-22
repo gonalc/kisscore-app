@@ -13,6 +13,7 @@ import Jumbotron from './Jumbotron'
 import type { QueryParams } from '../../api/types'
 import useGetSingleUser from '../../hooks/users/getSingleUser'
 import { UserContext } from '../../contexts/userContext'
+import type { IUserWithConquists } from '../../types/users'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -29,7 +30,7 @@ const LeaguesHome: FC = () => {
     user,
     loading: loadingUser,
     fetch: fetchUser
-  } = useGetSingleUser(localUser?.id, userQueryParams)
+  } = useGetSingleUser<IUserWithConquists>(localUser?.id, userQueryParams)
   const { leagues, loading: loadingLeagues, fetch } = useFetchLeagues()
 
   const loading = loadingLeagues || loadingUser
