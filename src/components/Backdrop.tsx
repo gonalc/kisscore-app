@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import { StyleSheet, Pressable, Dimensions } from 'react-native'
-import COLORS from '../utils/colors'
+import COLORS from '@utils/colors'
 
 interface IBackdropProps {
   onPress?: () => void

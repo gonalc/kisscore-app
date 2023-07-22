@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Modal from 'react-native-modal'
-import COLORS from '../utils/colors'
+import COLORS from '@utils/colors'
 import i18n, { AVAILABLE_LANGUAGES, changeLanguage } from '../../i18n'
-import { FONT_SIZE, NunitoSans, NunitoSansBold } from '../utils/fonts'
+import { FONT_SIZE, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import type { Locale } from 'expo-localization'
 
 interface ILanguageControllerProps {
