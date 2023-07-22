@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import { Pressable, StyleSheet, Text } from 'react-native'
-import COLORS from '../utils/colors'
-import { FONT_SIZE, NunitoSans } from '../utils/fonts'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 
 export interface INegativeButtonProps {
   label: string

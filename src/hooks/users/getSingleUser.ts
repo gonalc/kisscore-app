@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
-import { IUser } from '../../types/users'
-import { fetchUser } from '../../api/users'
-import type { QueryParams } from '../../api/types'
+import { IUser } from '@_types/users'
+import { fetchUser } from '@api/users'
+import type { QueryParams } from '@api/types'
 
-const useGetSingleUser = (userId: number, params: QueryParams = {}) => {
+const useGetSingleUser = <T extends IUser>(userId: number, params: QueryParams = {}) => {
   const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState<IUser | null>(null)
+  const [user, setUser] = useState<T | null>(null)
 
   const fetch = async (noLoading?: boolean) => {
     if (!noLoading) {
       setLoading(true)
     }
 
-    const result = await fetchUser(userId, params)
+    const result = await fetchUser<T>(userId, params)
 
     setUser(result)
 

@@ -26,7 +26,8 @@ const en = {
     confirm: 'Confirm',
     cancel: 'Cancel',
     continue: 'Continue to',
-    logout: 'Log off'
+    logout: 'Log off',
+    exit: 'Exit'
   },
   forms: {
     emailPlaceholder: 'example@yourmail.com',

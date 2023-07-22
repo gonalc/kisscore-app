@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { ITextInputProps } from '../components/forms/TextInput'
-import { IDateInputProps } from '../components/forms/DateInput'
-import { IEmailInputProps } from '../components/forms/EmailInput'
-import { IPasswordInputProps } from '../components/forms/PasswordInput'
-import { ISignupState } from '../views/Auth/Signup/reducer'
-import { ICountryInputProps } from '../components/forms/CountryInput'
+import { ITextInputProps } from '@components/forms/TextInput'
+import { IDateInputProps } from '@components/forms/DateInput'
+import { IEmailInputProps } from '@components/forms/EmailInput'
+import { IPasswordInputProps } from '@components/forms/PasswordInput'
+import { ISignupState } from '@views/Auth/Signup/reducer'
+import { ICountryInputProps } from '@components/forms/CountryInput'
 
 export type TErrorType = 'length'
 

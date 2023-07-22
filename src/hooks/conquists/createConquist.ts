@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { IConquist, IConquistToCreate, ICreationConquist } from '../../types/conquists'
-import { getStoredUser } from '../../utils/storage'
-import { createConquist } from '../../api/conquists'
+import type { IConquist, IConquistToCreate, ICreationConquist } from '@_types/conquists'
+import { getStoredUser } from '@utils/storage'
+import { createConquist } from '@api/conquists'
 
 const useCreateConquist = () => {
   const [loading, setLoading] = useState(false)

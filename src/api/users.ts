@@ -1,12 +1,12 @@
-import type { IUser } from '../types/users'
+import type { IUser } from '@_types/users'
 import type { QueryParams } from './types'
 import Api from './apiService'
 
 const api = new Api('users')
 
-export async function fetchUser(id: number, params: QueryParams = {}) {
+export async function fetchUser<T extends IUser>(id: number, params: QueryParams = {}) {
   try {
-    const data = await api.get<IUser>(`${id}`, { params })
+    const data = await api.get<T>(`${id}`, { params })
 
     return data
   } catch (error) {

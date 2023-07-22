@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getSingleLeague } from '../../api/leagues'
-import { ILeagueWithPlayers } from '../../types/leagues'
+import { getSingleLeague } from '@api/leagues'
+import { ILeagueWithPlayers } from '@_types/leagues'
 
 const useFetchSingleLeague = (leagueId: number) => {
   const [league, setLeague] = useState<ILeagueWithPlayers>()

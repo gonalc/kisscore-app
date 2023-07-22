@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { IInvitation, TInvitationCreationPayload } from '../../types/invitations'
-import { inviteUser } from '../../api/invitations'
+import type { IInvitation, TInvitationCreationPayload } from '@_types/invitations'
+import { inviteUser } from '@api/invitations'
 
 const useCreateInvitation = () => {
   const [loading, setLoading] = useState(false)

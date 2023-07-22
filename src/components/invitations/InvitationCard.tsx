@@ -1,13 +1,13 @@
 import { FC, useState } from 'react'
-import { IInvitation } from '../../types/invitations'
+import { IInvitation } from '@_types/invitations'
 import { Text, View, StyleSheet } from 'react-native'
-import boxShadow from '../../styles/boxShadow'
-import COLORS from '../../utils/colors'
-import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
+import boxShadow from '@styles/boxShadow'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import Button from '../Button'
 import NegativeButton from '../NegativeButton'
 import i18n from '../../../i18n'
-import useConfirmInvitation from '../../hooks/invitations/confirmInvitation'
+import useConfirmInvitation from '@hooks/invitations/confirmInvitation'
 import Loader from '../Loader'
 
 type ConfirmStage = 'accept' | 'reject' | null

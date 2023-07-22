@@ -19,10 +19,10 @@ class Api {
     this.baseUrl += `/${entity}`
   }
 
-  async get<T>(path = '', config: AxiosRequestConfig = {}): Promise<AxiosResponse<APIResponse<T>>> {
+  async get<T>(path = '', config: AxiosRequestConfig = {}): Promise<T> {
     try {
       const url = `${this.baseUrl}/${path}`
-      const result = await axios.get(url, config)
+      const result: AxiosResponse<APIResponse<T>> = await axios.get(url, config)
 
       return result.data.data
     } catch (error) {
@@ -30,10 +30,10 @@ class Api {
     }
   }
 
-  async post<T>({ path = '', payload = {} }: APIPayload): Promise<AxiosResponse<APIResponse<T>>> {
+  async post<T>({ path = '', payload = {} }: APIPayload): Promise<T> {
     try {
       const url = `${this.baseUrl}/${path}`
-      const result = await axios.post(url, payload)
+      const result: AxiosResponse<APIResponse<T>> = await axios.post(url, payload)
 
       return result.data.data
     } catch (error) {
@@ -41,10 +41,10 @@ class Api {
     }
   }
 
-  async put<T>({ path = '', payload = {} }: APIPayload): Promise<AxiosResponse<APIResponse<T>>> {
+  async put<T>({ path = '', payload = {} }: APIPayload): Promise<T> {
     try {
       const url = `${this.baseUrl}/${path}`
-      const result = await axios.put(url, payload)
+      const result: AxiosResponse<APIResponse<T>> = await axios.put(url, payload)
 
       return result.data.data
     } catch (error) {
@@ -52,10 +52,10 @@ class Api {
     }
   }
 
-  async delete<T>(path: string): Promise<AxiosResponse<APIResponse<T>>> {
+  async delete<T>(path: string): Promise<T> {
     try {
       const url = `${this.baseUrl}/${path}`
-      const result = await axios.delete(url)
+      const result: AxiosResponse<APIResponse<T>> = await axios.delete(url)
 
       return result.data.data
     } catch (error) {

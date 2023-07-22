@@ -1,15 +1,15 @@
 import i18n from '../../../i18n'
-import TextInput from '../../components/forms/TextInput'
+import TextInput from '@components/forms/TextInput'
 import { FontAwesome5 } from '@expo/vector-icons'
-import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
-import COLORS from '../../utils/colors'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
+import COLORS from '@utils/colors'
 import { FC, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import NegativeButton from '../../components/NegativeButton'
-import Button from '../../components/Button'
-import { MIN_NAME_LENGTH } from '../../utils/forms'
-import useCreateInvitation from '../../hooks/invitations/createInvitation'
-import Loader from '../../components/Loader'
+import NegativeButton from '@components/NegativeButton'
+import Button from '@components/Button'
+import { MIN_NAME_LENGTH } from '@utils/forms'
+import useCreateInvitation from '@hooks/invitations/createInvitation'
+import Loader from '@components/Loader'
 
 type InvitationStatus = 'success' | 'error' | null
 

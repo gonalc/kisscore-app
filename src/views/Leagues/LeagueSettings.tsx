@@ -1,8 +1,8 @@
 import { FC, ReactNode, useState } from 'react'
 import { Pressable, Share, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
-import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '../../utils/fonts'
-import COLORS from '../../utils/colors'
+import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
+import COLORS from '@utils/colors'
 import Modal from 'react-native-modal'
 import i18n from '../../../i18n'
 import Animated, {

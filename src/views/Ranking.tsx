@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
-import COLORS from '../utils/colors'
-import { FONT_SIZE, NunitoSans } from '../utils/fonts'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 
 const Ranking = () => {
   return (

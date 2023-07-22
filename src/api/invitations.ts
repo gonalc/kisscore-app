@@ -1,4 +1,4 @@
-import type { IInvitation, TInvitationCreationPayload } from '../types/invitations'
+import type { IInvitation, TInvitationCreationPayload } from '@_types/invitations'
 import Api from './apiService'
 
 const api = new Api('invitations')

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { IBaseLeague, ILeague, ILeagueToCreate } from '../../types/leagues'
-import { createLeague } from '../../api/leagues'
-import { getStoredUser } from '../../utils/storage'
+import type { IBaseLeague, ILeague, ILeagueToCreate } from '@_types/leagues'
+import { createLeague } from '@api/leagues'
+import { getStoredUser } from '@utils/storage'
 
 const useCreateLeague = () => {
   const [loading, setLoading] = useState(false)

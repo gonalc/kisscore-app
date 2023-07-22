@@ -1,4 +1,4 @@
-import type { ILeagueToCreate, ILeague, ILeagueWithPlayers } from '../types/leagues'
+import type { ILeagueToCreate, ILeague, ILeagueWithPlayers } from '@_types/leagues'
 import Api from './apiService'
 
 const api = new Api('leagues')

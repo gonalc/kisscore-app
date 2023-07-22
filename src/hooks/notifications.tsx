@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
-import { isAndroid } from '../utils/platform'
-import COLORS from '../utils/colors'
+import { isAndroid } from '@utils/platform'
+import COLORS from '@utils/colors'
 import { useEffect, useRef, useState } from 'react'
 import useUpdateUser from './users/updateUser'
-import { getStoredUser } from '../utils/storage'
+import { getStoredUser } from '@utils/storage'
 
 enum NotificationType {
   INVITATION = 'invitation'

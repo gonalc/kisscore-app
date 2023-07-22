@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import type { IUser } from '../../types/users'
+import type { IUser } from '@_types/users'
 import { StyleSheet, Text, View } from 'react-native'
-import COLORS from '../../utils/colors'
-import { getPositionColor } from '../../utils/leagues'
-import { NunitoSans } from '../../utils/fonts'
-import { NORMAL_FONT } from '../../utils/fonts'
-import { LARGER_FONT } from '../../utils/fonts'
+import COLORS from '@utils/colors'
+import { getPositionColor } from '@utils/leagues'
+import { NunitoSans } from '@utils/fonts'
+import { NORMAL_FONT } from '@utils/fonts'
+import { LARGER_FONT } from '@utils/fonts'
 
 interface IPlayerItemProps {
   player: IUser

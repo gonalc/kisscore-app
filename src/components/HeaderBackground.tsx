@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import { FC } from 'react'
-import COLORS from '../utils/colors'
+import COLORS from '@utils/colors'
 
 const HeaderBackground: FC = () => {
   return (

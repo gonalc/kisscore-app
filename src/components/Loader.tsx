@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
-import COLORS from '../utils/colors'
+import COLORS from '@utils/colors'
 
 interface ILoaderProps {
   children: React.ReactNode

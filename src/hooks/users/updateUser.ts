@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { IUser } from '../../types/users'
-import { updateUser } from '../../api/users'
+import type { IUser } from '@_types/users'
+import { updateUser } from '@api/users'
 
 const useUpdateUser = () => {
   const [loading, setLoading] = useState(false)

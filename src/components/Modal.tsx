@@ -2,8 +2,8 @@ import { FC, ReactNode, useEffect, useState } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import Backdrop from './Backdrop'
-import COLORS from '../utils/colors'
-import useKeyboard from '../hooks/keyboard'
+import COLORS from '@utils/colors'
+import useKeyboard from '@hooks/keyboard'
 
 export interface IModalProps {
   isOpen: boolean

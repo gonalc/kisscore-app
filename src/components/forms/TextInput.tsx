@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react'
 import { View, TextInput as Input, TextInputProps, Text, StyleSheet } from 'react-native'
-import COLORS from '../../utils/colors'
-import { FONT_SIZE, NunitoSans } from '../../utils/fonts'
-import type { TErrorType } from '../../types/forms'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, NunitoSans } from '@utils/fonts'
+import type { TErrorType } from '@_types/forms'
 import i18n from '../../../i18n'
 
 export interface ITextInputProps extends Omit<TextInputProps, 'onChange' | 'onChangeText'> {

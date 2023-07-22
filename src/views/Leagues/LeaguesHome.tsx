@@ -1,18 +1,19 @@
 import { FC, useContext } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import COLORS from '../../utils/colors'
-import useFetchLeagues from '../../hooks/leagues/fetchLeagues'
-import Loader from '../../components/Loader'
+import COLORS from '@utils/colors'
+import useFetchLeagues from '@hooks/leagues/fetchLeagues'
+import Loader from '@components/Loader'
 import NoLeagues from './NoLeagues'
 import LeagueCard from './LeagueCard'
 import { LeaguesStackParamsList } from '.'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import InvitationsManager from '../../components/invitations/InvitationsManager'
+import InvitationsManager from '@components/invitations/InvitationsManager'
 import AddConquist from './AddConquist'
 import Jumbotron from './Jumbotron'
-import type { QueryParams } from '../../api/types'
-import useGetSingleUser from '../../hooks/users/getSingleUser'
-import { UserContext } from '../../contexts/userContext'
+import type { QueryParams } from '@api/types'
+import useGetSingleUser from '@hooks/users/getSingleUser'
+import { UserContext } from '@contexts/userContext'
+import type { IUserWithConquists } from '@_types/users'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -29,7 +30,7 @@ const LeaguesHome: FC = () => {
     user,
     loading: loadingUser,
     fetch: fetchUser
-  } = useGetSingleUser(localUser?.id, userQueryParams)
+  } = useGetSingleUser<IUserWithConquists>(localUser?.id, userQueryParams)
   const { leagues, loading: loadingLeagues, fetch } = useFetchLeagues()
 
   const loading = loadingLeagues || loadingUser
