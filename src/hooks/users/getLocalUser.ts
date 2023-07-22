@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import type { IUser } from '../../types/users'
-import { getStoredUser } from '../../utils/storage'
+import type { IUser } from '@_types/users'
+import { getStoredUser } from '@utils/storage'
 
 const useGetLocalUser = () => {
   const [user, setUser] = useState<IUser | null>(null)

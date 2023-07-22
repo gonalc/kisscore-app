@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { IUser } from '../../types/users'
-import { fetchUser } from '../../api/users'
-import type { QueryParams } from '../../api/types'
+import { IUser } from '@_types/users'
+import { fetchUser } from '@api/users'
+import type { QueryParams } from '@api/types'
 
 const useGetSingleUser = <T extends IUser>(userId: number, params: QueryParams = {}) => {
   const [loading, setLoading] = useState(false)

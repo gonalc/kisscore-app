@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { IInvitation } from '../../types/invitations'
-import { getStoredUser } from '../../utils/storage'
-import { getUserInvitations } from '../../api/invitations'
+import { IInvitation } from '@_types/invitations'
+import { getStoredUser } from '@utils/storage'
+import { getUserInvitations } from '@api/invitations'
 
 const useFetchInvitations = () => {
   const [invitations, setInvitations] = useState<IInvitation[]>([])

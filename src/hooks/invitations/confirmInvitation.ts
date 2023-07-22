@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { IInvitation } from '../../types/invitations'
-import { acceptInvitation, rejectInvitation } from '../../api/invitations'
+import { IInvitation } from '@_types/invitations'
+import { acceptInvitation, rejectInvitation } from '@api/invitations'
 
 type TActionIvitation = 'accept' | 'reject'
 
