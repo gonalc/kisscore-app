@@ -2,8 +2,8 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { FC } from 'react'
 import { TextInput, View, StyleSheet, Text } from 'react-native'
 import i18n from '../../../i18n'
-import COLORS from '../../utils/colors'
-import { FONT_SIZE, LARGER_FONT, NunitoSans } from '../../utils/fonts'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, LARGER_FONT, NunitoSans } from '@utils/fonts'
 
 export interface IEmailInputProps {
   value: string

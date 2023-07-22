@@ -2,10 +2,10 @@ import { FC, useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { FONT_SIZE, LARGE_FONT, NunitoSans } from '../../utils/fonts'
-import COLORS from '../../utils/colors'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
+import COLORS from '@utils/colors'
 import dayjs from 'dayjs'
-import { DATE_FORMAT } from '../../utils/dates'
+import { DATE_FORMAT } from '@utils/dates'
 
 export interface IDateInputProps {
   label: string
