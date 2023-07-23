@@ -1,6 +1,7 @@
 const es = {
   greetings: '¡Hola, {{name}}!',
   logoutConfirmation: '¿Estás seguro/a de que deseas cerrar sesión?',
+  joinKisscore: 'Únete a Kisscore',
   labels: {
     name: 'Nombre',
     username: 'Nombre de usuario',

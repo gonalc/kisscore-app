@@ -1,5 +1,5 @@
-import { FC, ReactNode, useState } from 'react'
-import { Pressable, Share, StyleSheet, Text, View } from 'react-native'
+import { type FC, ReactNode, useState } from 'react'
+import { Pressable, Share, type ShareContent, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import COLORS from '@utils/colors'
@@ -71,9 +71,14 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
 
   const onShareInvitation = async () => {
     try {
-      const result = await Share.share({
-        message: 'This will be the invitation to the league'
-      })
+      const url = 'https://play.google.com/store/apps/details?id=com.cucupapi.kisscoreapp'
+
+      const content: ShareContent = {
+        message: `${i18n.t('joinKisscore')}: ${url}`,
+        url
+      }
+
+      const result = await Share.share(content)
 
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
