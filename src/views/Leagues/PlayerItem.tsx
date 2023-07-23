@@ -6,6 +6,7 @@ import { getPositionColor } from '@utils/leagues'
 import { NunitoSans } from '@utils/fonts'
 import { NORMAL_FONT } from '@utils/fonts'
 import { LARGER_FONT } from '@utils/fonts'
+import { displayNumber } from '@utils/numbers'
 
 interface IPlayerItemProps {
   player: IUser
@@ -23,7 +24,7 @@ const PlayerItem: FC<IPlayerItemProps> = ({ player, position }) => {
         <Text style={styles.positionText}>{position}</Text>
       </View>
 
-      <Text style={styles.score}>{score}</Text>
+      <Text style={styles.score}>{displayNumber(score)}</Text>
 
       <Text style={styles.playerName}>{name}</Text>
     </View>
