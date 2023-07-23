@@ -5,7 +5,7 @@ import { isAndroid } from './platform'
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.cucupapi.kisscoreapp'
 const APPLE_STORE_URL = 'NOT READY'
 
-export async function onShareInvitation() {
+export async function onShareAppLink() {
   try {
     const url = isAndroid() ? PLAY_STORE_URL : APPLE_STORE_URL
 

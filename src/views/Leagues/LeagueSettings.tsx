@@ -12,7 +12,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import InviteForm from './InviteForm'
 import i18n from '@i18n/index'
-import { onShareInvitation } from '@utils/share'
+import { onShareAppLink } from '@utils/share'
 
 type TMenuItem = {
   label: string
@@ -90,7 +90,7 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
     {
       label: 'shareLink',
       icon: <FontAwesome name="share-alt" size={LARGE_FONT} color={COLORS.black} />,
-      onPress: onShareInvitation,
+      onPress: onShareAppLink,
       animatedStyles: animatedOpacityStyles
     },
     {
