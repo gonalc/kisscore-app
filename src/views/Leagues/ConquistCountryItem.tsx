@@ -3,7 +3,7 @@ import { Text, StyleSheet } from 'react-native'
 import { FONT_SIZE, NunitoSansBold } from '@utils/fonts'
 import COLORS from '@utils/colors'
 import { getCountry } from '@utils/countries'
-import i18n from '../../../i18n'
+import i18n from '@i18n/index'
 
 interface IConquistCountryItem {
   countryCode: string

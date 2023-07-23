@@ -1,4 +1,3 @@
-import i18n from '../../../i18n'
 import TextInput from '@components/forms/TextInput'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
@@ -10,6 +9,7 @@ import Button from '@components/Button'
 import { MIN_NAME_LENGTH } from '@utils/forms'
 import useCreateInvitation from '@hooks/invitations/createInvitation'
 import Loader from '@components/Loader'
+import i18n from '@i18n/index'
 
 type InvitationStatus = 'success' | 'error' | null
 

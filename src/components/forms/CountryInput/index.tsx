@@ -5,8 +5,8 @@ import { FontAwesome } from '@expo/vector-icons'
 import { CountryItem } from 'react-native-country-codes-picker/types/Types'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
 import COLORS from '@utils/colors'
-import i18n from '../../../../i18n'
 import CountryListItem from './CountryListItem'
+import i18n from '@i18n/index'
 
 export interface ICountryInputProps {
   value: string

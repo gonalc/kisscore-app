@@ -1,9 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { FC, useState } from 'react'
 import { TextInput, View, StyleSheet, Pressable, Text } from 'react-native'
-import i18n from '../../../i18n'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, LARGER_FONT, LARGE_FONT, NunitoSans } from '@utils/fonts'
+import i18n from '@i18n/index'
 
 export interface IPasswordInputProps {
   value: string

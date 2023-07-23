@@ -5,52 +5,62 @@ import { type FC } from 'react'
 import { getCountry, getCountryName } from '@utils/countries'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
+import i18n from '@i18n/index'
 
 interface IUserConquistsProps {
   conquists: IConquist[]
 }
 
 const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={conquists}
-        renderItem={({ item }) => {
-          const { country: countryCode, place: placeCode, score } = item
-          const country = getCountry(countryCode)
-          const place = getCountry(placeCode)
+  const renderContent = () => {
+    if (conquists?.length) {
+      return (
+        <FlatList
+          data={conquists}
+          renderItem={({ item }) => {
+            const { country: countryCode, place: placeCode, score } = item
+            const country = getCountry(countryCode)
+            const place = getCountry(placeCode)
 
-          return (
-            <View style={styles.conquistWrapper}>
-              <View style={styles.scoreContainer}>
-                <Text style={styles.scoreText}>{score}</Text>
-              </View>
-              <View style={styles.groupWrapper}>
-                <View style={styles.iconsContainer}>
-                  <FontAwesome5 name="user-tag" size={FONT_SIZE.labels} color={COLORS.black} />
-                  <Text style={styles.flag}>{`${country.flag}`}</Text>
+            return (
+              <View style={styles.conquistWrapper}>
+                <View style={styles.scoreContainer}>
+                  <Text style={styles.scoreText}>{score}</Text>
                 </View>
-                <Text style={styles.countryName}>{getCountryName(country.name)}</Text>
-              </View>
+                <View style={styles.groupWrapper}>
+                  <View style={styles.iconsContainer}>
+                    <FontAwesome5 name="user-tag" size={FONT_SIZE.labels} color={COLORS.black} />
+                    <Text style={styles.flag}>{`${country.flag}`}</Text>
+                  </View>
+                  <Text style={styles.countryName}>{getCountryName(country.name)}</Text>
+                </View>
 
-              <View style={styles.groupWrapper}>
-                <View style={styles.iconsContainer}>
-                  <Ionicons
-                    name="ios-location-sharp"
-                    size={FONT_SIZE.labels}
-                    color={COLORS.black}
-                  />
-                  <Text style={styles.flag}>{`${place.flag}`}</Text>
+                <View style={styles.groupWrapper}>
+                  <View style={styles.iconsContainer}>
+                    <Ionicons
+                      name="ios-location-sharp"
+                      size={FONT_SIZE.labels}
+                      color={COLORS.black}
+                    />
+                    <Text style={styles.flag}>{`${place.flag}`}</Text>
+                  </View>
+                  <Text style={styles.countryName}>{getCountryName(place.name)}</Text>
                 </View>
-                <Text style={styles.countryName}>{getCountryName(place.name)}</Text>
               </View>
-            </View>
-          )
-        }}
-        keyExtractor={(item) => `user-conquist_${item.id}_${item.userId}`}
-      />
-    </View>
-  )
+            )
+          }}
+          keyExtractor={(item) => `user-conquist_${item.id}_${item.userId}`}
+        />
+      )
+    }
+
+    return (
+      <View>
+        <Text style={styles.noConquistsText}>{i18n.t('conquists.noConquists')}</Text>
+      </View>
+    )
+  }
+  return <View style={styles.container}>{renderContent()}</View>
 }
 
 const styles = StyleSheet.create({
@@ -71,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     padding: 5,
     borderRadius: 3,
-    width: 40,
+    minWidth: 40,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -86,7 +96,8 @@ const styles = StyleSheet.create({
   },
   groupWrapper: {
     flexGrow: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    maxWidth: '40%'
   },
   iconsContainer: {
     flexDirection: 'row',
@@ -98,6 +109,12 @@ const styles = StyleSheet.create({
     fontFamily: NunitoSans,
     color: COLORS.black,
     fontSize: FONT_SIZE.body,
+    textAlign: 'center'
+  },
+  noConquistsText: {
+    fontFamily: NunitoSans,
+    fontSize: FONT_SIZE.body,
+    color: COLORS.black,
     textAlign: 'center'
   }
 })

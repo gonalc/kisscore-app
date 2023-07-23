@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { TouchableOpacity, StyleSheet, Text } from 'react-native'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 
@@ -11,13 +11,13 @@ export interface IButtonProps {
 
 const Button: FC<IButtonProps> = ({ label, onPress, disabled }) => {
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={onPress}
       style={[styles.container, disabled ? styles.disabled : styles.enabled]}
       disabled={disabled}
     >
       <Text style={styles.text}>{label}</Text>
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 

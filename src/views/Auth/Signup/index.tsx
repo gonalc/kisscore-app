@@ -4,7 +4,6 @@ import Title from '@components/Title'
 import COLORS from '@utils/colors'
 import { FontAwesome, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
-import i18n from '../../../../i18n'
 import EmailInput from '@components/forms/EmailInput'
 import PasswordInput from '@components/forms/PasswordInput'
 import { useContext, useReducer } from 'react'
@@ -29,6 +28,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../../../App'
 import { storeSessionData } from '../../../utils/storage'
 import { UserContext } from '../../../contexts/userContext'
+import i18n from '@i18n/index'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 

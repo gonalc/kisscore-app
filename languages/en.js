@@ -2,6 +2,7 @@
 const en = {
   greetings: 'Hello, {{name}}!',
   logoutConfirmation: 'Are you sure you want to log out?',
+  joinKisscore: 'Join Kisscore',
   labels: {
     name: 'Name',
     username: 'User name',
@@ -73,6 +74,7 @@ const en = {
   conquists: {
     addConquist: 'Add conquest',
     ctaConquered: 'I conquered!',
+    noConquists: "There are no conquists yet. Let's go for the first one! 💪",
     form: {
       country: 'What was your nationality?',
       birthYear: 'Do you know his year of birth?',

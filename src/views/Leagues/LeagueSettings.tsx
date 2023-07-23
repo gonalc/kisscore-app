@@ -1,10 +1,9 @@
-import { FC, ReactNode, useState } from 'react'
-import { Pressable, Share, StyleSheet, Text, View } from 'react-native'
+import { type FC, ReactNode, useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import COLORS from '@utils/colors'
 import Modal from 'react-native-modal'
-import i18n from '../../../i18n'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -12,6 +11,8 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated'
 import InviteForm from './InviteForm'
+import i18n from '@i18n/index'
+import { onShareAppLink } from '@utils/share'
 
 type TMenuItem = {
   label: string
@@ -69,26 +70,6 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
     setShowMenu(false)
   }
 
-  const onShareInvitation = async () => {
-    try {
-      const result = await Share.share({
-        message: 'This will be the invitation to the league'
-      })
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // console.log('Shared with activityType')
-        } else {
-          // console.log('Shared')
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // console.log('Action dismissed')
-      }
-    } catch (error) {
-      alert(error)
-    }
-  }
-
   const startInviting = () => {
     itemsOpacity.value = withSpring(0)
     inviteOffset.value = withDelay(DURATION, withSpring(-50))
@@ -109,7 +90,7 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
     {
       label: 'shareLink',
       icon: <FontAwesome name="share-alt" size={LARGE_FONT} color={COLORS.black} />,
-      onPress: onShareInvitation,
+      onPress: onShareAppLink,
       animatedStyles: animatedOpacityStyles
     },
     {

@@ -3,8 +3,8 @@
  */
 import { type Locale, getLocales } from 'expo-localization'
 import { I18n } from 'i18n-js'
-import es from './languages/es'
-import en from './languages/en'
+import es from '../languages/es'
+import en from '../languages/en'
 
 export const AVAILABLE_LANGUAGES = ['es', 'en'] as const
 

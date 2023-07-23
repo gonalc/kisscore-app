@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { Pressable, StyleSheet, Text } from 'react-native'
-import i18n from '../../i18n'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { NORMAL_FONT, NunitoSans } from '@utils/fonts'
 import COLORS from '@utils/colors'
+import i18n from '@i18n/index'
 
 const BackButton: FC = () => {
   const navigation = useNavigation()

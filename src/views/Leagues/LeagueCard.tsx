@@ -4,10 +4,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import COLORS from '@utils/colors'
 import { LARGER_FONT, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import { FontAwesome } from '@expo/vector-icons'
-import i18n from '../../../i18n'
 import { useNavigation } from '@react-navigation/native'
 import type { TLeaguesHomeScreenProp } from './LeaguesHome'
 import boxShadow from '@styles/boxShadow'
+import i18n from '@i18n/index'
 
 interface ILeagueCardProps {
   league: ILeagueWithPlayers

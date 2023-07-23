@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text } from 'react-native'
 import { ItemTemplateProps } from 'react-native-country-codes-picker/types/Types'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
-import i18n from '../../../../i18n'
+import i18n from '@i18n/index'
 
 const CountryListItem: FC<ItemTemplateProps> = ({ item, onPress }) => {
   const { flag } = item

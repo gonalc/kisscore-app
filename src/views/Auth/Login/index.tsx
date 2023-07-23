@@ -3,7 +3,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useContext, useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { RootStackParamList } from '../../../../App'
-import i18n from '../../../../i18n'
 import Button from '@components/Button'
 import PasswordInput from '@components/forms/PasswordInput'
 import NegativeButton from '@components/NegativeButton'
@@ -18,6 +17,7 @@ import { storeSessionData } from '@utils/storage'
 import TextInput from '@components/forms/TextInput'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { UserContext } from '@contexts/userContext'
+import i18n from '@i18n/index'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
