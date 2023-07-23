@@ -15,7 +15,8 @@ module.exports = function (api) {
             '@hooks': './src/hooks',
             '@contexts': './src/contexts',
             '@components': './src/components',
-            '@api': './src/api'
+            '@api': './src/api',
+            '@i18n': './i18n'
           }
         }
       ]

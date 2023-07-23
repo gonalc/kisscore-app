@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import i18n from '../../../i18n'
 import COLORS from '@utils/colors'
 import boxShadow from '@styles/boxShadow'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
@@ -10,6 +9,7 @@ import UserConquists from './UserConquists'
 import Modal from 'react-native-modal'
 import Button from '@components/Button'
 import { displayNumber } from '@utils/numbers'
+import i18n from '@i18n/index'
 
 interface IJumbotronProps {
   user: IUserWithConquists
