@@ -9,6 +9,7 @@ import type { IUserWithConquists } from '@_types/users'
 import UserConquists from './UserConquists'
 import Modal from 'react-native-modal'
 import Button from '@components/Button'
+import { displayNumber } from '@utils/numbers'
 
 interface IJumbotronProps {
   user: IUserWithConquists
@@ -52,7 +53,7 @@ const Jumbotron: FC<IJumbotronProps> = ({ user }) => {
 
         <TouchableOpacity style={styles.card} onPress={() => setShowConquists(true)}>
           <View style={styles.scoreContainer}>
-            <Text style={[styles.numbersText, styles.whiteText]}>{score}</Text>
+            <Text style={[styles.numbersText, styles.whiteText]}>{displayNumber(score)}</Text>
             <Text style={[styles.labelsText, styles.whiteText]}>{i18n.t('labels.score')}</Text>
           </View>
 
