@@ -5,13 +5,14 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NORMAL_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Entypo } from '@expo/vector-icons'
 import { ReactNode, useContext, useState } from 'react'
 import Modal from 'react-native-modal'
 import LanguageController from '@components/LanguageController'
 import { updateUser } from '@api/users'
 import { UserContext } from '@contexts/userContext'
 import i18n from '@i18n/index'
+import { onShareAppLink } from '@utils/share'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
@@ -46,6 +47,11 @@ const Settings = () => {
     //   text: i18n.t('settings.changeLanguage'),
     //   action: () => setShowLanguageModal(true)
     // },
+    shareAppLink: {
+      icon: <Entypo name="share" size={NORMAL_FONT} color={COLORS.black} />,
+      text: i18n.t('leagues.settings.shareLink'),
+      action: onShareAppLink
+    },
     logout: {
       icon: <AntDesign name="logout" size={NORMAL_FONT} color={COLORS.black} />,
       text: i18n.t('actions.logout'),
