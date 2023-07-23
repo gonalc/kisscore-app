@@ -1,5 +1,5 @@
+import i18n from '@i18n/index'
 import { type CountryItem, countryCodes } from 'react-native-country-codes-picker'
-import i18n from '../../i18n'
 
 export function getCountry(countryCode: string) {
   return countryCodes.find((country) => countryCode === country.code)

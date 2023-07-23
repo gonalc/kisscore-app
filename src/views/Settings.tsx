@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
-import i18n from '../../i18n'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NORMAL_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import { AntDesign } from '@expo/vector-icons'
@@ -12,6 +11,7 @@ import Modal from 'react-native-modal'
 import LanguageController from '@components/LanguageController'
 import { updateUser } from '@api/users'
 import { UserContext } from '@contexts/userContext'
+import i18n from '@i18n/index'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 

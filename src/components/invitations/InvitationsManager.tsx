@@ -4,12 +4,12 @@ import Modal from 'react-native-modal'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import COLORS from '@utils/colors'
 import InvitationCard from './InvitationCard'
-import i18n from '../../../i18n'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import Button from '../Button'
 import Loader from '../Loader'
 import useNotifications from '@hooks/notifications'
 import type { IInvitation } from '@_types/invitations'
+import i18n from '@i18n/index'
 
 interface IInvitationsManagerProps {
   fetchLeagues: () => void

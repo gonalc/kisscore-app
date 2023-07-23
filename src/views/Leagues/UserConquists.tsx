@@ -5,7 +5,7 @@ import { type FC } from 'react'
 import { getCountry, getCountryName } from '@utils/countries'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
-import i18n from '../../../i18n'
+import i18n from '@i18n/index'
 
 interface IUserConquistsProps {
   conquists: IConquist[]

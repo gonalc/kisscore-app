@@ -4,7 +4,6 @@ import { MaterialIcons } from '@expo/vector-icons'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
 import NegativeButton from '@components/NegativeButton'
-import i18n from '../../../i18n'
 import { Ionicons } from '@expo/vector-icons'
 import TextInput from '@components/forms/TextInput'
 import Button from '@components/Button'
@@ -13,6 +12,7 @@ import Modal from 'react-native-modal'
 import Loader from '@components/Loader'
 import useCreateLeague from '@hooks/leagues/createLeague'
 import type { IBaseLeague } from '@_types/leagues'
+import i18n from '@i18n/index'
 
 interface INoLeaguesProps {
   fetchLeagues: () => void

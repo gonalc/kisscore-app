@@ -6,9 +6,9 @@ import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import Button from '../Button'
 import NegativeButton from '../NegativeButton'
-import i18n from '../../../i18n'
 import useConfirmInvitation from '@hooks/invitations/confirmInvitation'
 import Loader from '../Loader'
+import i18n from '@i18n/index'
 
 type ConfirmStage = 'accept' | 'reject' | null
 

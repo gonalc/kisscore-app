@@ -3,7 +3,6 @@ import COLORS from '@utils/colors'
 import Button from '@components/Button'
 import { FC, useState } from 'react'
 import Modal from 'react-native-modal'
-import i18n from '../../../i18n'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import CountryInput from '@components/forms/CountryInput'
 import { ICreationConquist } from '@_types/conquists'
@@ -16,6 +15,7 @@ import useCreateConquist from '@hooks/conquists/createConquist'
 import Loader from '@components/Loader'
 import { isAndroid } from '@utils/platform'
 import TextInput from '@components/forms/TextInput'
+import i18n from '@i18n/index'
 
 enum CreateConquistSteps {
   COUNTRY,

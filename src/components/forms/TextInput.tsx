@@ -3,13 +3,12 @@ import { View, TextInput as Input, TextInputProps, Text, StyleSheet } from 'reac
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import type { TErrorType } from '@_types/forms'
-import i18n from '../../../i18n'
+import i18n from '@i18n/index'
 
 export interface ITextInputProps extends Omit<TextInputProps, 'onChange' | 'onChangeText'> {
   label: string
   icon: ReactNode
   placeholder: string
-  // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void
   error?: TErrorType
   errorPayload?: Record<string, unknown>

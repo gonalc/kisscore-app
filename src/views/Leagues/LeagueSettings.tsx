@@ -4,7 +4,6 @@ import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import COLORS from '@utils/colors'
 import Modal from 'react-native-modal'
-import i18n from '../../../i18n'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -12,6 +11,7 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated'
 import InviteForm from './InviteForm'
+import i18n from '@i18n/index'
 
 type TMenuItem = {
   label: string
