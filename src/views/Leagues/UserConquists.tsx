@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     padding: 5,
     borderRadius: 3,
-    width: 40,
+    minWidth: 40,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   },
   groupWrapper: {
     flexGrow: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    maxWidth: '40%'
   },
   iconsContainer: {
     flexDirection: 'row',
