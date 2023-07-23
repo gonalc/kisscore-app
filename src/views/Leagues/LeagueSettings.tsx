@@ -1,5 +1,5 @@
 import { type FC, ReactNode, useState } from 'react'
-import { Pressable, Share, type ShareContent, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
 import COLORS from '@utils/colors'
@@ -12,6 +12,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import InviteForm from './InviteForm'
 import i18n from '@i18n/index'
+import { onShareInvitation } from '@utils/share'
 
 type TMenuItem = {
   label: string
@@ -67,31 +68,6 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
     resetAnimations()
 
     setShowMenu(false)
-  }
-
-  const onShareInvitation = async () => {
-    try {
-      const url = 'https://play.google.com/store/apps/details?id=com.cucupapi.kisscoreapp'
-
-      const content: ShareContent = {
-        message: `${i18n.t('joinKisscore')}: ${url}`,
-        url
-      }
-
-      const result = await Share.share(content)
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // console.log('Shared with activityType')
-        } else {
-          // console.log('Shared')
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // console.log('Action dismissed')
-      }
-    } catch (error) {
-      alert(error)
-    }
   }
 
   const startInviting = () => {
