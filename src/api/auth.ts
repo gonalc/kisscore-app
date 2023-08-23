@@ -13,9 +13,13 @@ interface ILoginResponse {
 
 const api = new Api('auth')
 
-export async function signup(payload: ICreationUser) {
+export async function signup(payload: ICreationUser, referral?: string) {
   try {
-    const path = 'signup'
+    let path = 'signup'
+
+    if (referral) {
+      path += `?referral=${referral}`
+    }
 
     const data = await api.post<ILoginResponse>({ path, payload })
 
