@@ -1,4 +1,4 @@
-import { DBBaseItem } from '.'
+import type { DBBaseItem } from '.'
 
 export interface ICreationConquist {
   country: string
