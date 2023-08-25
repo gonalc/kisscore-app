@@ -7,18 +7,28 @@ import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import i18n from '@i18n/index'
 import Modal from 'react-native-modal'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Button from '@components/Button'
 import modalContainer from '@styles/modalContainer'
+import useGetSingleUser from '@hooks/users/getSingleUser'
+import { UserContext } from '@contexts/userContext'
+import type { IUserWithBadges } from '@_types/users'
 
 const Badges = () => {
+  const { localUser } = useContext(UserContext)
+
   const { badges, loading } = useFetchBadges()
+  const { user, loading: userLoading } = useGetSingleUser<IUserWithBadges>(localUser.id, {
+    include: 'badges'
+  })
+  const userBadgesIds = user?.badges?.map((badge) => badge.id) || []
+
   const [infoModal, setInfoModal] = useState<string | null>(null)
 
   const { Ionicons } = Icons
 
   return (
-    <Loader isLoading={loading}>
+    <Loader isLoading={loading || userLoading}>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => setInfoModal('share-app')}>
           <Text style={styles.groupLabel}>
@@ -28,9 +38,14 @@ const Badges = () => {
         </TouchableOpacity>
         <View style={styles.badgesContainer}>
           {badges.map((badge) => {
-            const { name, id, iconFamily, iconKey } = badge
+            const { name, id, iconFamily, iconKey, color } = badge
 
             const Icon = Icons[iconFamily]
+
+            const achieved = userBadgesIds.includes(id)
+
+            const badgeColor = achieved ? color : undefined
+            const iconColor = achieved ? COLORS.white : COLORS.gray
 
             return (
               <TouchableOpacity
@@ -38,8 +53,8 @@ const Badges = () => {
                 key={`badge-${name}_${id}`}
                 style={styles.badgeGroup}
               >
-                <Hexagon>
-                  <Icon name={iconKey} size={FONT_SIZE.badge} color={COLORS.gray} />
+                <Hexagon backgroundColor={badgeColor}>
+                  <Icon name={iconKey} size={FONT_SIZE.badge} color={iconColor} />
                 </Hexagon>
 
                 <Text style={styles.badgeName}>{i18n.t(`badges.name.${name}`)}</Text>
