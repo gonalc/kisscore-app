@@ -1,4 +1,4 @@
-import { type FC, ReactNode, useState } from 'react'
+import { type FC, ReactNode, useState, useContext } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, LARGE_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
@@ -13,6 +13,7 @@ import Animated, {
 import InviteForm from './InviteForm'
 import i18n from '@i18n/index'
 import { onShareAppLink } from '@utils/share'
+import { UserContext } from '@contexts/userContext'
 
 type TMenuItem = {
   label: string
@@ -28,6 +29,8 @@ interface ILeagueSettingsProps {
 const DURATION = 300
 
 const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
+  const { localUser } = useContext(UserContext)
+
   const [showMenu, setShowMenu] = useState(false)
   const [invitingUser, setInvitingUser] = useState(false)
 
@@ -90,7 +93,7 @@ const LeagueSettings: FC<ILeagueSettingsProps> = ({ leagueId }) => {
     {
       label: 'shareLink',
       icon: <FontAwesome name="share-alt" size={LARGE_FONT} color={COLORS.black} />,
-      onPress: onShareAppLink,
+      onPress: () => onShareAppLink(localUser?.username),
       animatedStyles: animatedOpacityStyles
     },
     {

@@ -51,7 +51,7 @@ const Settings = () => {
     shareAppLink: {
       icon: <Entypo name="share" size={NORMAL_FONT} color={COLORS.black} />,
       text: i18n.t('leagues.settings.shareLink'),
-      action: onShareAppLink
+      action: () => onShareAppLink(localUser?.username)
     },
     logout: {
       icon: <AntDesign name="logout" size={NORMAL_FONT} color={COLORS.black} />,
