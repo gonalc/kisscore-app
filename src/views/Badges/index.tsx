@@ -2,6 +2,7 @@ import Loader from '@components/Loader'
 import useFetchBadges from '@hooks/badges/fetchBadges'
 import { StyleSheet, Text, View } from 'react-native'
 import * as Icons from '@expo/vector-icons'
+import Hexagon from '@components/Hexagon'
 
 const Badges = () => {
   const { badges, loading } = useFetchBadges()
@@ -23,6 +24,9 @@ const Badges = () => {
           )
         })}
       </View>
+      <Hexagon>
+        <Text>Hola</Text>
+      </Hexagon>
     </Loader>
   )
 }
