@@ -10,6 +10,7 @@ import Loader from '../Loader'
 import useNotifications from '@hooks/notifications'
 import type { IInvitation } from '@_types/invitations'
 import i18n from '@i18n/index'
+import modalContainer from '@styles/modalContainer'
 
 interface IInvitationsManagerProps {
   fetchLeagues: () => void
@@ -66,11 +67,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.background
   },
-  modalContainer: {
-    backgroundColor: COLORS.background,
-    padding: 10,
-    borderRadius: 5
-  },
+  modalContainer,
   title: {
     fontFamily: NunitoSans,
     textAlign: 'center',

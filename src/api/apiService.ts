@@ -9,7 +9,7 @@ type APIPayload = {
   payload: unknown
 }
 
-const LOCAL_URL = 'http://192.168.1.150:8080' // Change it to your local IP address
+const LOCAL_URL = 'http://192.168.1.197:8080' // Change it to your local IP address
 const SERVER_URL = 'http://54.74.43.13:3000'
 
 class Api {

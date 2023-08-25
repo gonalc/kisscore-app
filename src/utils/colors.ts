@@ -17,6 +17,8 @@ const COLORS = {
   bronze: '#9E4936'
 }
 
+export type Color = keyof typeof COLORS
+
 export function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 

@@ -13,5 +13,6 @@ export const FONT_SIZE = {
   header: LARGER_FONT,
   body: NORMAL_FONT,
   buttons: NORMAL_FONT,
-  labels: SMALL_FONT
+  labels: SMALL_FONT,
+  badge: 38
 } as const
