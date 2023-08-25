@@ -1,10 +1,9 @@
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Leagues from './Leagues'
 import Settings from './Settings'
-import Ranking from './Ranking'
 import COLORS from '../utils/colors'
-import { Ionicons } from '@expo/vector-icons'
-import { FontAwesome } from '@expo/vector-icons'
+import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
+import Badges from './Badges'
 
 const Tab = createBottomTabNavigator()
 
@@ -24,9 +23,9 @@ const LeaguesTabs = () => {
     tabBarIcon: (iconProps) => <Ionicons name="trophy" {...iconProps} />
   }
 
-  const rankingOptions: BottomTabNavigationOptions = {
+  const badgesOptions: BottomTabNavigationOptions = {
     ...tabOptions,
-    tabBarIcon: (iconProps) => <Ionicons name="podium-sharp" {...iconProps} />
+    tabBarIcon: (iconProps) => <MaterialCommunityIcons name="medal" {...iconProps} />
   }
 
   const settingsOptions: BottomTabNavigationOptions = {
@@ -37,7 +36,7 @@ const LeaguesTabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen options={leaguesOptions} name="Leagues" component={Leagues} />
-      <Tab.Screen options={rankingOptions} name="Ranking" component={Ranking} />
+      <Tab.Screen options={badgesOptions} name="Badges" component={Badges} />
       <Tab.Screen options={settingsOptions} name="Settings" component={Settings} />
     </Tab.Navigator>
   )

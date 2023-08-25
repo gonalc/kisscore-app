@@ -29,6 +29,7 @@ import { RootStackParamList } from '../../../../App'
 import { storeSessionData } from '../../../utils/storage'
 import { UserContext } from '../../../contexts/userContext'
 import i18n from '@i18n/index'
+import { getInstallationReferral } from '@utils/referral'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 
@@ -145,7 +146,9 @@ const Signup = () => {
       }
 
       try {
-        const { jwt, user } = await signup(formData)
+        const referral = await getInstallationReferral()
+
+        const { jwt, user } = await signup(formData, referral)
 
         setLocalUser(user)
 
