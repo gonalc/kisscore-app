@@ -90,6 +90,25 @@ const es = {
   languages: {
     es: 'Español',
     en: 'Inglés'
+  },
+  badges: {
+    name: {
+      'share-app-1': '1 Persona',
+      'share-app-5': '5 Personas',
+      'share-app-10': '10 Personas'
+    },
+    groups: {
+      'share-app': 'Difunde la palabra'
+    },
+    explanations: {
+      'share-app':
+        'Consigue insignias por la gente que se descarga la app con tu link. Puedes compartir la app desde ajustes o desde dentro de una liga, cuando vas a invitar a un jugador.'
+    },
+    celebrations: {
+      'share-app-1': '¡Enhorabuena! Has compartido Kisscore con 1 persona.',
+      'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 persona.',
+      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 persona.'
+    }
   }
 }
 
