@@ -3,20 +3,22 @@ import { UserContext } from '@contexts/userContext'
 import useFetchBadges from '@hooks/badges/fetchBadges'
 import useGetSingleUser from '@hooks/users/getSingleUser'
 import { useContext, type FC } from 'react'
-import * as Icons from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Text } from 'react-native'
 import i18n from '@i18n/index'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import COLORS from '@utils/colors'
-import Hexagon from '@components/Hexagon'
 import Loader from '@components/Loader'
+import type { AchievedBadgeModalProps } from '.'
+import Badge from './Badge'
 
 interface BadgesListProps {
   setInfoModal: (group: string) => void
+  setAchievedBadgeMoal: (badge: AchievedBadgeModalProps) => void
 }
 
-const BadgesList: FC<BadgesListProps> = ({ setInfoModal }) => {
+const BadgesList: FC<BadgesListProps> = ({ setInfoModal, setAchievedBadgeMoal }) => {
   const { localUser } = useContext(UserContext)
 
   const { badges, loading } = useFetchBadges()
@@ -24,8 +26,6 @@ const BadgesList: FC<BadgesListProps> = ({ setInfoModal }) => {
     include: 'badges'
   })
   const userBadgesIds = user?.badges?.map((badge) => badge.id) || []
-
-  const { Ionicons } = Icons
 
   return (
     <Loader isLoading={loading || userLoading}>
@@ -38,24 +38,18 @@ const BadgesList: FC<BadgesListProps> = ({ setInfoModal }) => {
         </TouchableOpacity>
         <View style={styles.badgesContainer}>
           {badges.map((badge) => {
-            const { name, id, iconFamily, iconKey, color } = badge
-
-            const Icon = Icons[iconFamily]
+            const { name, id } = badge
 
             const achieved = userBadgesIds.includes(id)
 
-            const badgeColor = achieved ? color : undefined
-            const iconColor = achieved ? COLORS.white : COLORS.gray
-
             return (
               <TouchableOpacity
-                onPress={() => alert('Hola!!')}
+                //   The group like this is provisional
+                onPress={() => setAchievedBadgeMoal({ badge, group: 'share-app' })}
                 key={`badge-${name}_${id}`}
                 style={styles.badgeGroup}
               >
-                <Hexagon backgroundColor={badgeColor}>
-                  <Icon name={iconKey} size={FONT_SIZE.badge} color={iconColor} />
-                </Hexagon>
+                <Badge badge={badge} achieved={achieved} />
 
                 <Text style={styles.badgeName}>{i18n.t(`badges.name.${name}`)}</Text>
               </TouchableOpacity>

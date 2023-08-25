@@ -9,7 +9,7 @@ interface HexagonProps {
   children?: JSX.Element
 }
 
-const DEFAULT_SIZE = 70
+export const DEFAULT_SIZE = 70
 const RATIO = 78 / DEFAULT_SIZE
 
 const Hexagon: FC<HexagonProps> = ({

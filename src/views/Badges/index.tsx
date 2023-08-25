@@ -1,38 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native'
-import COLORS from '@utils/colors'
-import { FONT_SIZE, NunitoSans } from '@utils/fonts'
-import i18n from '@i18n/index'
-import Modal from 'react-native-modal'
 import { useState } from 'react'
-import Button from '@components/Button'
-import modalContainer from '@styles/modalContainer'
 import BadgesList from './BadgesList'
+import InfoModal from './InfoModal'
+import type { IBadge } from '@_types/badges'
+import AchievedBadgeModal from './AchievedBadgeModal'
+
+export type AchievedBadgeModalProps = {
+  badge: IBadge
+  group?: string
+}
 
 const Badges = () => {
   const [infoModal, setInfoModal] = useState<string | null>(null)
+  const [achievedBadgeModal, setAchievedBadgeMoal] = useState<AchievedBadgeModalProps | null>(null)
 
   return (
     <>
-      <BadgesList setInfoModal={setInfoModal} />
+      <BadgesList setInfoModal={setInfoModal} setAchievedBadgeMoal={setAchievedBadgeMoal} />
 
-      <Modal isVisible={!!infoModal} onBackdropPress={() => setInfoModal(null)}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.text}>{i18n.t(`badges.explanations.${infoModal}`)}</Text>
-
-          <Button label={i18n.t('actions.exit')} onPress={() => setInfoModal(null)} />
-        </View>
-      </Modal>
+      <InfoModal close={() => setInfoModal(null)} text={infoModal} isVisible={!!infoModal} />
+      <AchievedBadgeModal
+        isVisible={!!achievedBadgeModal}
+        close={() => setAchievedBadgeMoal(null)}
+        badgeData={achievedBadgeModal}
+      />
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  modalContainer,
-  text: {
-    color: COLORS.black,
-    fontFamily: NunitoSans,
-    fontSize: FONT_SIZE.body
-  }
-})
 
 export default Badges
