@@ -42,10 +42,15 @@ const BadgesList: FC<BadgesListProps> = ({ setInfoModal, setAchievedBadgeMoal })
 
             const achieved = userBadgesIds.includes(id)
 
+            let onPress = () => null
+            if (achieved) {
+              onPress = () => setAchievedBadgeMoal({ badge, group: 'share-app' })
+            }
+
             return (
               <TouchableOpacity
                 //   The group like this is provisional
-                onPress={() => setAchievedBadgeMoal({ badge, group: 'share-app' })}
+                onPress={onPress}
                 key={`badge-${name}_${id}`}
                 style={styles.badgeGroup}
               >
