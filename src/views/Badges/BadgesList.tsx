@@ -22,7 +22,7 @@ const BadgesList: FC<BadgesListProps> = ({ setInfoModal, setAchievedBadgeMoal })
   const { localUser } = useContext(UserContext)
 
   const { badges, loading } = useFetchBadges()
-  const { user, loading: userLoading } = useGetSingleUser<IUserWithBadges>(localUser.id, {
+  const { user, loading: userLoading } = useGetSingleUser<IUserWithBadges>(localUser?.id, {
     include: 'badges'
   })
   const userBadgesIds = user?.badges?.map((badge) => badge.id) || []
