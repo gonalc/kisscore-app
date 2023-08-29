@@ -10,7 +10,7 @@ export async function onShareAppLink(username?: string) {
     let url = isAndroid() ? PLAY_STORE_URL : APPLE_STORE_URL
 
     if (username) {
-      url += `?referral=${username}`
+      url += `&referral=${username}`
     }
 
     const content: ShareContent = {
