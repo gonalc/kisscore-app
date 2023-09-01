@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { IUser } from '@_types/users'
-import { updateUser } from '@api/users'
+import UsersApi from '@api/users'
+
+const usersApi = new UsersApi()
 
 const useUpdateUser = () => {
   const [loading, setLoading] = useState(false)
@@ -10,7 +12,7 @@ const useUpdateUser = () => {
     try {
       setLoading(true)
 
-      const result: IUser = await updateUser(id, payload)
+      const result: IUser = await usersApi.update(id, payload)
 
       setUpdated(result)
     } catch (error) {
