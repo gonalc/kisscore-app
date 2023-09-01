@@ -6,6 +6,7 @@ import { StyleSheet, View } from 'react-native'
 import Modal from 'react-native-modal'
 import UserConquists from './UserConquists'
 import Button from '@components/Button'
+import i18n from '@i18n/index'
 
 interface IUserConquistsModalProps {
   isVisible: boolean
@@ -26,7 +27,7 @@ const UserConquistsModal: FC<IUserConquistsModalProps> = ({ isVisible, onClose, 
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button label="Saliendo" onPress={onClose} />
+          <Button label={i18n.t('actions.exit')} onPress={onClose} />
         </View>
       </Loader>
     </Modal>
