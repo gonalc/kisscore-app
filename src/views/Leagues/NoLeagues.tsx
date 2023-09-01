@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'

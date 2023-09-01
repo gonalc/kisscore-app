@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { type FC, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import COLORS from '@utils/colors'
 import boxShadow from '@styles/boxShadow'
