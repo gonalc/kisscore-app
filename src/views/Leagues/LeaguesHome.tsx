@@ -14,7 +14,6 @@ import type { QueryParams } from '@api/types'
 import useGetSingleUser from '@hooks/users/getSingleUser'
 import { UserContext } from '@contexts/userContext'
 import type { IUserWithConquists } from '@_types/users'
-import CreateLeagueButton from './CreateLeagueButton'
 
 export type TLeaguesHomeScreenProp = NativeStackNavigationProp<
   LeaguesStackParamsList,
@@ -48,6 +47,8 @@ const LeaguesHome: FC = () => {
             ListHeaderComponentStyle={styles.listEdgeTop}
             ListFooterComponent={<View />}
             ListFooterComponentStyle={styles.listEdgeBottom}
+            onRefresh={fetch}
+            refreshing={loading}
           />
         </View>
       )
@@ -63,7 +64,6 @@ const LeaguesHome: FC = () => {
         <InvitationsManager fetchLeagues={fetch} />
         <View style={styles.container}>{renderContent()}</View>
         <AddConquist fetch={() => fetchUser(true)} />
-        <CreateLeagueButton fetchLeagues={fetch} />
       </View>
     </Loader>
   )
