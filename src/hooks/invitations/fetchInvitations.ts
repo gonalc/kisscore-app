@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { IInvitation } from '@_types/invitations'
 import { getStoredUser } from '@utils/storage'
-import { getUserInvitations } from '@api/invitations'
+import InvitationsApi from '@api/invitations'
+
+const invitationsApi = new InvitationsApi()
 
 const useFetchInvitations = () => {
   const [invitations, setInvitations] = useState<IInvitation[]>([])
@@ -12,7 +14,7 @@ const useFetchInvitations = () => {
 
     const user = await getStoredUser()
 
-    const result = await getUserInvitations(user.id)
+    const result = await invitationsApi.getUserInvitations(user.id)
 
     setInvitations(result)
     setLoading(false)
