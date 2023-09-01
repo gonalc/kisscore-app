@@ -9,11 +9,11 @@ import { AntDesign, Entypo } from '@expo/vector-icons'
 import { ReactNode, useContext, useState } from 'react'
 import Modal from 'react-native-modal'
 import LanguageController from '@components/LanguageController'
-import { updateUser } from '@api/users'
 import { UserContext } from '@contexts/userContext'
 import i18n from '@i18n/index'
 import { onShareAppLink } from '@utils/share'
 import Constants from 'expo-constants'
+import useUpdateUser from '@hooks/users/updateUser'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
@@ -30,6 +30,7 @@ interface MenuItemsHash {
 const Settings = () => {
   const navigation = useNavigation<THomeScreenProp>()
   const { localUser, setLocalUser } = useContext(UserContext)
+  const { update: updateUser } = useUpdateUser()
 
   const [logoutConfirmation, setLogoutConfirmation] = useState(false)
   const [showLanguageModal, setShowLanguageModal] = useState(false)
