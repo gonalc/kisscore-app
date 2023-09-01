@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import type { IConquist, IConquistToCreate, ICreationConquist } from '@_types/conquists'
 import { getStoredUser } from '@utils/storage'
-import { createConquist } from '@api/conquists'
+import ConquistsApi from '@api/conquists'
+
+const conquistsApi = new ConquistsApi()
 
 const useCreateConquist = () => {
   const [loading, setLoading] = useState(false)
@@ -18,7 +20,7 @@ const useCreateConquist = () => {
         userId: loggedUser.id
       }
 
-      const result = await createConquist(conquistToCreate)
+      const result = await conquistsApi.create(conquistToCreate)
 
       setCreated(result)
     } catch (error) {
