@@ -80,7 +80,8 @@ const en = {
       birthYear: 'Do you know his year of birth?',
       place: 'In which country did it happen?',
       birthYearExplanation: 'Only the year will be taken into account',
-      conquistConfirmation: 'This is your latest conquest.'
+      conquistConfirmation: 'This is your latest conquest.',
+      dontKnowYear: "Don't know it"
     },
     successfulConquist: 'Congratulations, you have scored {{score}} points!'
   },

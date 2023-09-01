@@ -79,7 +79,8 @@ const es = {
       birthYear: '¿Te sabes su año de nacimiento?',
       place: '¿En qué país sucedió?',
       birthYearExplanation: 'Solo se tendrá en cuenta el año',
-      conquistConfirmation: 'Esta es tu última conquista.'
+      conquistConfirmation: 'Esta es tu última conquista.',
+      dontKnowYear: 'No sé el año'
     },
     successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
   },

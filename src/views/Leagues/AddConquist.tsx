@@ -66,9 +66,11 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
   const onSubmit = async () => {
     try {
+      const { birthYear } = creationConquist
+
       await create({
         ...creationConquist,
-        birthYear: Number(creationConquist.birthYear)
+        birthYear: birthYear ? Number(birthYear) : null
       })
       setShowForm(false)
     } catch (error) {
@@ -89,11 +91,15 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
   }
 
   const getNextButtonDisable = () => {
+    const yearDefined = !!creationConquist.birthYear
+    const yearLengthRight = creationConquist.birthYear.length === YEAR_FORMAT.length
+    const yearNextEnabled = !yearDefined || yearLengthRight
+
     switch (formStep) {
       case CreateConquistSteps.COUNTRY:
         return !creationConquist.country
       case CreateConquistSteps.BIRTH_YEAR:
-        return creationConquist.birthYear.length !== YEAR_FORMAT.length
+        return !yearNextEnabled
       case CreateConquistSteps.PLACE:
         return !creationConquist.place
       default:
@@ -111,14 +117,13 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
     }
 
   const renderStep = () => {
+    const { country, birthYear, place } = creationConquist
+
     if (formStep === CreateConquistSteps.COUNTRY) {
       return (
         <View>
           <Text style={styles.label}>{i18n.t('conquists.form.country')}</Text>
-          <CountryInput
-            value={creationConquist.country}
-            onChange={editConquistToCreate('country')}
-          />
+          <CountryInput value={country} onChange={editConquistToCreate('country')} />
         </View>
       )
     }
@@ -129,7 +134,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
           <Text style={styles.label}>{i18n.t('conquists.form.birthYear')}</Text>
           <TextInput
             label=""
-            value={creationConquist.birthYear.toString()}
+            value={birthYear.toString()}
             maxLength={4}
             onChange={editConquistToCreate('birthYear')}
             placeholder={YEAR_FORMAT}
@@ -150,7 +155,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
       return (
         <View>
           <Text style={styles.label}>{i18n.t('conquists.form.place')}</Text>
-          <CountryInput value={creationConquist.place} onChange={editConquistToCreate('place')} />
+          <CountryInput value={place} onChange={editConquistToCreate('place')} />
         </View>
       )
     }
@@ -162,17 +167,17 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.country')}: `}
-            <ConquistCountryItem countryCode={creationConquist.country} />
+            <ConquistCountryItem countryCode={country} />
           </Text>
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.birthYear')}: `}
             <Text style={styles.summaryValue}>
-              {dayjs(creationConquist.birthYear).format(YEAR_FORMAT)}
+              {birthYear ? dayjs(birthYear).format(YEAR_FORMAT) : '-'}
             </Text>
           </Text>
           <Text style={styles.summaryLabel}>
             {`${i18n.t('labels.place')}: `}
-            <ConquistCountryItem countryCode={creationConquist.place} />
+            <ConquistCountryItem countryCode={place} />
           </Text>
         </View>
       )
@@ -181,12 +186,14 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
 
   const getNextButton = () => {
     if (formStep < CreateConquistSteps.SUMMARY) {
+      let buttonLabel = 'actions.continue'
+
+      if (formStep === CreateConquistSteps.BIRTH_YEAR && !creationConquist.birthYear) {
+        buttonLabel = 'conquists.form.dontKnowYear'
+      }
+
       return (
-        <Button
-          label={i18n.t('actions.continue')}
-          onPress={onNext}
-          disabled={getNextButtonDisable()}
-        />
+        <Button label={i18n.t(buttonLabel)} onPress={onNext} disabled={getNextButtonDisable()} />
       )
     }
 
