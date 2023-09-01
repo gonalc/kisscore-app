@@ -1,24 +1,24 @@
-import Button from '@components/Button'
+import type { IBaseLeague } from '@_types/leagues'
 import Loader from '@components/Loader'
-import NegativeButton from '@components/NegativeButton'
-import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import TextInput from '@components/forms/TextInput'
+import useCreateLeague from '@hooks/leagues/createLeague'
+import { Ionicons } from '@expo/vector-icons'
 import i18n from '@i18n/index'
+import COLORS from '@utils/colors'
+import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
+import { MIN_LEAGUE_NAME_LENGTH } from '@utils/forms'
 import { type FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Modal from 'react-native-modal'
-import useCreateLeague from '@hooks/leagues/createLeague'
-import { FONT_SIZE, LARGE_FONT, NunitoSans } from '@utils/fonts'
-import COLORS from '@utils/colors'
-import { MIN_LEAGUE_NAME_LENGTH } from '@utils/forms'
-import type { IBaseLeague } from '@_types/leagues'
+import Button from '@components/Button'
 
-interface CreateLeagueProps {
-  fetchLeagues: () => void
+interface CreateLeagueModalProps {
+  isVisible: boolean
+  close: () => void
+  fetchLeagues?: () => void
 }
 
-const CreateLeague: FC<CreateLeagueProps> = ({ fetchLeagues }) => {
-  const [creatingLeague, setCreatingLeague] = useState(false)
+const CreateLeagueModal: FC<CreateLeagueModalProps> = ({ isVisible, close, fetchLeagues }) => {
   const [leagueName, setLeagueName] = useState('')
 
   const { loading, create } = useCreateLeague()
@@ -30,23 +30,17 @@ const CreateLeague: FC<CreateLeagueProps> = ({ fetchLeagues }) => {
 
     await create(leagueToCreate)
 
-    setCreatingLeague(false)
+    close()
     setLeagueName('')
 
-    fetchLeagues()
+    if (fetchLeagues) {
+      fetchLeagues()
+    }
   }
 
   return (
-    <Loader isLoading={loading}>
-      <View style={styles.buttonContainer}>
-        <NegativeButton
-          label={i18n.t('leagues.createLeague')}
-          onPress={() => setCreatingLeague(true)}
-          icon={<MaterialIcons name="add-box" size={LARGE_FONT} color={COLORS.black} />}
-        />
-      </View>
-
-      <Modal isVisible={creatingLeague} onBackdropPress={() => setCreatingLeague(false)}>
+    <Modal isVisible={isVisible} onBackdropPress={close} coverScreen useNativeDriverForBackdrop>
+      <Loader isLoading={loading}>
         <View style={styles.createLeagueForm}>
           <TextInput
             label={i18n.t('labels.name')}
@@ -63,15 +57,12 @@ const CreateLeague: FC<CreateLeagueProps> = ({ fetchLeagues }) => {
             onPress={onCreate}
           />
         </View>
-      </Modal>
-    </Loader>
+      </Loader>
+    </Modal>
   )
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    marginVertical: 20
-  },
   noLeaguesTitle: {
     fontSize: FONT_SIZE.body,
     fontFamily: NunitoSans,
@@ -86,4 +77,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CreateLeague
+export default CreateLeagueModal

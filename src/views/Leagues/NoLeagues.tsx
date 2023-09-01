@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native'
 import COLORS from '@utils/colors'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import i18n from '@i18n/index'
-import CreateLeague from './CreateLeague'
+import CreateLeagueButton from './CreateLeagueButton'
 
 interface NoLeaguesProps {
   fetchLeagues: () => void
@@ -13,7 +13,7 @@ const NoLeagues: FC<NoLeaguesProps> = ({ fetchLeagues }) => {
   return (
     <>
       <Text style={styles.noLeaguesTitle}>{i18n.t('leagues.noLeagues')}</Text>
-      <CreateLeague fetchLeagues={fetchLeagues} />
+      <CreateLeagueButton fetchLeagues={fetchLeagues} />
     </>
   )
 }
