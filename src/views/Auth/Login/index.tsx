@@ -12,7 +12,7 @@ import { FONT_SIZE, LARGE_FONT, NunitoSans, SMALL_FONT } from '@utils/fonts'
 import { MIN_NAME_LENGTH, passwordIsValid } from '@utils/forms'
 import constants from './constants'
 import reducer, { ILoginAction, ILoginInitialState } from './reducer'
-import { ILoginData, login } from '@api/auth'
+import AuthApi, { type ILoginData } from '@api/auth'
 import { storeSessionData } from '@utils/storage'
 import TextInput from '@components/forms/TextInput'
 import { FontAwesome5 } from '@expo/vector-icons'
@@ -20,6 +20,8 @@ import { UserContext } from '@contexts/userContext'
 import i18n from '@i18n/index'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
+
+const authApi = new AuthApi()
 
 const { MODIFY_FORM, SUBMIT_FORM, LOGIN_ERROR } = constants
 
@@ -72,7 +74,7 @@ function Login() {
     }
 
     try {
-      const { jwt, user } = await login(loginData)
+      const { jwt, user } = await authApi.login(loginData)
 
       await storeSessionData(user, jwt)
       setLocalUser(user)

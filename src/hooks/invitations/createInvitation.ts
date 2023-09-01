@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { IInvitation, TInvitationCreationPayload } from '@_types/invitations'
-import { inviteUser } from '@api/invitations'
+import InvitationsApi from '@api/invitations'
+
+const invitationsApi = new InvitationsApi()
 
 const useCreateInvitation = () => {
   const [loading, setLoading] = useState(false)
@@ -10,7 +12,7 @@ const useCreateInvitation = () => {
     try {
       setLoading(true)
 
-      const result = await inviteUser(data)
+      const result = await invitationsApi.inviteUser(data)
 
       setCreated(result)
     } catch (error) {

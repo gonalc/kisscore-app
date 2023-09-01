@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { ILeagueWithPlayers } from '@_types/leagues'
-import { getUserLeagues } from '@api/leagues'
+import LeaguesApi from '@api/leagues'
 import { getStoredUser } from '@utils/storage'
+
+const leaguesApi = new LeaguesApi()
 
 const useFetchLeagues = () => {
   const [leagues, setLeagues] = useState<ILeagueWithPlayers[]>([])
@@ -12,7 +14,7 @@ const useFetchLeagues = () => {
 
     const user = await getStoredUser()
 
-    const result = await getUserLeagues(user.id)
+    const result = await leaguesApi.getUserLeagues(user.id)
 
     setLeagues(result)
     setLoading(false)
