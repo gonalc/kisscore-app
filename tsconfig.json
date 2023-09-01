@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ESNext",
     "paths": {
       "@views/*": ["src/views/*"],
       "@utils/*": ["src/utils/*"],

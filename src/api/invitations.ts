@@ -1,10 +1,10 @@
 import type { IInvitation, TInvitationCreationPayload } from '@_types/invitations'
 import Api from './apiService'
 
-const api = new Api('invitations')
-
 export async function getUserInvitations(userId: number) {
   try {
+    const api = new Api('invitations')
+
     const path = `?filters[userId]=${userId}`
 
     const data = await api.get<IInvitation[]>(path)
@@ -17,6 +17,8 @@ export async function getUserInvitations(userId: number) {
 
 export async function inviteUser(payload: TInvitationCreationPayload) {
   try {
+    const api = new Api('invitations')
+
     const path = 'invite'
 
     const data = await api.post<IInvitation>({ path, payload })
@@ -29,6 +31,8 @@ export async function inviteUser(payload: TInvitationCreationPayload) {
 
 export async function acceptInvitation(invitation: IInvitation) {
   try {
+    const api = new Api('invitations')
+
     const path = `accept/${invitation.id}`
 
     const data = await api.post({ path, payload: invitation })
@@ -41,6 +45,8 @@ export async function acceptInvitation(invitation: IInvitation) {
 
 export async function rejectInvitation(id: number) {
   try {
+    const api = new Api('invitations')
+
     const data = api.delete(`${id}`)
 
     return data

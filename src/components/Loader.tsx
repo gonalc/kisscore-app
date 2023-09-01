@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import COLORS from '@utils/colors'
 
 interface ILoaderProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   isLoading: boolean
 }
 

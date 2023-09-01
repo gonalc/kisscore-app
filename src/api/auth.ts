@@ -11,10 +11,10 @@ interface ILoginResponse {
   user: IUser
 }
 
-const api = new Api('auth')
-
 export async function signup(payload: ICreationUser, referral?: string) {
   try {
+    const api = new Api('auth')
+
     let path = 'signup'
 
     if (referral) {
@@ -31,6 +31,8 @@ export async function signup(payload: ICreationUser, referral?: string) {
 
 export async function login(payload: ILoginData) {
   try {
+    const api = new Api('auth')
+
     const path = 'login'
 
     const data = await api.post<ILoginResponse>({ path, payload })
@@ -43,6 +45,8 @@ export async function login(payload: ILoginData) {
 
 export async function checkToken(token: string) {
   try {
+    const api = new Api('auth')
+
     const path = 'check'
 
     const data = await api.post<ILoginResponse>({ path, payload: { jwt: token } })
