@@ -11,48 +11,58 @@ interface ILoginResponse {
   user: IUser
 }
 
-export async function signup(payload: ICreationUser, referral?: string) {
-  try {
+class AuthApi {
+  private getApi() {
     const api = new Api('auth')
 
-    let path = 'signup'
+    return api
+  }
 
-    if (referral) {
-      path += `?referral=${referral}`
+  async signup(payload: ICreationUser, referral?: string) {
+    try {
+      const api = this.getApi()
+
+      let path = 'signup'
+
+      if (referral) {
+        path += `?referral=${referral}`
+      }
+
+      const data = await api.post<ILoginResponse>({ path, payload })
+
+      return data
+    } catch (error) {
+      throw Error(error)
     }
+  }
 
-    const data = await api.post<ILoginResponse>({ path, payload })
+  async login(payload: ILoginData) {
+    try {
+      const api = this.getApi()
 
-    return data
-  } catch (error) {
-    throw Error(error)
+      const path = 'login'
+
+      const data = await api.post<ILoginResponse>({ path, payload })
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
+  }
+
+  async checkToken(token: string) {
+    try {
+      const api = this.getApi()
+
+      const path = 'check'
+
+      const data = await api.post<ILoginResponse>({ path, payload: { jwt: token } })
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
   }
 }
 
-export async function login(payload: ILoginData) {
-  try {
-    const api = new Api('auth')
-
-    const path = 'login'
-
-    const data = await api.post<ILoginResponse>({ path, payload })
-
-    return data
-  } catch (error) {
-    throw Error(error)
-  }
-}
-
-export async function checkToken(token: string) {
-  try {
-    const api = new Api('auth')
-
-    const path = 'check'
-
-    const data = await api.post<ILoginResponse>({ path, payload: { jwt: token } })
-
-    return data
-  } catch (error) {
-    throw Error(error)
-  }
-}
+export default AuthApi
