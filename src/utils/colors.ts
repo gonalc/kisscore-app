@@ -14,7 +14,8 @@ const COLORS = {
   white: '#FFFFFF',
   gold: '#FFD700',
   silver: '#C0C0C0',
-  bronze: '#9E4936'
+  bronze: '#9E4936',
+  lightGray: '#F2F2F2'
 }
 
 export type Color = keyof typeof COLORS

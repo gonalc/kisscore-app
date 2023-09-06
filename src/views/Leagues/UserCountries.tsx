@@ -57,7 +57,7 @@ const UserCountries: FC<UserCountriesProps> = ({ conquists }) => {
 
           return (
             <View style={styles.countryItem}>
-              <Hexagon size={40}>
+              <Hexagon size={40} backgroundColor="lightGray">
                 <Text style={styles.text}>{flag}</Text>
               </Hexagon>
               <Text style={styles.text}>{name}</Text>
