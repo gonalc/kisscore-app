@@ -16,7 +16,9 @@ const es = {
     score: 'Puntos',
     countries: 'Países',
     places: 'Lugares',
-    availableLanguages: 'Idiomas disponibles'
+    availableLanguages: 'Idiomas disponibles',
+    conquists: 'Conquistas',
+    conquestCountries: 'Países conquistados'
   },
   actions: {
     create: 'Crear',

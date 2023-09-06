@@ -2,6 +2,7 @@ export const NunitoSans = 'NunitoSans'
 export const NunitoSansBold = 'NunitoSansBold'
 export const PassionOne = 'PassionOne'
 
+export const TINY_FONT = 12
 export const SMALL_FONT = 14
 export const NORMAL_FONT = 18
 export const LARGE_FONT = 24
