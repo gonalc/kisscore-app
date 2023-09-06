@@ -60,14 +60,21 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
       </View>
     )
   }
-  return <View style={styles.container}>{renderContent()}</View>
+  return (
+    <View style={styles.container}>
+      <Text style={[styles.text, styles.grayText, styles.title]}>{i18n.t('labels.conquists')}</Text>
+      <View>{renderContent()}</View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.background,
     padding: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    marginBottom: 40,
+    overflow: 'hidden'
   },
   conquistWrapper: {
     padding: 5,
@@ -115,6 +122,17 @@ const styles = StyleSheet.create({
     fontFamily: NunitoSans,
     fontSize: FONT_SIZE.body,
     color: COLORS.black,
+    textAlign: 'center'
+  },
+  text: {
+    fontFamily: NunitoSans,
+    fontSize: FONT_SIZE.body,
+    color: COLORS.black
+  },
+  grayText: {
+    color: COLORS.gray
+  },
+  title: {
     textAlign: 'center'
   }
 })
