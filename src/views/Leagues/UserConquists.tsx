@@ -6,6 +6,8 @@ import { getCountry, getCountryName } from '@utils/countries'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
 import i18n from '@i18n/index'
+import Hexagon from '@components/Hexagon'
+import { sortByField } from '@utils/sorter'
 
 interface IUserConquistsProps {
   conquists: IConquist[]
@@ -16,7 +18,7 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
     if (conquists?.length) {
       return (
         <FlatList
-          data={conquists}
+          data={conquists.sort(sortByField('score'))}
           renderItem={({ item }) => {
             const { country: countryCode, place: placeCode, score } = item
             const country = getCountry(countryCode)
@@ -24,9 +26,9 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
 
             return (
               <View style={styles.conquistWrapper}>
-                <View style={styles.scoreContainer}>
+                <Hexagon size={40} backgroundColor="blue">
                   <Text style={styles.scoreText}>{score}</Text>
-                </View>
+                </Hexagon>
                 <View style={styles.groupWrapper}>
                   <View style={styles.iconsContainer}>
                     <FontAwesome5 name="user-tag" size={FONT_SIZE.labels} color={COLORS.black} />
@@ -50,6 +52,8 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
             )
           }}
           keyExtractor={(item) => `user-conquist_${item.id}_${item.userId}`}
+          ListFooterComponent={View}
+          ListFooterComponentStyle={{ padding: 20 }}
         />
       )
     }
