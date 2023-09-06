@@ -10,6 +10,7 @@ import { displayNumber } from '@utils/numbers'
 import i18n from '@i18n/index'
 import Hexagon from '@components/Hexagon'
 import UserCountries from './UserCountries'
+import UserPlaces from './UserPlaces'
 
 interface IJumbotronProps {
   user: IUserWithConquists
@@ -29,7 +30,7 @@ const Jumbotron: FC<IJumbotronProps> = ({ user }) => {
       case 'countries':
         return <UserCountries conquists={conquists} />
       case 'places':
-        return <Text>Places data</Text>
+        return <UserPlaces conquists={conquists} />
     }
   }
 

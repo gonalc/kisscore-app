@@ -18,7 +18,8 @@ const es = {
     places: 'Lugares',
     availableLanguages: 'Idiomas disponibles',
     conquists: 'Conquistas',
-    conquestCountries: 'Países conquistados'
+    conquestCountries: 'Países conquistados',
+    visitedPlaces: 'Lugares visitados'
   },
   actions: {
     create: 'Crear',

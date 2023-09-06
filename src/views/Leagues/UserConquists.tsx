@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     color: COLORS.gray
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: 5
   }
 })
 

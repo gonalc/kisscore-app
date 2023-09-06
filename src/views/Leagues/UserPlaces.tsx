@@ -1,36 +1,36 @@
-import { IConquist } from '@_types/conquists'
+import type { IConquist } from '@_types/conquists'
 import Hexagon from '@components/Hexagon'
 import i18n from '@i18n/index'
 import COLORS from '@utils/colors'
 import { getCountry, getCountryName } from '@utils/countries'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
 import { sortByField } from '@utils/sorter'
-import { type FC } from 'react'
+import { FC } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 
-interface UserCountriesProps {
+interface UserPlacesProps {
   conquists: IConquist[]
 }
 
-const UserCountries: FC<UserCountriesProps> = ({ conquists }) => {
-  const getCountriesData = () => {
-    const countriesHash: Record<string, number> = {}
+const UserPlaces: FC<UserPlacesProps> = ({ conquists }) => {
+  const getPlacesData = () => {
+    const placesHash: Record<string, number> = {}
 
     conquists.forEach((conquist) => {
-      const { country } = conquist
+      const { place } = conquist
 
-      if (country in countriesHash) {
-        countriesHash[country] += 1
+      if (place in placesHash) {
+        placesHash[place] += 1
       } else {
-        countriesHash[country] = 1
+        placesHash[place] = 1
       }
     })
 
-    const countriesData = Object.entries(countriesHash)
-      .map(([country, times]) => ({ country, times }))
+    const placesData = Object.entries(placesHash)
+      .map(([place, times]) => ({ place, times }))
       .sort(sortByField('times'))
 
-    return countriesData
+    return placesData
   }
 
   const renderContent = () => {
@@ -42,13 +42,13 @@ const UserCountries: FC<UserCountriesProps> = ({ conquists }) => {
       )
     }
 
-    const countries = getCountriesData()
+    const countries = getPlacesData()
 
     return (
       <FlatList
         data={countries}
         renderItem={({ item }) => {
-          const { country: countryCode, times } = item
+          const { place: countryCode, times } = item
 
           const country = getCountry(countryCode)
 
@@ -65,7 +65,7 @@ const UserCountries: FC<UserCountriesProps> = ({ conquists }) => {
             </View>
           )
         }}
-        keyExtractor={(item) => `country-item-modal-list_${item.country}`}
+        keyExtractor={(item) => `country-item-modal-list_${item.place}`}
         ListFooterComponent={View}
         ListFooterComponentStyle={{ padding: 20 }}
       />
@@ -75,7 +75,7 @@ const UserCountries: FC<UserCountriesProps> = ({ conquists }) => {
   return (
     <View style={styles.container}>
       <Text style={[styles.text, styles.grayText, styles.title]}>
-        {i18n.t('labels.conquestCountries')}
+        {i18n.t('labels.visitedPlaces')}
       </Text>
       <View>{renderContent()}</View>
     </View>
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserCountries
+export default UserPlaces

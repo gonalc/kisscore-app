@@ -19,7 +19,8 @@ const en = {
     places: 'Places',
     availableLanguages: 'Available languages',
     conquists: 'Conquists',
-    conquestCountries: 'Conquest countries'
+    conquestCountries: 'Conquest countries',
+    visitedPlaces: 'Visited places'
   },
   actions: {
     create: 'Create',
