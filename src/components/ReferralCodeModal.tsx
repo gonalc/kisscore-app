@@ -9,6 +9,7 @@ import { Entypo, MaterialIcons } from '@expo/vector-icons'
 import { FONT_SIZE, NORMAL_FONT, NunitoSans } from '@utils/fonts'
 import boxShadow from '@styles/boxShadow'
 import { copyToClipboard } from '@utils/clipboard'
+import { onShare } from '@utils/share'
 
 export interface ReferralCodeModalProps {
   show: boolean
@@ -23,6 +24,10 @@ const ReferralCodeModal: FC<ReferralCodeModalProps> = ({ show, close }) => {
     await copyToClipboard(referralCode)
   }
 
+  const shareCode = async () => {
+    await onShare(referralCode)
+  }
+
   return (
     <Modal isVisible={show} onBackdropPress={close}>
       <View style={styles.container}>
@@ -35,7 +40,7 @@ const ReferralCodeModal: FC<ReferralCodeModalProps> = ({ show, close }) => {
 
         <NegativeButton
           label={i18n.t('actions.share')}
-          onPress={() => null}
+          onPress={shareCode}
           icon={<Entypo name="share" size={NORMAL_FONT} color={COLORS.black} />}
         />
       </View>
