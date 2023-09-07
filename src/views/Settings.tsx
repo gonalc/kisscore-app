@@ -12,6 +12,7 @@ import { onShareAppLink } from '@utils/share'
 import Constants from 'expo-constants'
 import CreateLeagueModal from './Leagues/CreateLeagueModal'
 import LogoutModal from '@components/LogoutModal'
+import ReferralCodeModal from '@components/ReferralCodeModal'
 
 export type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
@@ -31,6 +32,7 @@ const Settings = () => {
   const [logoutConfirmation, setLogoutConfirmation] = useState(false)
   const [showLanguageModal, setShowLanguageModal] = useState(false)
   const [leagueCreationModal, setLeagueCreationModal] = useState(false)
+  const [referralCodeModal, setReferralCodeModal] = useState(false)
 
   const menuItems: MenuItemsHash = {
     // language: {
@@ -42,6 +44,11 @@ const Settings = () => {
       icon: <Ionicons name="trophy" size={NORMAL_FONT} color={COLORS.black} />,
       text: i18n.t('leagues.createLeague'),
       action: () => setLeagueCreationModal(true)
+    },
+    referralCode: {
+      icon: <Entypo name="ticket" size={NORMAL_FONT} color={COLORS.black} />,
+      text: i18n.t('leagues.settings.referralCode'),
+      action: () => setReferralCodeModal(true)
     },
     shareAppLink: {
       icon: <Entypo name="share" size={NORMAL_FONT} color={COLORS.black} />,
@@ -77,6 +84,8 @@ const Settings = () => {
       </View>
 
       <LogoutModal show={logoutConfirmation} close={() => setLogoutConfirmation(false)} />
+
+      <ReferralCodeModal show={referralCodeModal} close={() => setReferralCodeModal(false)} />
 
       <LanguageController
         isVisible={showLanguageModal}

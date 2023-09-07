@@ -19,7 +19,9 @@ const es = {
     availableLanguages: 'Idiomas disponibles',
     conquists: 'Conquistas',
     conquestCountries: 'Países conquistados',
-    visitedPlaces: 'Lugares visitados'
+    visitedPlaces: 'Lugares visitados',
+    referralCode: 'Código de referido',
+    textCopied: 'Copiado al portapapeles'
   },
   actions: {
     create: 'Crear',
@@ -30,7 +32,8 @@ const es = {
     cancel: 'Cancelar',
     continue: 'Continuar',
     logout: 'Cerrar sesión',
-    exit: 'Salir'
+    exit: 'Salir',
+    share: 'Compartir'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -63,7 +66,8 @@ const es = {
     noLeagues: 'No estás dentro de ninguna liga.',
     settings: {
       invitePlayer: 'Invitar jugador',
-      shareLink: 'Compartir link'
+      shareLink: 'Compartir link',
+      referralCode: 'Ver código de referido'
     }
   },
   invitations: {
