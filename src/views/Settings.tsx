@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
-    paddingVertical: 5
+    paddingVertical: 10
   },
   itemText: {
     color: COLORS.black,
