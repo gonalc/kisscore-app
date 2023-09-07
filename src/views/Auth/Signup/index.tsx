@@ -137,7 +137,7 @@ const Signup = () => {
     dispatch({ type: SUBMIT_FORM, payload: formErrors })
 
     if (!hasErrors) {
-      const { name, email, password, country, city, birthdate, username } = state
+      const { name, email, password, country, city, birthdate, username, referralCode } = state
 
       const formData: ICreationUser = {
         name,
@@ -152,7 +152,7 @@ const Signup = () => {
       try {
         const referral = await getInstallationReferral()
 
-        const { jwt, user } = await authApi.signup(formData, referral)
+        const { jwt, user } = await authApi.signup(formData, referralCode || referral)
 
         setLocalUser(user)
 
