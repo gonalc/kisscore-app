@@ -17,6 +17,7 @@ export interface ICreationUser {
 
 export interface IUser extends Omit<ICreationUser, 'password'>, DBBaseItem {
   score: number
+  referralCode: string
   countries: CountryItem['code'][]
   places: CountryItem['code'][]
 }

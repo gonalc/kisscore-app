@@ -30,6 +30,7 @@ import AuthApi from '@api/auth'
 import CountryInput from '@components/forms/CountryInput'
 import { today } from '@utils/dates'
 import type { ISignupInputs, TFormErrors } from '@_types/forms'
+import ReferralCodeInput from '@components/forms/ReferralCodeInput'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 
@@ -57,7 +58,8 @@ const Signup = () => {
     passwordRepeat: '',
     passwordRepeatError: false,
     submitted: false,
-    signupError: false
+    signupError: false,
+    referralCode: ''
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -135,7 +137,7 @@ const Signup = () => {
     dispatch({ type: SUBMIT_FORM, payload: formErrors })
 
     if (!hasErrors) {
-      const { name, email, password, country, city, birthdate, username } = state
+      const { name, email, password, country, city, birthdate, username, referralCode } = state
 
       const formData: ICreationUser = {
         name,
@@ -150,7 +152,7 @@ const Signup = () => {
       try {
         const referral = await getInstallationReferral()
 
-        const { jwt, user } = await authApi.signup(formData, referral)
+        const { jwt, user } = await authApi.signup(formData, referralCode || referral)
 
         setLocalUser(user)
 
@@ -238,6 +240,13 @@ const Signup = () => {
         placeholder: i18n.t('forms.repeatPassword'),
         showError: state.passwordRepeatError,
         errorMessage: 'forms.errors.passwordsMustBeEqual'
+      }
+    },
+    referralCode: {
+      Component: ReferralCodeInput,
+      props: {
+        value: state.referralCode,
+        onChange
       }
     }
   }

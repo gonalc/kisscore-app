@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ToastAndroid, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import COLORS from '@utils/colors'
 import Button from '@components/Button'
 import { FC, useState } from 'react'
@@ -16,6 +16,7 @@ import Loader from '@components/Loader'
 import { isAndroid } from '@utils/platform'
 import TextInput from '@components/forms/TextInput'
 import i18n from '@i18n/index'
+import { addToast } from '@utils/toasts'
 
 enum CreateConquistSteps {
   COUNTRY,
@@ -49,7 +50,7 @@ const AddConquist: FC<IAddConquistProps> = ({ fetch }) => {
     if (created && isAndroid()) {
       const { score } = created
 
-      ToastAndroid.show(i18n.t('conquists.successfulConquist', { score }), ToastAndroid.LONG)
+      addToast(i18n.t('conquists.successfulConquist', { score }))
     }
   }
 
