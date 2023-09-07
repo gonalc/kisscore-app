@@ -18,6 +18,11 @@ export interface ReferralCodeModalProps {
 
 const ReferralCodeModal: FC<ReferralCodeModalProps> = ({ show, close }) => {
   const { localUser } = useContext(UserContext)
+
+  if (!localUser) {
+    return null
+  }
+
   const { referralCode } = localUser
 
   const copyCode = async () => {
