@@ -19,6 +19,7 @@ export interface ISignupState {
   passwordRepeatError: boolean
   submitted: boolean
   signupError: boolean
+  referralCode: string
 }
 
 export interface ISignupAction {

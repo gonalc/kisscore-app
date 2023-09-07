@@ -20,7 +20,9 @@ const en = {
     availableLanguages: 'Available languages',
     conquists: 'Conquists',
     conquestCountries: 'Conquest countries',
-    visitedPlaces: 'Visited places'
+    visitedPlaces: 'Visited places',
+    referralCode: 'Referral code',
+    textCopied: 'Copied to clipboard'
   },
   actions: {
     create: 'Create',
@@ -31,7 +33,8 @@ const en = {
     cancel: 'Cancel',
     continue: 'Continue to',
     logout: 'Log off',
-    exit: 'Exit'
+    exit: 'Exit',
+    share: 'Share'
   },
   forms: {
     emailPlaceholder: 'example@yourmail.com',
@@ -48,6 +51,7 @@ const en = {
     repeatPassword: 'Repeat your password',
     countryNotFound: 'Country not found',
     createLeaguePlaceholder: 'Super Cup',
+    pasteOrTypeCode: 'Paste or type the code',
     errors: {
       length: 'It must have at least {{value}} characters.',
       emailError: 'The email is invalid',
@@ -64,7 +68,8 @@ const en = {
     noLeagues: 'You are not in any league.',
     settings: {
       invitePlayer: 'Invite player',
-      shareLink: 'Share link'
+      shareLink: 'Share link',
+      referralCode: 'See referral code'
     }
   },
   invitations: {

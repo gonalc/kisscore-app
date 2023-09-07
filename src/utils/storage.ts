@@ -30,3 +30,7 @@ export async function storeSessionData(user: IUser, jwt: string) {
   await AsyncStorage.setItem(JWT_STORAGE_KEY, jwt)
   await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
 }
+
+export async function clearAsyncStorage() {
+  await AsyncStorage.clear()
+}
