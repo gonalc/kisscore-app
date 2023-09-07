@@ -7,3 +7,9 @@ export async function copyToClipboard(text: string) {
 
   addToast(i18n.t('labels.textCopied'), 'SHORT')
 }
+
+export async function pasteFromClipboard() {
+  const text = await Clipboard.getStringAsync()
+
+  return text
+}

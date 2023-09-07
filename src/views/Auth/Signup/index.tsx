@@ -30,6 +30,7 @@ import AuthApi from '@api/auth'
 import CountryInput from '@components/forms/CountryInput'
 import { today } from '@utils/dates'
 import type { ISignupInputs, TFormErrors } from '@_types/forms'
+import ReferralCodeInput from '@components/forms/ReferralCodeInput'
 
 type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>
 
@@ -57,7 +58,8 @@ const Signup = () => {
     passwordRepeat: '',
     passwordRepeatError: false,
     submitted: false,
-    signupError: false
+    signupError: false,
+    referralCode: ''
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -238,6 +240,13 @@ const Signup = () => {
         placeholder: i18n.t('forms.repeatPassword'),
         showError: state.passwordRepeatError,
         errorMessage: 'forms.errors.passwordsMustBeEqual'
+      }
+    },
+    referralCode: {
+      Component: ReferralCodeInput,
+      props: {
+        value: state.referralCode,
+        onChange
       }
     }
   }

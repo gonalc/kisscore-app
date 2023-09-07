@@ -51,6 +51,7 @@ const en = {
     repeatPassword: 'Repeat your password',
     countryNotFound: 'Country not found',
     createLeaguePlaceholder: 'Super Cup',
+    pasteOrTypeCode: 'Paste or type the code',
     errors: {
       length: 'It must have at least {{value}} characters.',
       emailError: 'The email is invalid',
