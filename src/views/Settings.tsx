@@ -1,22 +1,19 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../App'
 import COLORS from '@utils/colors'
-import { FONT_SIZE, NORMAL_FONT, NunitoSans, NunitoSansBold } from '@utils/fonts'
+import { FONT_SIZE, NORMAL_FONT, NunitoSans } from '@utils/fonts'
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
 import { type ReactNode, useContext, useState } from 'react'
-import Modal from 'react-native-modal'
 import LanguageController from '@components/LanguageController'
 import { UserContext } from '@contexts/userContext'
 import i18n from '@i18n/index'
 import { onShareAppLink } from '@utils/share'
 import Constants from 'expo-constants'
-import useUpdateUser from '@hooks/users/updateUser'
 import CreateLeagueModal from './Leagues/CreateLeagueModal'
+import LogoutModal from '@components/LogoutModal'
 
-type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
+export type THomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'LeaguesScreens'>
 
 type MenuItem = {
   icon: ReactNode
@@ -29,21 +26,11 @@ interface MenuItemsHash {
 }
 
 const Settings = () => {
-  const navigation = useNavigation<THomeScreenProp>()
-  const { localUser, setLocalUser } = useContext(UserContext)
-  const { update: updateUser } = useUpdateUser()
+  const { localUser } = useContext(UserContext)
 
   const [logoutConfirmation, setLogoutConfirmation] = useState(false)
   const [showLanguageModal, setShowLanguageModal] = useState(false)
   const [leagueCreationModal, setLeagueCreationModal] = useState(false)
-
-  const logout = async () => {
-    await updateUser(localUser.id, { fcmToken: null })
-    setLocalUser(null)
-    await AsyncStorage.clear()
-
-    navigation.navigate('Login')
-  }
 
   const menuItems: MenuItemsHash = {
     // language: {
@@ -89,22 +76,7 @@ const Settings = () => {
         <Text style={styles.version}>v{Constants.manifest?.version}</Text>
       </View>
 
-      <Modal isVisible={logoutConfirmation} onBackdropPress={() => setLogoutConfirmation(false)}>
-        <View style={styles.modalBody}>
-          <Text style={[styles.itemText, styles.centered, styles.bold]}>
-            {i18n.t('logoutConfirmation')}
-          </Text>
-
-          <View style={styles.buttonsRow}>
-            <Pressable style={styles.modalButton} onPress={() => setLogoutConfirmation(false)}>
-              <Text style={styles.itemText}>{i18n.t('actions.cancel')}</Text>
-            </Pressable>
-            <Pressable style={styles.modalButton} onPress={logout}>
-              <Text style={styles.itemText}>{i18n.t('actions.logout')}</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+      <LogoutModal show={logoutConfirmation} close={() => setLogoutConfirmation(false)} />
 
       <LanguageController
         isVisible={showLanguageModal}
@@ -142,25 +114,6 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontSize: FONT_SIZE.body,
     fontFamily: NunitoSans
-  },
-  modalBody: {
-    borderRadius: 5,
-    backgroundColor: COLORS.background,
-    padding: 10
-  },
-  centered: {
-    textAlign: 'center'
-  },
-  buttonsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  modalButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 10
-  },
-  bold: {
-    fontFamily: NunitoSansBold
   },
   version: {
     fontFamily: NunitoSans,
