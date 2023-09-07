@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { IInvitation } from '@_types/invitations'
-import { acceptInvitation, rejectInvitation } from '@api/invitations'
+import InvitationsApi from '@api/invitations'
 
 type TActionIvitation = 'accept' | 'reject'
+
+const invitationsApi = new InvitationsApi()
 
 const useConfirmInvitation = () => {
   const [loading, setLoading] = useState(false)
@@ -12,9 +14,9 @@ const useConfirmInvitation = () => {
       setLoading(true)
 
       if (action === 'accept') {
-        await acceptInvitation(data)
+        await invitationsApi.acceptInvitation(data)
       } else {
-        await rejectInvitation(data.id)
+        await invitationsApi.rejectInvitation(data.id)
       }
     } catch (error) {
       throw Error(error)

@@ -2,7 +2,7 @@ import type { DBBaseItem } from '.'
 
 export interface ICreationConquist {
   country: string
-  birthYear: number
+  birthYear: number | null
   place: string
 }
 

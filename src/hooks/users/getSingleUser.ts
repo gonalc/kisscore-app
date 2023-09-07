@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { IUser } from '@_types/users'
-import { fetchUser } from '@api/users'
+import UsersApi from '@api/users'
 import type { QueryParams } from '@api/types'
+
+const usersApi = new UsersApi()
 
 const useGetSingleUser = <T extends IUser>(userId: number, params: QueryParams = {}) => {
   const [loading, setLoading] = useState(false)
@@ -12,7 +14,7 @@ const useGetSingleUser = <T extends IUser>(userId: number, params: QueryParams =
       setLoading(true)
     }
 
-    const result = await fetchUser<T>(userId, params)
+    const result = await usersApi.fetch<T>(userId, params)
 
     setUser(result)
 

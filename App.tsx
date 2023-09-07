@@ -13,7 +13,7 @@ import HeaderBackground from './src/components/HeaderBackground'
 import COLORS from './src/utils/colors'
 import { useEffect, useState } from 'react'
 import { getJWTToken, storeSessionData } from './src/utils/storage'
-import { checkToken } from './src/api/auth'
+import AuthApi from './src/api/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import LeaguesTabs from './src/views/LeaguesTabs'
 import { UserContext } from './src/contexts/userContext'
@@ -27,6 +27,8 @@ export type RootStackParamList = {
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
+
+const authApi = new AuthApi()
 
 function App() {
   const [fontsLoaded] = useFonts({
@@ -47,7 +49,7 @@ function App() {
         const token = await getJWTToken()
 
         if (token) {
-          const { jwt, user } = await checkToken(token)
+          const { jwt, user } = await authApi.checkToken(token)
           setLocalUser(user)
           await storeSessionData(user, jwt)
           setInitialScreen('LeaguesScreens')

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { getSingleLeague } from '@api/leagues'
+import LeaguesApi from '@api/leagues'
 import { ILeagueWithPlayers } from '@_types/leagues'
+
+const leaguesApi = new LeaguesApi()
 
 const useFetchSingleLeague = (leagueId: number) => {
   const [league, setLeague] = useState<ILeagueWithPlayers>()
@@ -9,7 +11,7 @@ const useFetchSingleLeague = (leagueId: number) => {
   const fetch = async () => {
     setLoading(true)
 
-    const result = await getSingleLeague(leagueId)
+    const result = await leaguesApi.getSingle(leagueId)
 
     setLeague(result)
     setLoading(false)

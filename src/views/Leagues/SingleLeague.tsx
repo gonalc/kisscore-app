@@ -52,7 +52,9 @@ const SingleLeague: FC<ISingleLeagueProps> = ({ route }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1
+  },
   title: {
     fontFamily: NunitoSans,
     fontSize: FONT_SIZE.header,

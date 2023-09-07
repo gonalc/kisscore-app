@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { ILeagueWithPlayers } from '@_types/leagues'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import COLORS from '@utils/colors'

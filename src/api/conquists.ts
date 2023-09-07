@@ -1,14 +1,24 @@
 import type { IConquist, IConquistToCreate } from '@_types/conquists'
 import Api from './apiService'
 
-const api = new Api('conquists')
+class ConquistsApi {
+  private getApi() {
+    const api = new Api('conquists')
 
-export async function createConquist(payload: IConquistToCreate) {
-  try {
-    const data = await api.post<IConquist>({ payload })
+    return api
+  }
 
-    return data
-  } catch (error) {
-    throw Error(error)
+  async create(payload: IConquistToCreate) {
+    try {
+      const api = this.getApi()
+
+      const data = await api.post<IConquist>({ payload })
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
   }
 }
+
+export default ConquistsApi

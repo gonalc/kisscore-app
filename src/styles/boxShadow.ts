@@ -7,7 +7,7 @@ const boxShadow = {
     height: 20
   },
   shadowOpacity: 0.05,
-  shadowRadius: 15,
+  shadowRadius: 3.84,
   elevation: 10
 }
 

@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import type { IBaseLeague, ILeague, ILeagueToCreate } from '@_types/leagues'
-import { createLeague } from '@api/leagues'
+import LeaguesApi from '@api/leagues'
 import { getStoredUser } from '@utils/storage'
+
+const leaguesApi = new LeaguesApi()
 
 const useCreateLeague = () => {
   const [loading, setLoading] = useState(false)
@@ -20,7 +22,7 @@ const useCreateLeague = () => {
         }
       }
 
-      const result = await createLeague(leagueToCreate)
+      const result = await leaguesApi.create(leagueToCreate)
 
       setCreated(result)
     } catch (error) {

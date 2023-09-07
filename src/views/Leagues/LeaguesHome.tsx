@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { type FC, useContext } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import COLORS from '@utils/colors'
 import useFetchLeagues from '@hooks/leagues/fetchLeagues'
@@ -47,6 +47,8 @@ const LeaguesHome: FC = () => {
             ListHeaderComponentStyle={styles.listEdgeTop}
             ListFooterComponent={<View />}
             ListFooterComponentStyle={styles.listEdgeBottom}
+            onRefresh={fetch}
+            refreshing={loading}
           />
         </View>
       )

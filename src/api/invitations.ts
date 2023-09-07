@@ -1,50 +1,66 @@
 import type { IInvitation, TInvitationCreationPayload } from '@_types/invitations'
 import Api from './apiService'
 
-const api = new Api('invitations')
+class InvitationsApi {
+  private getApi() {
+    const api = new Api('invitations')
 
-export async function getUserInvitations(userId: number) {
-  try {
-    const path = `?filters[userId]=${userId}`
+    return api
+  }
 
-    const data = await api.get<IInvitation[]>(path)
+  async getUserInvitations(userId: number) {
+    try {
+      const api = this.getApi()
 
-    return data
-  } catch (error) {
-    throw Error(error)
+      const path = `?filters[userId]=${userId}`
+
+      const data = await api.get<IInvitation[]>(path)
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
+  }
+
+  async inviteUser(payload: TInvitationCreationPayload) {
+    try {
+      const api = this.getApi()
+
+      const path = 'invite'
+
+      const data = await api.post<IInvitation>({ path, payload })
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
+  }
+
+  async acceptInvitation(invitation: IInvitation) {
+    try {
+      const api = this.getApi()
+
+      const path = `accept/${invitation.id}`
+
+      const data = await api.post({ path, payload: invitation })
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
+  }
+
+  async rejectInvitation(id: number) {
+    try {
+      const api = this.getApi()
+
+      const data = api.delete(`${id}`)
+
+      return data
+    } catch (error) {
+      throw Error(error)
+    }
   }
 }
 
-export async function inviteUser(payload: TInvitationCreationPayload) {
-  try {
-    const path = 'invite'
-
-    const data = await api.post<IInvitation>({ path, payload })
-
-    return data
-  } catch (error) {
-    throw Error(error)
-  }
-}
-
-export async function acceptInvitation(invitation: IInvitation) {
-  try {
-    const path = `accept/${invitation.id}`
-
-    const data = await api.post({ path, payload: invitation })
-
-    return data
-  } catch (error) {
-    throw Error(error)
-  }
-}
-
-export async function rejectInvitation(id: number) {
-  try {
-    const data = api.delete(`${id}`)
-
-    return data
-  } catch (error) {
-    throw Error(error)
-  }
-}
+export default InvitationsApi

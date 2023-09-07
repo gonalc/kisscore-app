@@ -16,7 +16,12 @@ const es = {
     score: 'Puntos',
     countries: 'Países',
     places: 'Lugares',
-    availableLanguages: 'Idiomas disponibles'
+    availableLanguages: 'Idiomas disponibles',
+    conquists: 'Conquistas',
+    conquestCountries: 'Países conquistados',
+    visitedPlaces: 'Lugares visitados',
+    referralCode: 'Código de referido',
+    textCopied: 'Copiado al portapapeles'
   },
   actions: {
     create: 'Crear',
@@ -27,7 +32,8 @@ const es = {
     cancel: 'Cancelar',
     continue: 'Continuar',
     logout: 'Cerrar sesión',
-    exit: 'Salir'
+    exit: 'Salir',
+    share: 'Compartir'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -44,6 +50,7 @@ const es = {
     repeatPassword: 'Repite tu contraseña',
     countryNotFound: 'País no encontrado',
     createLeaguePlaceholder: 'Súper Copa',
+    pasteOrTypeCode: 'Pega o escribe el código',
     errors: {
       length: 'Tiene que tener al menos {{value}} caracteres.',
       emailError: 'El email no es válido',
@@ -60,7 +67,8 @@ const es = {
     noLeagues: 'No estás dentro de ninguna liga.',
     settings: {
       invitePlayer: 'Invitar jugador',
-      shareLink: 'Compartir link'
+      shareLink: 'Compartir link',
+      referralCode: 'Ver código de referido'
     }
   },
   invitations: {
@@ -79,7 +87,8 @@ const es = {
       birthYear: '¿Te sabes su año de nacimiento?',
       place: '¿En qué país sucedió?',
       birthYearExplanation: 'Solo se tendrá en cuenta el año',
-      conquistConfirmation: 'Esta es tu última conquista.'
+      conquistConfirmation: 'Esta es tu última conquista.',
+      dontKnowYear: 'No sé el año'
     },
     successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
   },
