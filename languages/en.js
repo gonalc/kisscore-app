@@ -104,20 +104,44 @@ const en = {
   badges: {
     name: {
       'share-app-1': '1 Person',
-      'share-app-5': '5 Persons',
-      'share-app-10': '10 Persons'
+      'share-app-5': '5 People',
+      'share-app-10': '10 People',
+      'conquist-1': '1 Conquest',
+      'conquist-5': '5 Conquests',
+      'conquist-10': '10 Conquests',
+      'conquist-20': '20 Conquest',
+      'conquist-50': '50 Conquests',
+      'conquist-100': '100 Conquests',
+      'country-1': '1 Country',
+      'country-5': '5 Countries',
+      'country-10': '10 Countries',
+      'country-20': '20 Countries',
+      'country-50': '50 Countries',
+      'country-100': '100 Countries',
+      'place-1': '1 Place',
+      'place-5': '5 Places',
+      'place-10': '10 Locations',
+      'place-20': '20 Locations',
+      'place-50': '50 Places',
+      'place-100': '100 Places'
     },
     groups: {
-      'share-app': 'Spread the word'
+      'share-app': 'Spread the word',
+      country: 'Cross out countries',
+      conquist: 'Make conquests',
+      place: 'Discover places'
     },
     explanations: {
       'share-app':
-        'Get badges for people who download the app with your link. You can share the app from settings or from within a league, when you invite a player.'
+        'Get badges for people who register in the app with your code. You can share the app from settings or from within a league, when you invite a player.',
+      country: 'Earn badges by discovering new nationalities of the people you hook up with.',
+      place: 'Get badges by hooking up with someone in new countries.',
+      conquist: 'Earn badges by making out with people.'
     },
     celebrations: {
       'share-app-1': 'Congratulations! You have shared Kisscore with 1 person.',
-      'share-app-5': 'Congratulations! You have shared your Kisscore with 5 people.',
-      'share-app-10': 'Congratulations! You have shared your Kisscore with 10 people.'
+      'share-app-5': 'Congratulations! You have shared Kisscore with 5 people.',
+      'share-app-10': 'Congratulations! You have shared Kisscore with 10 people.'
     }
   }
 }

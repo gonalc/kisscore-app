@@ -104,19 +104,44 @@ const es = {
     name: {
       'share-app-1': '1 Persona',
       'share-app-5': '5 Personas',
-      'share-app-10': '10 Personas'
+      'share-app-10': '10 Personas',
+      'conquist-1': '1 Conquista',
+      'conquist-5': '5 Conquistas',
+      'conquist-10': '10 Conquistas',
+      'conquist-20': '20 Conquista',
+      'conquist-50': '50 Conquistas',
+      'conquist-100': '100 Conquistas',
+      'country-1': '1 País',
+      'country-5': '5 Países',
+      'country-10': '10 Países',
+      'country-20': '20 Países',
+      'country-50': '50 Países',
+      'country-100': '100 Países',
+      'place-1': '1 Lugar',
+      'place-5': '5 Lugares',
+      'place-10': '10 Lugares',
+      'place-20': '20 Lugares',
+      'place-50': '50 Lugares',
+      'place-100': '100 Lugares'
     },
     groups: {
-      'share-app': 'Difunde la palabra'
+      'share-app': 'Difunde la palabra',
+      country: 'Tacha países',
+      conquist: 'Haz conquistas',
+      place: 'Descubre lugares'
     },
     explanations: {
       'share-app':
-        'Consigue insignias por la gente que se descarga la app con tu link. Puedes compartir la app desde ajustes o desde dentro de una liga, cuando vas a invitar a un jugador.'
+        'Consigue insignias por la gente que se registra en la app con tu código. Puedes compartir la app desde ajustes o desde dentro de una liga, cuando vas a invitar a un jugador.',
+      country:
+        'Consigue insignias descubriendo nacionalidades nuevas de la gente con la que te lías.',
+      place: 'Consigue insignias liándote con alguien en países nuevos.',
+      conquist: 'Consigue insignias liándote con gente.'
     },
     celebrations: {
       'share-app-1': '¡Enhorabuena! Has compartido Kisscore con 1 persona.',
-      'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 persona.',
-      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 persona.'
+      'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 personas.',
+      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 personas.'
     }
   }
 }

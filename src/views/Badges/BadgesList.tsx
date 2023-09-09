@@ -4,7 +4,7 @@ import useFetchBadges from '@hooks/badges/fetchBadges'
 import useGetSingleUser from '@hooks/users/getSingleUser'
 import { useContext, type FC } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Text } from 'react-native'
 import i18n from '@i18n/index'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
@@ -12,6 +12,7 @@ import COLORS from '@utils/colors'
 import Loader from '@components/Loader'
 import type { AchievedBadgeModalProps } from '.'
 import Badge from './Badge'
+import { badgesOrderGroups, groupBadges } from '@utils/badges'
 
 interface BadgesListProps {
   setInfoModal: (group: string) => void
@@ -27,41 +28,59 @@ const BadgesList: FC<BadgesListProps> = ({ setInfoModal, setAchievedBadgeMoal })
   })
   const userBadgesIds = user?.badges?.map((badge) => badge.id) || []
 
+  const groupedBadges = groupBadges(badges)
+
   return (
     <Loader isLoading={loading || userLoading}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => setInfoModal('share-app')}>
-          <Text style={styles.groupLabel}>
-            {i18n.t('badges.groups.share-app')}{' '}
-            <Ionicons name="information-circle-outline" size={FONT_SIZE.body} color={COLORS.blue} />
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.badgesContainer}>
-          {badges.map((badge) => {
-            const { name, id } = badge
+      <ScrollView style={styles.container}>
+        {badgesOrderGroups.map((groupKey) => {
+          const badgesList = groupedBadges[groupKey]
 
-            const achieved = userBadgesIds.includes(id)
+          if (!badgesList?.length) {
+            return null
+          }
 
-            let onPress = () => null
-            if (achieved) {
-              onPress = () => setAchievedBadgeMoal({ badge, group: 'share-app' })
-            }
-
-            return (
-              <TouchableOpacity
-                //   The group like this is provisional
-                onPress={onPress}
-                key={`badge-${name}_${id}`}
-                style={styles.badgeGroup}
-              >
-                <Badge badge={badge} achieved={achieved} />
-
-                <Text style={styles.badgeName}>{i18n.t(`badges.name.${name}`)}</Text>
+          return (
+            <View key={`group-badges_${groupKey}`} style={styles.badgeGroupContainer}>
+              <TouchableOpacity onPress={() => setInfoModal(groupKey)}>
+                <Text style={styles.groupLabel}>
+                  {i18n.t(`badges.groups.${groupKey}`)}{' '}
+                  <Ionicons
+                    name="information-circle-outline"
+                    size={FONT_SIZE.body}
+                    color={COLORS.blue}
+                  />
+                </Text>
               </TouchableOpacity>
-            )
-          })}
-        </View>
-      </View>
+              <View style={styles.badgesContainer}>
+                {badgesList.map((badge) => {
+                  const { name, id } = badge
+
+                  const achieved = userBadgesIds.includes(id)
+
+                  let onPress = () => null
+                  if (achieved) {
+                    onPress = () => setAchievedBadgeMoal({ badge, group: groupKey })
+                  }
+
+                  return (
+                    <TouchableOpacity
+                      //   The group like this is provisional
+                      onPress={onPress}
+                      key={`badge-${name}_${id}`}
+                      style={styles.badgeGroup}
+                    >
+                      <Badge badge={badge} achieved={achieved} />
+
+                      <Text style={styles.badgeName}>{i18n.t(`badges.name.${name}`)}</Text>
+                    </TouchableOpacity>
+                  )
+                })}
+              </View>
+            </View>
+          )
+        })}
+      </ScrollView>
     </Loader>
   )
 }
@@ -78,15 +97,22 @@ const styles = StyleSheet.create({
   badgesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 10
+    paddingVertical: 10,
+    flexWrap: 'wrap'
+  },
+  badgeGroupContainer: {
+    marginBottom: 20
   },
   badgeGroup: {
-    alignItems: 'center'
+    alignItems: 'center',
+    flexBasis: '30%',
+    marginVertical: 10
   },
   badgeName: {
     color: COLORS.gray,
     fontFamily: NunitoSans,
-    fontSize: FONT_SIZE.body
+    fontSize: FONT_SIZE.labels,
+    textAlign: 'center'
   }
 })
 
