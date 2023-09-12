@@ -141,7 +141,25 @@ const es = {
     celebrations: {
       'share-app-1': '¡Enhorabuena! Has compartido Kisscore con 1 persona.',
       'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 personas.',
-      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 personas.'
+      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 personas.',
+      'country-1': '¡Enhorabuena! Has tachado un país.',
+      'country-5': '¡Enhorabuena! Has tachado 5 países.',
+      'country-10': '¡Enhorabuena! Has tachado 10 países.',
+      'country-20': '¡Enhorabuena! Has tachado 20 países.',
+      'country-50': '¡Enhorabuena! Has tachado 50 países.',
+      'country-100': '¡Enhorabuena! Has tachado 100 países.',
+      'conquist-1': '¡Enhorabuena! Has hecho una conquista.',
+      'conquist-5': '¡Enhorabuena! Has hecho 5 conquistas.',
+      'conquist-10': '¡Enhorabuena! Has hecho 10 conquistas.',
+      'conquist-20': '¡Enhorabuena! Has hecho 20 conquistas.',
+      'conquist-50': '¡Enhorabuena! Has hecho 50 conquistas.',
+      'conquist-100': '¡Enhorabuena! Has hecho 100 conquistas.',
+      'place-1': '¡Enhorabuena! Has visitado un lugar.',
+      'place-5': '¡Enhorabuena! Has visitado 5 lugares.',
+      'place-10': '¡Enhorabuena! Has visitado 10 lugares.',
+      'place-20': '¡Enhorabuena! Has visitado 20 lugares.',
+      'place-50': '¡Enhorabuena! Has visitado 50 lugares.',
+      'place-100': '¡Enhorabuena! Has visitado 100 lugares.'
     }
   }
 }
