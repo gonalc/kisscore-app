@@ -34,7 +34,8 @@ const en = {
     continue: 'Continue to',
     logout: 'Log off',
     exit: 'Exit',
-    share: 'Share'
+    share: 'Share',
+    delete: 'Delete'
   },
   forms: {
     emailPlaceholder: 'example@yourmail.com',
@@ -91,7 +92,8 @@ const en = {
       conquistConfirmation: 'This is your latest conquest.',
       dontKnowYear: "Don't know it"
     },
-    successfulConquist: 'Congratulations, you have scored {{score}} points!'
+    successfulConquist: 'Congratulations, you have scored {{score}} points!',
+    deleteConfirmation: 'You about to delete this conquist. Are you sure?'
   },
   settings: {
     title: 'Settings',

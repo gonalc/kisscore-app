@@ -1,54 +1,30 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import COLORS from '@utils/colors'
-import { IConquist } from '@_types/conquists'
-import { type FC } from 'react'
-import { getCountry, getCountryName } from '@utils/countries'
+import type { IConquist } from '@_types/conquists'
+import { useState, type FC } from 'react'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
 import i18n from '@i18n/index'
-import Hexagon from '@components/Hexagon'
 import { sortByField } from '@utils/sorter'
+import DeleteConquistModal from './DeleteConquistModal'
+import ConquistDisplay from './ConquistDisplay'
 
 interface IUserConquistsProps {
   conquists: IConquist[]
 }
 
 const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
+  const [selectedConquist, setSelectedConquist] = useState<IConquist | null>(null)
+
   const renderContent = () => {
     if (conquists?.length) {
       return (
         <FlatList
           data={conquists.sort(sortByField('score'))}
           renderItem={({ item }) => {
-            const { country: countryCode, place: placeCode, score } = item
-            const country = getCountry(countryCode)
-            const place = getCountry(placeCode)
-
             return (
-              <View style={styles.conquistWrapper}>
-                <Hexagon size={40} backgroundColor="blue">
-                  <Text style={styles.scoreText}>{score}</Text>
-                </Hexagon>
-                <View style={styles.groupWrapper}>
-                  <View style={styles.iconsContainer}>
-                    <FontAwesome5 name="user-tag" size={FONT_SIZE.labels} color={COLORS.black} />
-                    <Text style={styles.flag}>{`${country.flag}`}</Text>
-                  </View>
-                  <Text style={styles.countryName}>{getCountryName(country.name)}</Text>
-                </View>
-
-                <View style={styles.groupWrapper}>
-                  <View style={styles.iconsContainer}>
-                    <Ionicons
-                      name="ios-location-sharp"
-                      size={FONT_SIZE.labels}
-                      color={COLORS.black}
-                    />
-                    <Text style={styles.flag}>{`${place.flag}`}</Text>
-                  </View>
-                  <Text style={styles.countryName}>{getCountryName(place.name)}</Text>
-                </View>
-              </View>
+              <TouchableOpacity onLongPress={() => setSelectedConquist(item)}>
+                <ConquistDisplay item={item} />
+              </TouchableOpacity>
             )
           }}
           keyExtractor={(item) => `user-conquist_${item.id}_${item.userId}`}
@@ -68,6 +44,7 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
     <View style={styles.container}>
       <Text style={[styles.text, styles.grayText, styles.title]}>{i18n.t('labels.conquists')}</Text>
       <View>{renderContent()}</View>
+      <DeleteConquistModal item={selectedConquist} close={() => setSelectedConquist(null)} />
     </View>
   )
 }
@@ -80,15 +57,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     overflow: 'hidden'
   },
-  conquistWrapper: {
-    padding: 5,
-    backgroundColor: COLORS.white,
-    borderRadius: 5,
-    marginVertical: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10
-  },
   scoreContainer: {
     backgroundColor: COLORS.blue,
     padding: 5,
@@ -96,32 +64,6 @@ const styles = StyleSheet.create({
     minWidth: 40,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  scoreText: {
-    fontFamily: NunitoSans,
-    color: COLORS.white,
-    fontSize: FONT_SIZE.body,
-    textAlign: 'center'
-  },
-  flag: {
-    fontSize: FONT_SIZE.body
-  },
-  groupWrapper: {
-    flexGrow: 1,
-    alignItems: 'center',
-    maxWidth: '40%'
-  },
-  iconsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    gap: 10
-  },
-  countryName: {
-    fontFamily: NunitoSans,
-    color: COLORS.black,
-    fontSize: FONT_SIZE.body,
-    textAlign: 'center'
   },
   noConquistsText: {
     fontFamily: NunitoSans,
