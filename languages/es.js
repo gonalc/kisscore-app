@@ -33,7 +33,8 @@ const es = {
     continue: 'Continuar',
     logout: 'Cerrar sesión',
     exit: 'Salir',
-    share: 'Compartir'
+    share: 'Compartir',
+    delete: 'Borrar'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -59,7 +60,8 @@ const es = {
       passwordsMustBeEqual: 'Las contraseñas deben coincidir.',
       signupError:
         'Hubo un problema al registrar el usuario. Puede que ese email o el nombre de usuario ya existan. Vuelve a probar más tarde.',
-      loginError: 'Las credenciales no son correctas.'
+      loginError: 'Las credenciales no son correctas.',
+      genericError: 'Hubo un error. Vuelve a intentarlo más tarde.'
     }
   },
   leagues: {
@@ -90,7 +92,8 @@ const es = {
       conquistConfirmation: 'Esta es tu última conquista.',
       dontKnowYear: 'No sé el año'
     },
-    successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
+    successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!',
+    deleteConfirmation: 'Vas a borrar esta conquista, ¿es correcto?'
   },
   settings: {
     title: 'Ajustes',

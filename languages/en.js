@@ -34,7 +34,8 @@ const en = {
     continue: 'Continue to',
     logout: 'Log off',
     exit: 'Exit',
-    share: 'Share'
+    share: 'Share',
+    delete: 'Delete'
   },
   forms: {
     emailPlaceholder: 'example@yourmail.com',
@@ -60,7 +61,8 @@ const en = {
       passwordsMustBeEqual: 'Passwords must match.',
       signupError:
         'There was a problem registering the user. That email or username may already exist. Please try again later.',
-      loginError: 'The credentials are not correct.'
+      loginError: 'The credentials are not correct.',
+      genericError: 'There was something wrong. Try again later.'
     }
   },
   leagues: {
@@ -91,7 +93,8 @@ const en = {
       conquistConfirmation: 'This is your latest conquest.',
       dontKnowYear: "Don't know it"
     },
-    successfulConquist: 'Congratulations, you have scored {{score}} points!'
+    successfulConquist: 'Congratulations, you have scored {{score}} points!',
+    deleteConfirmation: 'You about to delete this conquist. Are you sure?'
   },
   settings: {
     title: 'Settings',

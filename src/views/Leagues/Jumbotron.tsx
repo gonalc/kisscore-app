@@ -14,11 +14,12 @@ import UserPlaces from './UserPlaces'
 
 interface IJumbotronProps {
   user: IUserWithConquists
+  refetchUser: () => void
 }
 
 type ModalType = 'conquists' | 'countries' | 'places'
 
-const Jumbotron: FC<IJumbotronProps> = ({ user }) => {
+const Jumbotron: FC<IJumbotronProps> = ({ user, refetchUser }) => {
   const { countries = [], places = [], conquists = [] } = user || {}
 
   const [modalToShow, setModalToShow] = useState<ModalType | null>(null)
@@ -26,7 +27,7 @@ const Jumbotron: FC<IJumbotronProps> = ({ user }) => {
   const getModalComponent = () => {
     switch (modalToShow) {
       case 'conquists':
-        return <UserConquists conquists={conquists} />
+        return <UserConquists conquists={conquists} refetchUser={refetchUser} />
       case 'countries':
         return <UserCountries conquists={conquists} />
       case 'places':
