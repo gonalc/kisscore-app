@@ -15,7 +15,11 @@ interface IUserConquistsModalProps {
 }
 
 const UserConquistsModal: FC<IUserConquistsModalProps> = ({ isVisible, onClose, playerId }) => {
-  const { loading, user } = useGetSingleUser<IUserWithConquists>(playerId, {
+  const {
+    loading,
+    user,
+    fetch: fetchUser
+  } = useGetSingleUser<IUserWithConquists>(playerId, {
     include: 'conquists'
   })
 
@@ -23,7 +27,7 @@ const UserConquistsModal: FC<IUserConquistsModalProps> = ({ isVisible, onClose, 
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
       <Loader isLoading={loading}>
         <View style={styles.conquistsWrapper}>
-          <UserConquists conquists={user?.conquists} />
+          <UserConquists conquists={user?.conquists} refetchUser={fetchUser} />
         </View>
 
         <View style={styles.buttonWrapper}>

@@ -10,9 +10,10 @@ import ConquistDisplay from './ConquistDisplay'
 
 interface IUserConquistsProps {
   conquists: IConquist[]
+  refetchUser: () => void
 }
 
-const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
+const UserConquists: FC<IUserConquistsProps> = ({ conquists = [], refetchUser }) => {
   const [selectedConquist, setSelectedConquist] = useState<IConquist | null>(null)
 
   const renderContent = () => {
@@ -44,7 +45,11 @@ const UserConquists: FC<IUserConquistsProps> = ({ conquists = [] }) => {
     <View style={styles.container}>
       <Text style={[styles.text, styles.grayText, styles.title]}>{i18n.t('labels.conquists')}</Text>
       <View>{renderContent()}</View>
-      <DeleteConquistModal item={selectedConquist} close={() => setSelectedConquist(null)} />
+      <DeleteConquistModal
+        item={selectedConquist}
+        close={() => setSelectedConquist(null)}
+        refetchUser={refetchUser}
+      />
     </View>
   )
 }

@@ -61,7 +61,8 @@ const en = {
       passwordsMustBeEqual: 'Passwords must match.',
       signupError:
         'There was a problem registering the user. That email or username may already exist. Please try again later.',
-      loginError: 'The credentials are not correct.'
+      loginError: 'The credentials are not correct.',
+      genericError: 'There was something wrong. Try again later.'
     }
   },
   leagues: {

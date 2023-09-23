@@ -60,7 +60,8 @@ const es = {
       passwordsMustBeEqual: 'Las contraseñas deben coincidir.',
       signupError:
         'Hubo un problema al registrar el usuario. Puede que ese email o el nombre de usuario ya existan. Vuelve a probar más tarde.',
-      loginError: 'Las credenciales no son correctas.'
+      loginError: 'Las credenciales no son correctas.',
+      genericError: 'Hubo un error. Vuelve a intentarlo más tarde.'
     }
   },
   leagues: {
