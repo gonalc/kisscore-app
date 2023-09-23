@@ -1,5 +1,5 @@
 import Hexagon from '@components/Hexagon'
-import type { FC } from 'react'
+import { memo, type FC } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
 import { FONT_SIZE, NunitoSans } from '@utils/fonts'
@@ -16,10 +16,20 @@ const ConquistDisplay: FC<ConquistDisplayProps> = ({ item }) => {
   const country = getCountry(countryCode)
   const place = getCountry(placeCode)
 
+  const getScoreStyles = () => {
+    const scoreLength = score.toString().length
+
+    if (scoreLength > 3) {
+      return [styles.scoreText, styles.smallText]
+    }
+
+    return styles.scoreText
+  }
+
   return (
     <View style={styles.conquistWrapper}>
       <Hexagon size={40} backgroundColor="blue">
-        <Text style={styles.scoreText}>{score}</Text>
+        <Text style={getScoreStyles()}>{score}</Text>
       </Hexagon>
       <View style={styles.groupWrapper}>
         <View style={styles.iconsContainer}>
@@ -56,6 +66,9 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.body,
     textAlign: 'center'
   },
+  smallText: {
+    fontSize: FONT_SIZE.labels
+  },
   groupWrapper: {
     flexGrow: 1,
     alignItems: 'center',
@@ -78,4 +91,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ConquistDisplay
+export default memo(ConquistDisplay)
