@@ -37,13 +37,3 @@ yarn start
 ```
 
 - That command will show a QR code on screen -- console -- that you can scan with your Expo Go app.
-
-## Workflow
-
-For development, create branches for specific tasks.
-
-Those branches should be created **from develop branch** and pushed also to `develop` but through Pull Requests, never directly.
-
-**Never push directly to master.**
-
->  There is an action triggered when pushing to master, it throws an error but it's fine, don't worry.
