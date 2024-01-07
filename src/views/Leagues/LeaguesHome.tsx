@@ -60,7 +60,7 @@ const LeaguesHome: FC = () => {
   return (
     <Loader isLoading={loading || !localUser}>
       <View style={styles.container}>
-        <Jumbotron user={user} />
+        <Jumbotron user={user} refetchUser={fetchUser} />
         <InvitationsManager fetchLeagues={fetch} />
         <View style={styles.container}>{renderContent()}</View>
         <AddConquist fetch={() => fetchUser(true)} />

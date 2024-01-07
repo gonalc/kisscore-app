@@ -33,7 +33,8 @@ const es = {
     continue: 'Continuar',
     logout: 'Cerrar sesión',
     exit: 'Salir',
-    share: 'Compartir'
+    share: 'Compartir',
+    delete: 'Borrar'
   },
   forms: {
     emailPlaceholder: 'ejemplo@tuemail.com',
@@ -59,7 +60,8 @@ const es = {
       passwordsMustBeEqual: 'Las contraseñas deben coincidir.',
       signupError:
         'Hubo un problema al registrar el usuario. Puede que ese email o el nombre de usuario ya existan. Vuelve a probar más tarde.',
-      loginError: 'Las credenciales no son correctas.'
+      loginError: 'Las credenciales no son correctas.',
+      genericError: 'Hubo un error. Vuelve a intentarlo más tarde.'
     }
   },
   leagues: {
@@ -90,7 +92,8 @@ const es = {
       conquistConfirmation: 'Esta es tu última conquista.',
       dontKnowYear: 'No sé el año'
     },
-    successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!'
+    successfulConquist: '¡Enhorabuena, has conseguido {{score}} puntos!',
+    deleteConfirmation: 'Vas a borrar esta conquista, ¿es correcto?'
   },
   settings: {
     title: 'Ajustes',
@@ -104,19 +107,62 @@ const es = {
     name: {
       'share-app-1': '1 Persona',
       'share-app-5': '5 Personas',
-      'share-app-10': '10 Personas'
+      'share-app-10': '10 Personas',
+      'conquist-1': '1 Conquista',
+      'conquist-5': '5 Conquistas',
+      'conquist-10': '10 Conquistas',
+      'conquist-20': '20 Conquista',
+      'conquist-50': '50 Conquistas',
+      'conquist-100': '100 Conquistas',
+      'country-1': '1 País',
+      'country-5': '5 Países',
+      'country-10': '10 Países',
+      'country-20': '20 Países',
+      'country-50': '50 Países',
+      'country-100': '100 Países',
+      'place-1': '1 Lugar',
+      'place-5': '5 Lugares',
+      'place-10': '10 Lugares',
+      'place-20': '20 Lugares',
+      'place-50': '50 Lugares',
+      'place-100': '100 Lugares'
     },
     groups: {
-      'share-app': 'Difunde la palabra'
+      'share-app': 'Difunde la palabra',
+      country: 'Tacha países',
+      conquist: 'Haz conquistas',
+      place: 'Descubre lugares'
     },
     explanations: {
       'share-app':
-        'Consigue insignias por la gente que se descarga la app con tu link. Puedes compartir la app desde ajustes o desde dentro de una liga, cuando vas a invitar a un jugador.'
+        'Consigue insignias por la gente que se registra en la app con tu código. Puedes compartir la app desde ajustes o desde dentro de una liga, cuando vas a invitar a un jugador.',
+      country:
+        'Consigue insignias descubriendo nacionalidades nuevas de la gente con la que te lías.',
+      place: 'Consigue insignias liándote con alguien en países nuevos.',
+      conquist: 'Consigue insignias liándote con gente.'
     },
     celebrations: {
       'share-app-1': '¡Enhorabuena! Has compartido Kisscore con 1 persona.',
-      'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 persona.',
-      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 persona.'
+      'share-app-5': '¡Enhorabuena! Has compartido Kisscore con 5 personas.',
+      'share-app-10': '¡Enhorabuena! Has compartido Kisscore con 10 personas.',
+      'country-1': '¡Enhorabuena! Has tachado un país.',
+      'country-5': '¡Enhorabuena! Has tachado 5 países.',
+      'country-10': '¡Enhorabuena! Has tachado 10 países.',
+      'country-20': '¡Enhorabuena! Has tachado 20 países.',
+      'country-50': '¡Enhorabuena! Has tachado 50 países.',
+      'country-100': '¡Enhorabuena! Has tachado 100 países.',
+      'conquist-1': '¡Enhorabuena! Has hecho una conquista.',
+      'conquist-5': '¡Enhorabuena! Has hecho 5 conquistas.',
+      'conquist-10': '¡Enhorabuena! Has hecho 10 conquistas.',
+      'conquist-20': '¡Enhorabuena! Has hecho 20 conquistas.',
+      'conquist-50': '¡Enhorabuena! Has hecho 50 conquistas.',
+      'conquist-100': '¡Enhorabuena! Has hecho 100 conquistas.',
+      'place-1': '¡Enhorabuena! Has visitado un lugar.',
+      'place-5': '¡Enhorabuena! Has visitado 5 lugares.',
+      'place-10': '¡Enhorabuena! Has visitado 10 lugares.',
+      'place-20': '¡Enhorabuena! Has visitado 20 lugares.',
+      'place-50': '¡Enhorabuena! Has visitado 50 lugares.',
+      'place-100': '¡Enhorabuena! Has visitado 100 lugares.'
     }
   }
 }

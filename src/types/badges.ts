@@ -6,4 +6,5 @@ export interface IBadge extends DBBaseItem {
   iconKey: string
   iconFamily: string
   color: Color
+  group?: string | null
 }
