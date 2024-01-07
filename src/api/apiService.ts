@@ -10,8 +10,8 @@ type APIPayload = {
   payload: unknown
 }
 
-const LOCAL_URL = 'http://192.168.1.197:8080' // Change it to your local IP address
-const SERVER_URL = 'http://54.74.43.13:3000'
+const LOCAL_URL = process.env.EXPO_PUBLIC_LOCAL_URL // Change it to your local IP address
+const SERVER_URL = process.env.EXPO_PUBLIC_API_URL
 
 class Api {
   private baseUrl = `${__DEV__ ? LOCAL_URL : SERVER_URL}/api`
